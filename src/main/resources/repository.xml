@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<repository>
+<!-- 
+  <repository>
+    <name>Pythia</name>
+    <host>193.30.112.98</host>
+    <port>9280</port>
+    <version>2</version>
+    <user>fedoraAdmin</user>
+    <password>fssAug04</password>
+  </repository>
+-->
+
+  <repository>
+    <name>ThemisLive</name>
+    <host>193.30.112.23</host>
+    <port>9280</port>
+    <version>2</version>
+    <user>fedoraAdmin</user>
+    <password>fssAug04</password>
+  </repository>
+  
+</repository>

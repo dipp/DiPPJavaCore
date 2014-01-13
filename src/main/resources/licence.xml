@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<legalNote>
+	<licence lang="de">
+		<title>Lizenz</title>
+		<text type="dppl">Jedermann darf dieses Werk unter den Bedingungen der Digital Peer Publishing Lizenz elektronisch übermitteln und zum Download bereitstellen. Der Lizenztext ist im Internet abrufbar unter der Adresse http://www.dipp.nrw.de/lizenzen/dppl/dppl/DPPL_v2_de_06-2004.html</text>
+		<text type="fdppl">Jedermann darf dieses Werk unter den Bedingungen der freien Digital Peer Publishing Lizenz elektronisch übermitteln und zum Download bereitstellen. Der Lizenztext ist im Internet abrufbar unter der Adresse http://www.dipp.nrw.de/lizenzen/dppl/fdppl/f-DPPL_v1_de_11-2004.html</text>
+		<text type="mdppl">Jedermann darf dieses Werk unter den Bedingungen der modularen Digital Peer Publishing Lizenz elektronisch übermitteln und zum Download bereitstellen. Der Lizenztext ist im Internet abrufbar unter der Adresse http://www.dipp.nrw.de/lizenzen/dppl/mdppl/m-DPPL_v1_de_11-2004.html</text>
+	</licence>
+	<licence lang="en">
+		<title>Licence</title>
+		<text type="dppl">Any party may pass on this Work by electronic means and make it available for download under the terms and conditions of the Digital Peer Publishing Licence. The text of the licence may be accessed and retrieved via Internet at http://www.dipp.nrw.de/lizenzen/dppl/dppl/DPPL_v2_en_06-2004.html</text>
+		<text type="fdppl">Any party may pass on this Work by electronic means and make it available for download under the terms and conditions of the free Digital Peer Publishing Licence. The text of the licence may be accessed and retrieved via Internet at http://www.dipp.nrw.de/lizenzen/dppl/fdppl/f-DPPL_v1_de_11-2004.html</text>
+		<text type="mdppl">Any party may pass on this Work by electronic means and make it available for download under the terms and conditions of the modular Digital Peer Publishing Licence. The text of the licence may be accessed and retrieved via Internet at http://www.dipp.nrw.de/lizenzen/dppl/mdppl/m-DPPL_v1_de_11-2004.html</text>
+	</licence>
+</legalNote>
+

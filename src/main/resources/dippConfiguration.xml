@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <dippInstance>
+    <id>1</id>
+    <description>TestJournal</description>
+    <configuration type="style" targetFormat="pdf">dipp</configuration>
+  </dippInstance>
+  <dippInstance>
+    <id>2</id>
+    <description>rtejournal</description>
+  </dippInstance>
+  <dippInstance>
+    <id>3</id>
+    <description>bmm</description>
+    <configuration type="style" targetFormat="pdf">bmm</configuration>
+  </dippInstance>
+  <dippInstance>
+    <id>4</id>
+    <description>construction</description>
+  </dippInstance>
+  <dippInstance>
+    <id>5</id>
+    <description>eleed</description>
+  </dippInstance>
+  <dippInstance>
+    <id>6</id>
+    <description>jvrb</description>
+    <configuration type="style" targetFormat="pdf">jvrb</configuration>
+  </dippInstance>
+  <dippInstance>
+    <id>7</id>
+    <description>languageATinternet</description>
+  </dippInstance>
+  <dippInstance>
+    <id>8</id>
+    <description>grir</description>
+  </dippInstance>
+  <dippInstance>
+    <id>9</id>
+    <description>zeitenblicke</description>
+    <configuration type="style" targetFormat="pdf">zb</configuration>
+  </dippInstance>
+  <dippInstance>
+    <id>10</id>
+    <description>afrikanistik</description>
+  </dippInstance>
+  <dippInstance>
+    <id>11</id>
+    <description>socworks</description>
+  </dippInstance>
+  <dippInstance>
+    <id>12</id>
+    <description>infu</description>
+  </dippInstance>
+  <dippInstance>
+    <id>13</id>
+    <description>prolibris</description>
+  </dippInstance>
+  <dippInstance>
+    <id>14</id>
+    <description>luftverkehrswirtschaft</description>
+  </dippInstance>
+  <dippInstance>
+    <id>15</id>
+    <description>oa recht</description>
+  </dippInstance>
+  <dippInstance>
+    <id>16</id>
+    <description>uvk</description>
+  </dippInstance>
+  <dippInstance>
+    <id>17</id>
+    <description>dr</description>
+  </dippInstance>
+  <dippInstance>
+    <id>23</id>
+    <description>logistics</description>
+  </dippInstance>
+  <dippInstance>
+    <id>24</id>
+    <description>psychology</description>
+  </dippInstance>
+  <dippInstance>
+    <id>25</id>
+    <description>rezphil</description>
+  </dippInstance>
+  <dippInstance>
+    <id>26</id>
+    <description>konmech</description>
+  </dippInstance>
+</config>
+

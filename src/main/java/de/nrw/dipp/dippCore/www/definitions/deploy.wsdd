@@ -1,0 +1,208 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ContentModelService WSDL service -->
+
+  <service name="dipp" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://www.dippCore.dipp.nrw.de/definitions/"/>
+      <parameter name="wsdlServiceElement" value="ContentModelService"/>
+      <parameter name="schemaUnqualified" value="http://webservice.dippCore.dipp.nrw.de"/>
+      <parameter name="wsdlServicePort" value="dipp"/>
+      <parameter name="className" value="de.nrw.dipp.dippCore.www.definitions.DippSoapBindingSkeleton"/>
+      <parameter name="wsdlPortType" value="ContentModel"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:Citation"
+        type="java:de.nrw.dipp.dippCore.webservice.Citation"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:ListSessionType"
+        type="java:de.nrw.dipp.dippCore.webservice.ListSessionType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:>getAdministrativeMetadata_fault"
+        type="java:de.nrw.dipp.dippCore.webservice.GetAdministrativeMetadata_fault"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:ObjectFields"
+        type="java:de.nrw.dipp.dippCore.webservice.ObjectFields"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:Element"
+        type="java:de.nrw.dipp.dippCore.webservice.Element"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:>setNewContainer_fault"
+        type="java:de.nrw.dipp.dippCore.webservice.SetNewContainer_fault"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:>setAdministrativeMetadata_fault"
+        type="java:de.nrw.dipp.dippCore.webservice.SetAdministrativeMetadata_fault"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:Contributor"
+        type="java:de.nrw.dipp.dippCore.webservice.Contributor"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:conditionType"
+        type="java:de.nrw.dipp.dippCore.webservice.ConditionType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:FieldSearchResult"
+        type="java:de.nrw.dipp.dippCore.webservice.FieldSearchResult"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:operatorType"
+        type="java:de.nrw.dipp.dippCore.webservice.OperatorType"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:resultFieldArrayType"
+        type="java:java.lang.String[]"
+        innerType="cmp-ns:string" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:Part"
+        type="java:de.nrw.dipp.dippCore.webservice.Part"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:CreatorPerson"
+        type="java:de.nrw.dipp.dippCore.webservice.CreatorPerson"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:CreatorCorporated"
+        type="java:de.nrw.dipp.dippCore.webservice.CreatorCorporated"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:>setNewArticle_fault"
+        type="java:de.nrw.dipp.dippCore.webservice.SetNewArticle_fault"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:>setConvert_fault"
+        type="java:de.nrw.dipp.dippCore.webservice.SetConvert_fault"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:SubjectClassified"
+        type="java:de.nrw.dipp.dippCore.webservice.SubjectClassified"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:AdministrativeMetadata"
+        type="java:de.nrw.dipp.dippCore.webservice.AdministrativeMetadata"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:searchConditionListType"
+        type="java:de.nrw.dipp.dippCore.webservice.ConditionType[]"
+        innerType="cmp-ns:conditionType" xmlns:cmp-ns="http://webservice.dippCore.dipp.nrw.de"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:>setNewJournal_fault"
+        type="java:de.nrw.dipp.dippCore.webservice.SetNewJournal_fault"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:ExtendedMetadata"
+        type="java:de.nrw.dipp.dippCore.webservice.ExtendedMetadata"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:QualifiedDublinCore"
+        type="java:de.nrw.dipp.dippCore.webservice.QualifiedDublinCore"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
