@@ -18,6 +18,7 @@ public class DigitalObjectDatastream {
 	private String mItemLabel		= null;
 	private String mItemURL			= null;
 	private String mItemMimeType	= null;
+	private String mItemCreateDate  = null;
 	private long mSize;
 	
 	
@@ -53,4 +54,11 @@ public class DigitalObjectDatastream {
 		// a new package WSAdaptor now have to be public :-( 
 		mSize = size;
 	}
+	public void setCreateDate(String itemCreateDate) {
+		mItemCreateDate = itemCreateDate;
+	}
+	public String getCreateDate() {
+		return mItemCreateDate;
+	}
+
 }
