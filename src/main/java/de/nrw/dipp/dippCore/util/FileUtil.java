@@ -80,6 +80,7 @@ public class FileUtil {
 		if (aIdentifier != null){
 			id = aIdentifier;
 		}
+		/*
 		rootDir = new File(Constant.getAbsolutPath() 
 				+ "/WEB-INF/convert/" + id.replace(':', '_') + "_" + timeStamp + "_" + counter);
 		while (rootDir.exists()){
@@ -87,6 +88,16 @@ public class FileUtil {
 					+ "/WEB-INF/convert/" + id.replace(':', '_') + "_" + timeStamp + "_" + counter);
 			counter++;
 		}
+		
+		*/
+		rootDir = new File(Constant.getcUpcastWorkDirPath() 
+				+ id.replace(':', '_') + "_" + timeStamp + "_" + counter);
+		while (rootDir.exists()){
+			rootDir = new File(Constant.getcUpcastWorkDirPath() 
+					+ id.replace(':', '_') + "_" + timeStamp + "_" + counter);
+			counter++;
+		}
+
 		rootDir.mkdir();
 		targetDir = new File(rootDir.getAbsolutePath() + "/target");
 		targetDir.mkdir();

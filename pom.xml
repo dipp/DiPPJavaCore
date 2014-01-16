@@ -14,22 +14,15 @@
   </organization>
   <build>
   	<plugins>
-
-		<plugin>
-  			<groupId>org.apache.maven.plugins</groupId>
-  			<artifactId>maven-assembly-plugin</artifactId>
-  			<version>2.2-beta-5</version>
-  			<configuration>
-  				<descriptorRefs>
-  					<descriptorRef>jar-with-dependencies</descriptorRef>
-  				</descriptorRefs>
-  				<archive>
-  					<manifest>
-  						<mainClass>de.hbz_nrw.www.pdfconverter.Servermpl.ServiceImpl</mainClass>
-  					</manifest>
-  				</archive>
-  			</configuration>
-  		</plugin>
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-compiler-plugin</artifactId>
+         <version>2.3.2</version>
+         <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+         </configuration>
+      </plugin>
 
 		<plugin>
   			<groupId>org.apache.axis2</groupId>
@@ -59,7 +52,13 @@
   			<configuration>
 				<webXml>src/main/resources/WEB-INF/web.xml</webXml>
 				<packagingExcludes>WEB-INF/lib/servlet-api-2.3.jar</packagingExcludes>				
-				<warName>dippCore</warName>
+				<warName>dipp3</warName>
+          		<webResources>
+            		<resource>
+            	  		<!-- this is relative to the pom.xml directory -->
+        	      		<directory>src/main/resources</directory>
+    	        	</resource>
+	          	</webResources>
 			</configuration>
   			<executions>
   				<execution>

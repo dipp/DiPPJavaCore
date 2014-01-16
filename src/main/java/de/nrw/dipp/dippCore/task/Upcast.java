@@ -49,7 +49,7 @@ public final class Upcast extends Observable{
 	
 	private Upcast(){
 		try{
-			cUpCastOutputDir = Constant.getAbsolutPath() + "/WEB-INF/convert";
+			cUpCastOutputDir = Constant.getcUpcastWorkDirPath() + "/WEB-INF/convert";
 //			cUpCastConfigFile = Constant.getAbsolutPath() + "/WEB-INF/preferences.xml";
 			UpcastEngine.setLicense(UpcastEngine.class.getResourceAsStream(Constant.cLicensePathUpcast));
 //			mPerlscriptsProps.load(getClass().getResourceAsStream("perlscripts.properties")); // "perlscripts.properties"));

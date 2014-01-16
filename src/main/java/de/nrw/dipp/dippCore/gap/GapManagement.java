@@ -440,7 +440,7 @@ public class GapManagement extends TimerTask{
 				}
 
 				/*
-				 * TODO hier mögliche Parsing-Fehler abfangen, loggen und für toDo-AdminTool bereitstellen
+				 * TODO hier mÃ¶gliche Parsing-Fehler abfangen, loggen und fÃ¼r toDo-AdminTool bereitstellen
 				 */
 				OAIPMHDocument oaiDoc = OAIPMHDocument.Factory.parse(getMethod.getResponseBodyAsStream());
 
