@@ -143,7 +143,7 @@ public class Constant {
 	public static final String	cFallbackConfigFileDir 		= "/conf/";
 	public static final String	cConfigFileName				= "DiPPConfiguration.xml";
 	private static 		String	cAbsolutPath				= "/files/share/tomcat/webapps/dipp3"; //for Alkyoneus
-	private static 		String	cUpcastWorkDirPath			= "/files/share/upcastWork/convert"; //for Alkyoneus
+	private static 		String	cUpcastWorkDirPath			= "/files/share/upcastWork/convert/"; //for Alkyoneus
 	
 	public static final String cDocBookIdentifierClassURN	= "uri";
 	public static final String cDocBookIdentifierClassDOI	= "doi";

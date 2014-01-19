@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/management31
+END
+undeploy.wsdd
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/management31/undeploy.wsdd
+END
+FedoraAPIMBindingSOAPHTTPStub.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/management31/FedoraAPIMBindingSOAPHTTPStub.java
+END
+FedoraAPIM.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/management31/FedoraAPIM.java
+END
+FedoraAPIMBindingSOAPHTTPImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/management31/FedoraAPIMBindingSOAPHTTPImpl.java
+END
+FedoraAPIMService.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/management31/FedoraAPIMService.java
+END
+FedoraAPIMBindingSOAPHTTPSkeleton.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/management31/FedoraAPIMBindingSOAPHTTPSkeleton.java
+END
+FedoraAPIMServiceLocator.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/management31/FedoraAPIMServiceLocator.java
+END
+deploy.wsdd
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/management31/deploy.wsdd
+END

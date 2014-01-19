@@ -1,0 +1,423 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from Fedora-API-A-Service WSDL service -->
+
+  <service name="Fedora-API-A-Port-SOAPHTTP" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://www.fedora.info/definitions/1/0/api/"/>
+      <parameter name="wsdlServiceElement" value="Fedora-API-A-Service"/>
+      <parameter name="schemaUnqualified" value="http://www.fedora.info/definitions/1/0/types/"/>
+      <parameter name="wsdlServicePort" value="Fedora-API-A-Port-SOAPHTTP"/>
+      <parameter name="className" value="fedora.server.access21.FedoraAPIABindingSOAPHTTPSkeleton"/>
+      <parameter name="wsdlPortType" value="Fedora-API-A"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfDatastreamDef"
+        type="java:fedora.server.types.gen21.DatastreamDef[]"
+        innerType="cmp-ns:DatastreamDef" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfObjectFields"
+        type="java:fedora.server.types.gen21.ObjectFields[]"
+        innerType="cmp-ns:ObjectFields" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:defaultInputType"
+        type="java:fedora.server.types.gen21.DefaultInputType"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:MethodParmDef"
+        type="java:fedora.server.types.gen21.MethodParmDef"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:RepositoryInfo"
+        type="java:fedora.server.types.gen21.RepositoryInfo"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfObjectMethodsDef"
+        type="java:fedora.server.types.gen21.ObjectMethodsDef[]"
+        innerType="cmp-ns:ObjectMethodsDef" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:passByValue"
+        type="java:fedora.server.types.gen21.PassByValue"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:MIMETypedStream"
+        type="java:fedora.server.types.gen21.MIMETypedStream"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ObjectProfile"
+        type="java:fedora.server.types.gen21.ObjectProfile"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:passByRef"
+        type="java:fedora.server.types.gen21.PassByRef"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ComparisonOperator"
+        type="java:fedora.server.types.gen21.ComparisonOperator"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ObjectFields"
+        type="java:fedora.server.types.gen21.ObjectFields"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:FieldSearchResult"
+        type="java:fedora.server.types.gen21.FieldSearchResult"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:datastreamInputType"
+        type="java:fedora.server.types.gen21.DatastreamInputType"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ObjectMethodsDef"
+        type="java:fedora.server.types.gen21.ObjectMethodsDef"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ListSession"
+        type="java:fedora.server.types.gen21.ListSession"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:Condition"
+        type="java:fedora.server.types.gen21.Condition"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfString"
+        type="java:java.lang.String[]"
+        innerType="cmp-ns:string" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:FieldSearchQuery"
+        type="java:fedora.server.types.gen21.FieldSearchQuery"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:DatastreamDef"
+        type="java:fedora.server.types.gen21.DatastreamDef"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfProperty"
+        type="java:fedora.server.types.gen21.Property[]"
+        innerType="cmp-ns:Property" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:Property"
+        type="java:fedora.server.types.gen21.Property"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfMethodParmDef"
+        type="java:fedora.server.types.gen21.MethodParmDef[]"
+        innerType="cmp-ns:MethodParmDef" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:userInputType"
+        type="java:fedora.server.types.gen21.UserInputType"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfCondition"
+        type="java:fedora.server.types.gen21.Condition[]"
+        innerType="cmp-ns:Condition" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+  <service name="Fedora-API-A-Port-SOAPHTTPS" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://www.fedora.info/definitions/1/0/api/"/>
+      <parameter name="wsdlServiceElement" value="Fedora-API-A-Service"/>
+      <parameter name="schemaUnqualified" value="http://www.fedora.info/definitions/1/0/types/"/>
+      <parameter name="wsdlServicePort" value="Fedora-API-A-Port-SOAPHTTPS"/>
+      <parameter name="className" value="fedora.server.access21.FedoraAPIABindingSOAPHTTPSkeleton"/>
+      <parameter name="wsdlPortType" value="Fedora-API-A"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfDatastreamDef"
+        type="java:fedora.server.types.gen21.DatastreamDef[]"
+        innerType="cmp-ns:DatastreamDef" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfObjectFields"
+        type="java:fedora.server.types.gen21.ObjectFields[]"
+        innerType="cmp-ns:ObjectFields" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:defaultInputType"
+        type="java:fedora.server.types.gen21.DefaultInputType"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:MethodParmDef"
+        type="java:fedora.server.types.gen21.MethodParmDef"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:RepositoryInfo"
+        type="java:fedora.server.types.gen21.RepositoryInfo"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfObjectMethodsDef"
+        type="java:fedora.server.types.gen21.ObjectMethodsDef[]"
+        innerType="cmp-ns:ObjectMethodsDef" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:passByValue"
+        type="java:fedora.server.types.gen21.PassByValue"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:MIMETypedStream"
+        type="java:fedora.server.types.gen21.MIMETypedStream"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ObjectProfile"
+        type="java:fedora.server.types.gen21.ObjectProfile"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:passByRef"
+        type="java:fedora.server.types.gen21.PassByRef"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ComparisonOperator"
+        type="java:fedora.server.types.gen21.ComparisonOperator"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ObjectFields"
+        type="java:fedora.server.types.gen21.ObjectFields"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:FieldSearchResult"
+        type="java:fedora.server.types.gen21.FieldSearchResult"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:datastreamInputType"
+        type="java:fedora.server.types.gen21.DatastreamInputType"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ObjectMethodsDef"
+        type="java:fedora.server.types.gen21.ObjectMethodsDef"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ListSession"
+        type="java:fedora.server.types.gen21.ListSession"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:Condition"
+        type="java:fedora.server.types.gen21.Condition"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfString"
+        type="java:java.lang.String[]"
+        innerType="cmp-ns:string" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:FieldSearchQuery"
+        type="java:fedora.server.types.gen21.FieldSearchQuery"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:DatastreamDef"
+        type="java:fedora.server.types.gen21.DatastreamDef"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfProperty"
+        type="java:fedora.server.types.gen21.Property[]"
+        innerType="cmp-ns:Property" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:Property"
+        type="java:fedora.server.types.gen21.Property"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfMethodParmDef"
+        type="java:fedora.server.types.gen21.MethodParmDef[]"
+        innerType="cmp-ns:MethodParmDef" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:userInputType"
+        type="java:fedora.server.types.gen21.UserInputType"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://www.fedora.info/definitions/1/0/types/"
+        qname="ns:ArrayOfCondition"
+        type="java:fedora.server.types.gen21.Condition[]"
+        innerType="cmp-ns:Condition" xmlns:cmp-ns="http://www.fedora.info/definitions/1/0/types/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

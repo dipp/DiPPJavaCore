@@ -66,6 +66,16 @@
   				</execution>
   			</executions> 
   		</plugin>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-assembly-plugin</artifactId>
+  			<version>2.2-beta-5</version>
+  			<configuration>
+  				<descriptorRefs>
+  					<descriptorRef>jar-with-dependencies</descriptorRef>
+  				</descriptorRefs>
+  			</configuration>
+  		</plugin>
   	</plugins>		
   </build>
 
@@ -156,18 +166,6 @@
             <artifactId>xepicur</artifactId>
             <version>1.0</version>
             <type>jar</type>
-        </dependency>
-        <dependency>
-        	<groupId>dipp</groupId>
-        	<artifactId>dippFedora2</artifactId>
-        	<version>1.1.0</version>
-        	<scope>compile</scope>
-        </dependency>
-        <dependency>
-        	<groupId>dipp</groupId>
-        	<artifactId>dippFedora3</artifactId>
-        	<version>1.1.0</version>
-        	<scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>jena</groupId>

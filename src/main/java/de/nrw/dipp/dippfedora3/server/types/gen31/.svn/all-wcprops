@@ -1,0 +1,431 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31
+END
+ExportResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ExportResponse.java
+END
+DatastreamControlGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/DatastreamControlGroup.java
+END
+FindObjectsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/FindObjectsResponse.java
+END
+AddRelationship.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/AddRelationship.java
+END
+RelationshipTuple.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/RelationshipTuple.java
+END
+GetDatastreamDissemination.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetDatastreamDissemination.java
+END
+ModifyObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ModifyObject.java
+END
+MethodParmDef.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/MethodParmDef.java
+END
+DescribeRepository.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/DescribeRepository.java
+END
+DatastreamBinding.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/DatastreamBinding.java
+END
+Datastream.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/Datastream.java
+END
+GetDatastream.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetDatastream.java
+END
+Ingest.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/Ingest.java
+END
+AddRelationshipResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/AddRelationshipResponse.java
+END
+GetDatastreamDisseminationResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetDatastreamDisseminationResponse.java
+END
+ObjectFields.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ObjectFields.java
+END
+ModifyObjectResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ModifyObjectResponse.java
+END
+PassByValue.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/PassByValue.java
+END
+DescribeRepositoryResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/DescribeRepositoryResponse.java
+END
+GetDatastreamResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetDatastreamResponse.java
+END
+GetDatastreamHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetDatastreamHistory.java
+END
+IngestResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/IngestResponse.java
+END
+GetDatastreams.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetDatastreams.java
+END
+MIMETypedStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/MIMETypedStream.java
+END
+ResumeFindObjects.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ResumeFindObjects.java
+END
+DatastreamBindingMap.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/DatastreamBindingMap.java
+END
+GetRelationships.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetRelationships.java
+END
+ModifyDatastreamByValue.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ModifyDatastreamByValue.java
+END
+ComparisonOperator.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ComparisonOperator.java
+END
+ResumeFindObjectsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ResumeFindObjectsResponse.java
+END
+AddDatastream.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/AddDatastream.java
+END
+ListMethods.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ListMethods.java
+END
+FieldSearchQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/FieldSearchQuery.java
+END
+UserInputType.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/UserInputType.java
+END
+SetDatastreamState.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/SetDatastreamState.java
+END
+PurgeRelationship.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/PurgeRelationship.java
+END
+ModifyDatastreamByValueResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ModifyDatastreamByValueResponse.java
+END
+GetDissemination.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetDissemination.java
+END
+ModifyDatastreamByReference.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ModifyDatastreamByReference.java
+END
+FieldSearchResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/FieldSearchResult.java
+END
+ObjectMethodsDef.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ObjectMethodsDef.java
+END
+GetNextPID.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetNextPID.java
+END
+AddDatastreamResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/AddDatastreamResponse.java
+END
+ListSession.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ListSession.java
+END
+SetDatastreamStateResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/SetDatastreamStateResponse.java
+END
+PurgeRelationshipResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/PurgeRelationshipResponse.java
+END
+Property.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/Property.java
+END
+GetDisseminationResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetDisseminationResponse.java
+END
+ModifyDatastreamByReferenceResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ModifyDatastreamByReferenceResponse.java
+END
+Condition.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/Condition.java
+END
+ObjectProfile.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ObjectProfile.java
+END
+GetObjectXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetObjectXML.java
+END
+GetObjectProfile.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetObjectProfile.java
+END
+RepositoryInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/RepositoryInfo.java
+END
+SetDatastreamVersionable.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/SetDatastreamVersionable.java
+END
+PassByRef.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/PassByRef.java
+END
+ListDatastreams.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/ListDatastreams.java
+END
+DatastreamDef.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/DatastreamDef.java
+END
+GetObjectXMLResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetObjectXMLResponse.java
+END
+GetObjectProfileResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetObjectProfileResponse.java
+END
+DefaultInputType.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/DefaultInputType.java
+END
+DatastreamInputType.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/DatastreamInputType.java
+END
+PurgeObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/PurgeObject.java
+END
+SetDatastreamVersionableResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/SetDatastreamVersionableResponse.java
+END
+CompareDatastreamChecksum.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/CompareDatastreamChecksum.java
+END
+Export.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/Export.java
+END
+PurgeObjectResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/PurgeObjectResponse.java
+END
+PurgeDatastream.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/PurgeDatastream.java
+END
+GetObjectHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/GetObjectHistory.java
+END
+FindObjects.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/FindObjects.java
+END
+CompareDatastreamChecksumResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/dipp/!svn/ver/1470/Java/dippFedora3/trunk/src/java/de/nrw/dipp/dippfedora3/server/types/gen31/CompareDatastreamChecksumResponse.java
+END
