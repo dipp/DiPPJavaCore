@@ -83,12 +83,16 @@ public class TaskXML extends Observable implements Task {
 	private Properties			mPerlscriptsProps	= new Properties();
 	
 	public TaskXML( Param aParam ){
+		log.info("initialize TaskXml");
 		mParam = aParam;
 		try{
 			mPerlscriptsProps.load(getClass().getResourceAsStream("perlscripts.properties")); // "perlscripts.properties"));
 		}catch(IOException ioExc){
 			ioExc.printStackTrace();
+			log.error(ioExc);
 		}
+		log.info("initialized TaskXml");
+		
 	}
 	
 	/* (non-Javadoc)

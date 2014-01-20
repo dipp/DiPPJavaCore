@@ -75,10 +75,15 @@ public class TaskManager implements Observer{
 			case cRegisteredTaskXML: 
 				log.info("calling TaskXML");
 				task = new TaskXML(aParam);
+				log.info("add Observer");
 				((TaskXML)task).addObserver(this);
 				mHashtableXML.put(aParam.getArticlePID(), task);
+				log.info("before starting task");
+
 				if (aStart){
-					new Thread(task).start();					
+					log.info("starting task now");
+					new Thread(task).start();
+					log.info("task started");
 				}
 				break;
 			case cRegisteredTaskHTML:

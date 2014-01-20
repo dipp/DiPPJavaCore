@@ -207,7 +207,6 @@
             <groupId>jmimemagic</groupId>
             <artifactId>jmimemagic</artifactId>
             <version>0.0.4a</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>oro</groupId>

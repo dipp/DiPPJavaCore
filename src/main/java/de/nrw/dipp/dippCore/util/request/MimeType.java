@@ -1,7 +1,13 @@
 package de.nrw.dipp.dippCore.util.request;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import de.nrw.dipp.dippCore.task.Upcast;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicException;
 import net.sf.jmimemagic.MagicMatch;
@@ -26,6 +32,9 @@ import net.sf.jmimemagic.MagicParseException;
  */
 public final class MimeType {
 	
+    // Get Logger for MimeType
+	private static Logger log = Logger.getLogger(MimeType.class);
+
 	private Magic magic = new Magic();
 
 	private static final class MimeTypeHolder {
@@ -40,10 +49,21 @@ public final class MimeType {
 	}
 	
 	public String getMimeType(File aFile){
-		String mimeType = "unkwnon";
+		String mimeType = "unkown";
 		System.out.println("MimeType a");
 		try{
 			System.out.println("MimeType: file: " + aFile.getName()); 
+			log.info("MimeType: file: " + aFile.getAbsolutePath());
+			
+			/*
+			List aList = (List) magic.getMatchers();
+			Iterator test = aList.iterator();
+			
+			while(test.hasNext()){
+				log.info(test.next().toString());
+			}
+			*/
+			
 			MagicMatch match = magic.getMagicMatch(aFile);
 			System.out.println("MimeType aaa");
 			mimeType = match.getMimeType();
@@ -66,7 +86,7 @@ public final class MimeType {
 		}
 */		
 		System.out.println("MimeType c: " + mimeType);
-
+		
 		return mimeType;
 	}
 
