@@ -1,0 +1,139 @@
+<xs:schema	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+			xmlns:gap="http://www.gapworks.de/oai/2.0/oai_gap/" 
+			targetNamespace="http://www.gapworks.de/oai/2.0/oai_gap/" 
+			elementFormDefault="qualified" 
+			attributeFormDefault="unqualified">
+	
+	<xs:annotation>
+		<xs:documentation> 
+			XML Schema for GAP, 2004-01-05
+			written by Heinrich Stamerjohanns, stamer@isn-oldenburg.de
+			$Id: oai_gap_v1RC2.xsd,v 1.1 2006/04/26 08:48:05 dippadm Exp $
+			modified for DiPP-Services v1RC2 by Jochen Schirrwagen (schirrwagen@hbz-nrw.de)
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace"
+				schemaLocation="http://www.w3.org/2001/03/xml.xsd">
+	</xs:import>
+
+	<xs:simpleType name="langType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ger" />
+			<xs:enumeration value="eng" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="titleType">
+		<xs:simpleContent>
+    		<xs:extension base="xs:string">
+				<xs:attribute name="lang" type="gap:langType"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="subjectType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="scheme" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="keywordType">
+		<xs:simpleContent>
+    		<xs:extension base="xs:string">
+				<xs:attribute name="lang" type="gap:langType"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:element name="gap">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="creator" maxOccurs="unbounded" >
+					<xs:complexType>
+						<xs:sequence>
+							<!-- 13092004 by JS: type string assigned -->
+							<!-- 19102004 by JS: tag creatorrole added -->
+							<xs:element name="creatornfamily" minOccurs="0" type="xs:string" />
+							<xs:element name="creatorngiven" minOccurs="0" type="xs:string" />
+							<xs:element name="creatorrole" minOccurs="0" type="xs:string" />
+							<xs:element name="creatoremail" minOccurs="0" type="xs:string" />
+							<xs:element name="creatororgname" minOccurs="0" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="type" type="xs:string" minOccurs="0" />
+				<xs:element name="pubtype" type="xs:string" minOccurs="0" />
+				<xs:element name="title" type="gap:titleType" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="subtitle" type="gap:titleType" minOccurs="0" maxOccurs="unbounded" />
+				<!-- 22072005 by JS: added maxOccurs="unbounded" for subject -->
+				<xs:element name="subject" type="gap:subjectType" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="keyword" type="gap:keywordType" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="language" type="xs:string" minOccurs="0" />
+				<xs:element name="format" type="xs:string" minOccurs="0" />
+				<xs:element name="identifier" type="xs:string" minOccurs="0" />
+				<!-- 13092004 by JS: type date assigned -->
+				<xs:element name="dateaccepted" minOccurs="0" type="xs:dateTime" />
+				<xs:element name="datesubmitted" minOccurs="0" type="xs:dateTime" />
+				<xs:element name="description" type="gap:titleType" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="isbn" type="xs:string" minOccurs="0" />
+				<xs:element name="publication" minOccurs="0" >
+					<xs:complexType>
+						<xs:sequence>
+						<!-- 13092004 by JS: type string assigned -->
+							<xs:element name="publisher" type="xs:string" />
+							<xs:element name="publisherloc" minOccurs="0" />
+							<xs:element name="datepublished" minOccurs="0" />
+							<xs:element name="source" minOccurs="0" >
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="inbook" minOccurs="0" >
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="booktitle" type="xs:string" />
+													<xs:element name="editiondescription" minOccurs="0" type="xs:string"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="inissue" minOccurs="0" >
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="issuetitle" minOccurs="0" type="xs:string"/>
+													<xs:element name="issuesubtitle" minOccurs="0" type="xs:string"/>
+													<xs:element name="issueyear" minOccurs="0" type="xs:string"/>
+													<xs:element name="issueissn" minOccurs="0" type="xs:string"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="injournal" minOccurs="0" >
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="journaltitle" minOccurs="0" type="xs:string"/>
+													<xs:element name="journalsubtitle" minOccurs="0" type="xs:string"/>
+													<xs:element name="journalyear" minOccurs="0" type="xs:string"/>
+													<xs:element name="journalissn" minOccurs="0" type="xs:string"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="inseries" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="seriestitle" minOccurs="0" type="xs:string"/>
+													<xs:element name="seriessubtitle" minOccurs="0" type="xs:string"/>
+													<xs:element name="seriesyear" minOccurs="0" type="xs:string"/>
+													<xs:element name="seriesisbn" minOccurs="0" type="xs:string"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>  
+</xs:schema>

@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.dipp.nrw.de/definitions/" xmlns:impl="http://www.dipp.nrw.de/definitions/" xmlns:intf="http://www.dipp.nrw.de/definitions/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://webservice.dipp.nrw.de" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+ <wsdl:types>
+  <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://webservice.dipp.nrw.de">
+ <!--  <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+-->   
+	<xsd:annotation>
+		<xsd:documentation> 
+			WSDL Definition for DiPP-Services, v2.1alpha, 2007-01-22
+			written by Jochen Schirrwagen (schirrwagen@hbz-nrw.de) for DiPP (www.dipp.nrw.de)
+			History: 2005-07-11: added message types: copyObject, moveObject
+							2005-07-14: added elements chunkURL, absoluteURL for complexType AdminsitrativeMetadata, new method newDirectory, obsolet method newContainer
+							2005-08-24: added Array Type tns1_List, modified parentList and childList type
+							2005-11-23: v1.0RC2, refinement of complexType Element: added "type"-element
+							2006-03-28: added element "identifierDOI" for complexType QualifiedDublinCore
+							2006-04-11: added element "objectSupplementary" for complexType ExtendedMetadata
+							2007-01-22: v2.1alpha added new method "createNewComplexDocument"
+		</xsd:documentation>
+	</xsd:annotation>
+   <complexType name="ExtendedMetadata">
+    <sequence>
+     <element name="objectHTML" nillable="true" type="xsd:string"/>
+     <element name="objectMultimedia" nillable="true" type="xsd:string"/>
+     <element name="objectNative" nillable="true" type="xsd:string"/>
+     <element name="objectOther" nillable="true" type="xsd:string"/>
+     <element name="objectPDF" nillable="true" type="xsd:string"/>
+     <element name="objectXML" nillable="true" type="xsd:string"/>
+     <element name="objectSupplementary" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Element">
+    <sequence>
+     <element name="type" nillable="true" type="xsd:string"/>
+     <element name="lang" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Citation">
+    <sequence>
+     <element name="journalIssueDate" nillable="true" type="xsd:string"/>
+     <element name="journalIssueNumber" nillable="true" type="xsd:string"/>
+     <element name="journalTitle" nillable="true" type="xsd:string"/>
+     <element name="journalVolume" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="CreatorCorporated">
+    <sequence>
+     <element name="GKDIdentNumber" nillable="true" type="xsd:string"/>
+     <element name="PNDIdentNumber" nillable="true" type="xsd:string"/>
+     <element name="academicTitle" nillable="true" type="xsd:string"/>
+     <element name="emailAddress" nillable="true" type="xsd:string"/>
+     <element name="firstName" nillable="true" type="xsd:string"/>
+     <element name="institutionelAuthor" nillable="true" type="xsd:string"/>
+     <element name="lastName" nillable="true" type="xsd:string"/>
+     <element name="organization" nillable="true" type="xsd:string"/>
+     <element name="postalAddress" nillable="true" type="xsd:string"/>
+     <element name="role" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="CreatorPerson">
+    <sequence>
+     <element name="GKDIdentNumber" nillable="true" type="xsd:string"/>
+     <element name="PNDIdentNumber" nillable="true" type="xsd:string"/>
+     <element name="academicTitle" nillable="true" type="xsd:string"/>
+     <element name="emailAddress" nillable="true" type="xsd:string"/>
+     <element name="firstName" nillable="true" type="xsd:string"/>
+     <element name="institutionelAuthor" nillable="true" type="xsd:string"/>
+     <element name="lastName" nillable="true" type="xsd:string"/>
+     <element name="organization" nillable="true" type="xsd:string"/>
+     <element name="postalAddress" nillable="true" type="xsd:string"/>
+     <element name="role" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Contributor">
+    <sequence>
+     <element name="GKDIdentNumber" nillable="true" type="xsd:string"/>
+     <element name="PNDIdentNumber" nillable="true" type="xsd:string"/>
+     <element name="academicTitle" nillable="true" type="xsd:string"/>
+     <element name="emailAddress" nillable="true" type="xsd:string"/>
+     <element name="firstName" nillable="true" type="xsd:string"/>
+     <element name="institutionelAuthor" nillable="true" type="xsd:string"/>
+     <element name="lastName" nillable="true" type="xsd:string"/>
+     <element name="organization" nillable="true" type="xsd:string"/>
+     <element name="postalAddress" nillable="true" type="xsd:string"/>
+     <element name="role" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Part">
+    <sequence>
+     <element name="URL" nillable="true" type="xsd:string"/>
+     <element name="URN" nillable="true" type="xsd:string"/>
+     <element name="title" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SubjectClassified">
+    <sequence>
+     <element name="classificationIdent" nillable="true" type="xsd:string"/>
+     <element name="classificationSystem" nillable="true" type="xsd:string"/>
+     <element name="subjectClassified" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="QualifiedDublinCore">
+    <sequence>
+     <element name="DCTermsAbstract" minOccurs="0" type="impl:ArrayOf_tns1_Element"/>
+     <element name="DDC"  minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="accessRights" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="alternative" minOccurs="0" type="impl:ArrayOf_tns1_Element"/>
+     <element name="articleType" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="audience" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="available" nillable="true" type="xsd:dateTime"/>
+     <element name="bibliographicCitation" minOccurs="0" type="impl:ArrayOf_tns1_Citation"/>
+     <element name="conformsTo" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="contributor" minOccurs="0" type="impl:ArrayOf_tns1_Contributor"/>
+     <element name="coverage" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="created" nillable="true" type="xsd:dateTime"/>
+     <element name="creatorCorporated" minOccurs="0" type="impl:ArrayOf_tns1_CreatorCorporated"/>
+     <element name="creatorPerson" minOccurs="0" type="impl:ArrayOf_tns1_CreatorPerson"/>
+     <element name="date" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="dateAccepted" nillable="true" type="xsd:dateTime"/>
+     <element name="dateCopyrighted" nillable="true" type="xsd:dateTime"/>
+     <element name="dateSubmitted" nillable="true" type="xsd:dateTime"/>
+     <element name="description" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="docType" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="educationLevel" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="extent" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="format" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="hasFormat" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="hasPart" minOccurs="0" type="impl:ArrayOf_tns1_Part"/>
+     <element name="hasVersionOf" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="identifier" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="identifierISBN" minOccurs="0" type="xsd:string"/>
+     <element name="identifierISSN" minOccurs="0" type="xsd:string"/>
+     <element name="identifierURL" minOccurs="0" type="xsd:string"/>
+     <element name="identifierURN" minOccurs="0" type="xsd:string"/>
+     <element name="identifierDOI" minOccurs="0" type="xsd:string"/>
+     <element name="isFormatOf" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="isPartOf" minOccurs="0" type="impl:ArrayOf_tns1_Part"/>
+     <element name="isReferencedBy" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="isReplacedBy" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="isRequiredBy" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="isVersionOf" minOccurs="0" type="impl:ArrayOf_tns1_Part"/>
+     <element name="issued" nillable="true" type="xsd:dateTime"/>
+     <element name="language" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="mediator" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="medium" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="modified" nillable="true" type="xsd:dateTime"/>
+     <element name="pubType" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="publisher" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="references" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="relation" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="replaces" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="requires" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="rights" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="source" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="spatial" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="subject" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="subjectClassified" minOccurs="0" type="impl:ArrayOf_tns1_SubjectClassified"/>
+     <element name="tableOfContents" minOccurs="0" type="impl:ArrayOf_tns1_Element"/>
+     <element name="temporal" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="title" minOccurs="0" type="impl:ArrayOf_tns1_Element"/>
+     <element name="type" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="valid" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="AdministrativeMetadata">
+    <sequence>
+     <element name="childList" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+     <element name="metaName" nillable="true" type="xsd:string"/>
+     <element name="chunkURL" nillable="true" type="xsd:string" minOccurs="0"/>
+     <element name="absoluteURL" nillable="true" type="xsd:string" minOccurs="0"/>
+     <element name="metaType" nillable="true" type="xsd:string"/>
+     <element name="parentList" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Reference">
+    <sequence>
+     <element name="DCMIType" nillable="true" type="xsd:string"/>
+     <element name="PID" nillable="true" type="xsd:string"/>
+     <element name="administrativeMetaType" nillable="true" type="xsd:string"/>
+     <element name="contentModel" nillable="true" type="xsd:string"/>
+     <element name="docType" nillable="true" type="soapenc:Array"/>
+     <element name="metaName" nillable="true" type="xsd:string"/>
+     <element name="parent" type="xsd:boolean"/>
+     <element name="pubType" nillable="true" type="soapenc:Array"/>
+     <element name="title" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+
+  </schema>
+  <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.dipp.nrw.de/definitions/">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_tns1_Element">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:Element[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_xsd_anyType">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:anyType[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_xsd_string">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns1_Citation">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:Citation[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns1_Contributor">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:Contributor[]"/>
+     </restriction>
+    </complexContent>
+    </complexType>
+   <complexType name="ArrayOf_tns1_CreatorCorporated">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:CreatorCorporated[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns1_CreatorPerson">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:CreatorPerson[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns1_Part">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:Part[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns1_SubjectClassified">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:SubjectClassified[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns1_Reference">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:Reference[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getQualifiedDublinCoreResponse">
+
+      <wsdl:part name="getQualifiedDublinCoreReturn" type="tns1:QualifiedDublinCore"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getQualifiedDublinCoreRequest">
+
+      <wsdl:part name="in0" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getArticleContentMetadataResponse">
+
+      <wsdl:part name="getArticleContentMetadataReturn" type="tns1:ExtendedMetadata"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getArticleContentMetadataRequest">
+
+      <wsdl:part name="in0" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setQualifiedDublinCoreResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="setQualifiedDublinCoreRequest">
+
+      <wsdl:part name="in0" type="xsd:string"/>
+
+      <wsdl:part name="in1" type="tns1:QualifiedDublinCore"/>
+
+   </wsdl:message>
+<!-- -->
+   <wsdl:message name="setNewJournalResponse">
+
+      <wsdl:part name="setNewJournalReturn" type="xsd:string"/>
+      
+   </wsdl:message>
+
+   <wsdl:message name="setNewJournalRequest">
+
+      <wsdl:part name="in0" type="tns1:QualifiedDublinCore"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="InvalidParamMessage">
+      <wsdl:part type="xsd:string" name="fault"/>
+   </wsdl:message>
+   
+<!-- -->
+   <wsdl:message name="createNewComplexDocumentResponse">
+
+      <wsdl:part name="createNewComplexDocumentReturn" type="xsd:string"/>
+      
+   </wsdl:message>
+
+   <wsdl:message name="createNewComplexDocumentRequest">
+
+      <wsdl:part name="isPartOfPID" type="xsd:string"/>
+      <wsdl:part name="isVersionOfPID" type="xsd:string"/>
+      <wsdl:part name="qdc" type="tns1:QualifiedDublinCore"/>
+
+   </wsdl:message>
+<!-- -->
+   <wsdl:message name="setNewArticleResponse">
+
+      <wsdl:part name="setNewArticleReturn" type="xsd:string"/>
+      
+   </wsdl:message>
+
+   <wsdl:message name="setNewArticleRequest">
+
+      <wsdl:part name="in0" type="impl:ArrayOf_xsd_string"/>
+      <wsdl:part name="in1" type="xsd:string"/>
+      <wsdl:part name="in2" type="tns1:QualifiedDublinCore"/>
+      <wsdl:part name="nativeDocIdent" type="xsd:string" />
+      <wsdl:part name="storageType" type="xsd:string" />
+      <wsdl:part name="targetFormat" type="impl:ArrayOf_xsd_string" />
+
+   </wsdl:message>
+<!-- -->
+   <wsdl:message name="setConvertResponse">
+
+      <wsdl:part name="setConvertReturn" type="xsd:string"/>
+      
+   </wsdl:message>
+
+   <wsdl:message name="setConvertRequest">
+
+      <wsdl:part name="articlePID" type="xsd:string"/>
+      <wsdl:part name="sourceURL" type="xsd:string" />
+      <wsdl:part name="targetFormat" type="impl:ArrayOf_xsd_string" />
+
+   </wsdl:message>
+<!-- -->   
+   <wsdl:message name="copyObjectResponse">
+
+      <wsdl:part name="copyObjectReturn" type="xsd:string"/>
+      
+   </wsdl:message>
+   <wsdl:message name="copyObjectRequest">
+
+      <wsdl:part name="objectPID" type="xsd:string"/>
+      <wsdl:part name="destObjectPID" type="xsd:string" />
+
+   </wsdl:message>
+<!-- -->   
+   <wsdl:message name="moveObjectResponse">
+
+      <wsdl:part name="moveObjectReturn" type="xsd:string"/>
+      
+   </wsdl:message>
+   <wsdl:message name="moveObjectRequest">
+
+      <wsdl:part name="objectPID" type="xsd:string"/>
+      <wsdl:part name="sourceObjectPID" type="xsd:string" />
+      <wsdl:part name="destObjectPID" type="xsd:string" />
+
+   </wsdl:message>
+<!-- -->
+   <wsdl:message name="setPublishingStateResponse">
+
+      <wsdl:part name="setPublishingStateReturn" type="xsd:string"/>
+      
+   </wsdl:message>
+
+   <wsdl:message name="setPublishingStateRequest">
+
+      <wsdl:part name="articlePID" type="xsd:string"/>
+      <wsdl:part name="state" type="xsd:boolean"/>
+      <wsdl:part name="published" type="xsd:boolean" />
+
+   </wsdl:message>
+
+<!-- this is obsolet with DiPP-Services v1.0RC2-->
+   <wsdl:message name="setNewContainerResponse">
+
+      <wsdl:part name="setNewContainerReturn" type="xsd:string"/>
+      
+   </wsdl:message>
+
+   <wsdl:message name="setNewContainerRequest">
+
+      <wsdl:part name="in0" type="xsd:string"/>
+      <wsdl:part name="in1" type="xsd:string"/>
+      <wsdl:part name="in2" type="xsd:string"/>
+
+   </wsdl:message>
+<!-- -->
+   <wsdl:message name="setNewDirectoryResponse">
+
+      <wsdl:part name="setNewDirectoryReturn" type="xsd:string"/>
+      
+   </wsdl:message>
+
+   <wsdl:message name="setNewDirectoryRequest">
+
+      <wsdl:part name="admProperties" type="tns1:AdministrativeMetadata"/>
+
+   </wsdl:message>
+<!-- -->
+
+   <wsdl:message name="setAdministrativeMetadataResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="setAdministrativeMetadataRequest">
+
+      <wsdl:part name="admProperties" type="tns1:AdministrativeMetadata"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAdministrativeMetadataRequest">
+
+      <wsdl:part name="in0" type="xsd:string"/>
+
+   </wsdl:message>
+   <wsdl:message name="getAdministrativeMetadataResponse">
+
+      <wsdl:part name="getAdministrativeMetadataReturn" type="tns1:AdministrativeMetadata"/>
+
+   </wsdl:message>
+   
+   
+   <wsdl:portType name="ContentModel">
+   
+
+      <wsdl:operation name="getArticleContentMetadata" parameterOrder="in0">
+
+         <wsdl:input name="getArticleContentMetadataRequest" message="impl:getArticleContentMetadataRequest"/>
+
+         <wsdl:output name="getArticleContentMetadataResponse" message="impl:getArticleContentMetadataResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getQualifiedDublinCore" parameterOrder="in0">
+
+         <wsdl:input name="getQualifiedDublinCoreRequest" message="impl:getQualifiedDublinCoreRequest"/>
+
+         <wsdl:output name="getQualifiedDublinCoreResponse" message="impl:getQualifiedDublinCoreResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setQualifiedDublinCore" parameterOrder="in0 in1">
+
+         <wsdl:input name="setQualifiedDublinCoreRequest" message="impl:setQualifiedDublinCoreRequest"/>
+
+         <wsdl:output name="setQualifiedDublinCoreResponse" message="impl:setQualifiedDublinCoreResponse"/>
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="setNewJournal" parameterOrder="in0">
+
+         <wsdl:input name="setNewJournalRequest" message="impl:setNewJournalRequest"/>
+
+         <wsdl:output name="setNewJournalResponse" message="impl:setNewJournalResponse"/>
+         <wsdl:fault message="impl:InvalidParamMessage" name="InvalidParamException"/>
+         
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="createNewComplexDocument" parameterOrder="isPartOfPID isVersionOfPID qdc">
+
+         <wsdl:input name="createNewComplexDocumentRequest" message="impl:createNewComplexDocumentRequest"/>
+
+         <wsdl:output name="createNewComplexDocumentResponse" message="impl:createNewComplexDocumentResponse"/>
+         <wsdl:fault message="impl:InvalidParamMessage" name="InvalidParamException"/>
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="setNewArticle" parameterOrder="in0 in1 in2 nativeDocIdent storageType targetFormat">
+
+         <wsdl:input name="setNewArticleRequest" message="impl:setNewArticleRequest"/>
+
+         <wsdl:output name="setNewArticleResponse" message="impl:setNewArticleResponse"/>
+         <wsdl:fault message="impl:InvalidParamMessage" name="InvalidParamException"/>
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="setConvert" parameterOrder="articlePID sourceURL targetFormat">
+
+         <wsdl:input name="setConvertRequest" message="impl:setConvertRequest"/>
+
+         <wsdl:output name="setConvertResponse" message="impl:setConvertResponse"/>
+         <wsdl:fault message="impl:InvalidParamMessage" name="InvalidParamException"/>
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="copyObject" parameterOrder="objectPID destObjectPID">
+
+         <wsdl:input name="copyObjectRequest" message="impl:copyObjectRequest"/>
+
+         <wsdl:output name="copyObjectResponse" message="impl:copyObjectResponse"/>
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="moveObject" parameterOrder="objectPID sourceObjectPID destObjectPID">
+
+         <wsdl:input name="moveObjectRequest" message="impl:moveObjectRequest"/>
+
+         <wsdl:output name="moveObjectResponse" message="impl:moveObjectResponse"/>
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="setPublishingState" parameterOrder="articlePID state published">
+
+         <wsdl:input name="setPublishingStateRequest" message="impl:setPublishingStateRequest"/>
+
+         <wsdl:output name="setPublishingStateResponse" message="impl:setPublishingStateResponse"/>
+         <wsdl:fault message="impl:InvalidParamMessage" name="InvalidParamException"/>
+
+      </wsdl:operation>
+      
+<!-- -->
+      <wsdl:operation name="setNewContainer" parameterOrder="in0 in1 in2">
+
+         <wsdl:input name="setNewContainerRequest" message="impl:setNewContainerRequest"/>
+
+         <wsdl:output name="setNewContainerResponse" message="impl:setNewContainerResponse"/>
+         <wsdl:fault message="impl:InvalidParamMessage" name="InvalidParamException"/>
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="setNewDirectory" parameterOrder="admProperties">
+
+         <wsdl:input name="setNewDirectoryRequest" message="impl:setNewDirectoryRequest"/>
+
+         <wsdl:output name="setNewDirectoryResponse" message="impl:setNewDirectoryResponse"/>
+
+      </wsdl:operation>
+<!-- -->
+
+      <wsdl:operation name="getAdministrativeMetadata" parameterOrder="in0">
+
+         <wsdl:input name="getAdministrativeMetadataRequest" message="impl:getAdministrativeMetadataRequest"/>
+
+         <wsdl:output name="getAdministrativeMetadataResponse" message="impl:getAdministrativeMetadataResponse"/>
+
+         <wsdl:fault name="InvalidParamMessage" message="impl:InvalidParamMessage"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setAdministrativeMetadata" parameterOrder="admProperties">
+
+         <wsdl:input name="setAdministrativeMetadataRequest" message="impl:setAdministrativeMetadataRequest"/>
+
+         <wsdl:output name="setAdministrativeMetadataResponse" message="impl:setAdministrativeMetadataResponse"/>
+
+         <wsdl:fault name="InvalidParamMessage" message="impl:InvalidParamMessage"/>
+
+      </wsdl:operation>
+
+
+   </wsdl:portType>
+
+   <wsdl:binding name="dippSoapBinding" type="impl:ContentModel">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getArticleContentMetadata">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getArticleContentMetadataRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getArticleContentMetadataResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getQualifiedDublinCore">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getQualifiedDublinCoreRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getQualifiedDublinCoreResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setQualifiedDublinCore">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setQualifiedDublinCoreRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setQualifiedDublinCoreResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+<!-- -->
+
+      <wsdl:operation name="setNewJournal">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setNewJournalRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setNewJournalResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+         
+
+      </wsdl:operation>
+<!-- -->
+	  <wsdl:operation name="createNewComplexDocument">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createNewComplexDocumentRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createNewComplexDocumentResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+         
+	  </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="setNewArticle">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setNewArticleRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setNewArticleResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="setConvert">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setConvertRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setConvertResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="copyObject">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="copyObjectRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="copyObjectResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="moveObject">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="moveObjectRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="moveObjectResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+<!-- -->
+      <wsdl:operation name="setPublishingState">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setPublishingStateRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setPublishingStateResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+<!-- -->
+
+      <wsdl:operation name="setNewContainer">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setNewContainerRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setNewContainerResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+<!-- -->
+
+      <wsdl:operation name="setNewDirectory">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setNewDirectoryRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setNewDirectoryResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+<!-- -->
+     <wsdl:operation name="getAdministrativeMetadata">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAdministrativeMetadataRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAdministrativeMetadataResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+
+
+      </wsdl:operation>
+      
+
+      <wsdl:operation name="setAdministrativeMetadata">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setAdministrativeMetadataRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setAdministrativeMetadataResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://www.dipp.nrw.de/definitions/"/>
+
+         </wsdl:output>
+
+
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ContentModelService">
+
+      <wsdl:port name="dipp" binding="impl:dippSoapBinding">
+
+         <wsdlsoap:address location="http://nike:9080/proto/services/dipp"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dipp_ext="http://www.dipp.nrw.de/definitions/extmetadata/" targetNamespace="http://www.dipp.nrw.de/definitions/extmetadata/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation> 
+			 Schema Definition for Extended Metadata in DiPP-Services, V1.1, 2005-07-13
+			written by Jochen Schirrwagen (schirrwagen@hbz-nrw.de) for DiPP (www.dipp.nrw.de)
+			History: 2005-07-13: added sequence element "supplementary" for complexType "content"
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="reference">
+		<xs:sequence>
+			<xs:element name="itemID" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="content">
+		<xs:sequence>
+			<xs:element name="native" type="dipp_ext:reference" minOccurs="0"/>
+			<xs:element name="xml" type="dipp_ext:reference" minOccurs="0"/>
+			<xs:element name="html" type="dipp_ext:reference" minOccurs="0"/>
+			<xs:element name="pdf" type="dipp_ext:reference" minOccurs="0"/>
+			<xs:element name="multimedia" type="dipp_ext:reference" minOccurs="0"/>
+			<xs:element name="other" type="dipp_ext:reference" minOccurs="0"/>
+			<xs:element name="supplementary" type="dipp_ext:reference" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="extMd">
+		<xs:annotation>
+			<xs:documentation>extended metadata describing properties of article</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="isNew" type="xs:boolean"/>
+				<xs:element name="isConverted" type="xs:boolean"/>
+				<xs:element name="isLocked" type="xs:boolean"/>
+				<xs:element name="content" type="dipp_ext:content"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

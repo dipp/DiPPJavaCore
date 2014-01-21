@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://dipp.nrw.de/DiPPConfiguration" 
+	xmlns:tns="http://www.dipp.nrw.de/DiPPConfiguration" 
+	elementFormDefault="qualified" xmlns:dipp="http://dipp.nrw.de/DiPPConfiguration">
+
+
+
+    <annotation>
+    	<documentation>
+    		This XML Schema provides all (allmost all) Datatypes
+    		required for a DiPP Instance Configuration. It should be the
+    		Framework for an All in One Configuration File for DiPP
+    		Instances. 
+    		Author: Andres Quast, quast@hbz-nrw.de 
+    		Date: 2009.07.14
+    	</documentation>
+    </annotation>
+    <element name="dippInstance">
+        <annotation>
+        	<documentation>
+        		Root element for all DiPP Instances
+        	</documentation>
+        </annotation>
+        <complexType>
+    		<sequence>
+    			<element name="activeInstance" type="string"
+    				maxOccurs="1" minOccurs="1">
+    			</element>
+    			<element name="followerInstance" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+    			<element name="instance" type="dipp:instanceType"
+    				minOccurs="0" maxOccurs="unbounded" />
+    		</sequence>
+        </complexType>
+    </element>
+
+    <complexType name="instanceType">
+    	<sequence>
+    		<element name="instanceID" type="string" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>
+                		An ID for the instance. Is set to Repository
+                		Name by default, because actually each instance
+                		can be bound to one Repository
+                	</documentation>
+                </annotation>
+    		</element>
+    		<element name="repository" type="dipp:repositoryType"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="zopeInstance" type="dipp:zopeInstanceType"
+    			maxOccurs="unbounded" minOccurs="0">
+    		</element>
+    	</sequence>
+    </complexType>
+        
+    <complexType name="repositoryType">
+    	<sequence>
+            <element name="name" type="string" maxOccurs="1" minOccurs="1"></element>
+            <element name="host" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="port" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="version" type="int" maxOccurs="1" minOccurs="1"></element>
+    		<element name="user" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="password" type="string" maxOccurs="1" minOccurs="0" nillable="true"></element>
+    	</sequence>
+    </complexType>
+
+
+
+    <complexType name="zopeInstanceType">
+    	<sequence>
+    		<element name="name" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="version" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+            <element name="port" type="string" maxOccurs="1" minOccurs="1"></element>
+            <element name="journal" type="dipp:journalType"
+    			maxOccurs="unbounded" minOccurs="0">
+    		</element>
+    	</sequence>
+    </complexType>
+
+
+    <complexType name="journalType">
+    	<sequence>
+    		<element name="name" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="label" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="oaiJournalSetName" type="string"
+    			maxOccurs="1" minOccurs="0">
+    		</element>
+    		<element name="oaiJournalSetSpec" type="string"
+    			maxOccurs="1" minOccurs="0">
+    		</element>
+    		<element name="identifierUrl" type="anyURI" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="globalUrl" type="anyURI" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="imageResize" type="boolean" maxOccurs="1"></element> 
+    	</sequence>
+    </complexType>
+</schema>

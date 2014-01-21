@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/dipp/!svn/ver/1473/Java/dippCore/trunk/src/xsd/dublincore
+END
+dcmitype.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/dipp/!svn/ver/1473/Java/dippCore/trunk/src/xsd/dublincore/dcmitype.xsd
+END
+oai_dc.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/dipp/!svn/ver/1473/Java/dippCore/trunk/src/xsd/dublincore/oai_dc.xsd
+END
+xml.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/dipp/!svn/ver/1473/Java/dippCore/trunk/src/xsd/dublincore/xml.xsd
+END
+dcterms.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/dipp/!svn/ver/1473/Java/dippCore/trunk/src/xsd/dublincore/dcterms.xsd
+END
+dc.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/dipp/!svn/ver/1473/Java/dippCore/trunk/src/xsd/dublincore/dc.xsd
+END

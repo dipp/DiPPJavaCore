@@ -67,7 +67,7 @@ public class DublinCoreQualified {
 	private static final String		cCreatorPerson		= "person";
 	private static final String		cCreatorCorporation	= "corporation";
 	private static final String		cContributor		= "contributor";
-	private static Hashtable 		cClassificatonSystems	= new Hashtable();
+	private static Hashtable<String, SchemaType> cClassificatonSystems	= new Hashtable<String, SchemaType>();
 	
 	private MetadataDocument mMetadataDoc = null;
 	private MetadataDocument.Metadata	mMetadata = null;
