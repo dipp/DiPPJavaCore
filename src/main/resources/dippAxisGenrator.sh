@@ -16,5 +16,5 @@ export AXISCLASSPATH="$AXIS_LIB/axis.jar:$AXIS_LIB/commons-discovery-0.2.jar:$AX
 java -cp $AXISCLASSPATH org.apache.axis.wsdl.WSDL2Java -s -v --skeletonDeploy true --allowInvalidURL -B $CODEGEN_CACHE/dippdoc.wsdl
 
 
-#cp -f $CODEGEN_CACHE/src/de/hbz_nrw/www/pdfaconverter/services/*.* ~/git/pdfaWS/src/main/java/de/hbz_nrw/www/pdfaconverter/services 
-#cp -f $CODEGEN_CACHE/pdfAtool/src/de/hbz_nrw/www/pdfaconverter/types/*.* ~/git/pdfaWS/src/main/java/de/hbz_nrw/www/pdfaconverter/types
+cp -f $CODEGEN_CACHE/de/nrw/dipp/dippCore/webservice/*.* ~/git/dippCoreMvn/src/main/java/de/nrw/dipp/dippCore/webservice/ 
+cp -f $CODEGEN_CACHE/de/nrw/dipp/dippCore/www/definitions/*.* ~/git/dippCoreMvn/src/main/java/de/nrw/dipp/dippCore/www/definitions/
