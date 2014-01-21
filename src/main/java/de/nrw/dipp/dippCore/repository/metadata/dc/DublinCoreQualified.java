@@ -261,7 +261,7 @@ public class DublinCoreQualified {
 				for (int i = 0; i < aQDCMetadata.getContributor().length; i++){
 					VCard vcard = mMetadata.addNewContributor();
 					de.nrw.dipp.dippCore.webservice.Contributor contributor = aQDCMetadata.getContributor()[i];
-					setVCard(vcard, contributor);
+					setVCard(vcard, (de.nrw.dipp.dippCore.webservice.VCard) contributor);
 				}
 			}
 
@@ -270,7 +270,7 @@ public class DublinCoreQualified {
 				for (int i = 0; i < aQDCMetadata.getCreatorPerson().length; i++){
 					VCard vcard = mMetadata.addNewCreator();
 					de.nrw.dipp.dippCore.webservice.CreatorPerson person = aQDCMetadata.getCreatorPerson()[i];
-					setVCard(vcard, person);
+					setVCard(vcard, (de.nrw.dipp.dippCore.webservice.VCard) person);
 				}
 			}
 
@@ -279,7 +279,7 @@ public class DublinCoreQualified {
 				for (int i = 0; i < aQDCMetadata.getCreatorCorporated().length; i++){
 					VCard vcard = mMetadata.addNewCreator();
 					de.nrw.dipp.dippCore.webservice.CreatorCorporated corporated = aQDCMetadata.getCreatorCorporated()[i];
-					setVCard(vcard, corporated);
+					setVCard(vcard, (de.nrw.dipp.dippCore.webservice.VCard) corporated);
 				}
 			}
 

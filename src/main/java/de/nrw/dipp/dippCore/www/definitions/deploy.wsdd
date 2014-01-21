@@ -127,6 +127,14 @@
       />
       <typeMapping
         xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
+        qname="ns:IdentNumberType"
+        type="java:de.nrw.dipp.dippCore.webservice.IdentNumberType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.dippCore.dipp.nrw.de"
         qname="ns:CreatorPerson"
         type="java:de.nrw.dipp.dippCore.webservice.CreatorPerson"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"

@@ -414,6 +414,13 @@ public class DippSoapBindingStub extends org.apache.axis.client.Stub implements 
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
+            qName = new javax.xml.namespace.QName("http://webservice.dippCore.dipp.nrw.de", "IdentNumberType");
+            cachedSerQNames.add(qName);
+            cls = de.nrw.dipp.dippCore.webservice.IdentNumberType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
             qName = new javax.xml.namespace.QName("http://webservice.dippCore.dipp.nrw.de", "ListSessionType");
             cachedSerQNames.add(qName);
             cls = de.nrw.dipp.dippCore.webservice.ListSessionType.class;

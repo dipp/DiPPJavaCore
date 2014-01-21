@@ -7,10 +7,14 @@
 
 package de.nrw.dipp.dippCore.webservice;
 
-public class CreatorPerson  implements java.io.Serializable, VCard {
+public class CreatorPerson  implements java.io.Serializable {
     private java.lang.String GKDIdentNumber;
 
     private java.lang.String PNDIdentNumber;
+
+    private java.lang.String dippdentNumber;
+
+    private de.nrw.dipp.dippCore.webservice.IdentNumberType identNumber;
 
     private java.lang.String academicTitle;
 
@@ -34,6 +38,8 @@ public class CreatorPerson  implements java.io.Serializable, VCard {
     public CreatorPerson(
            java.lang.String GKDIdentNumber,
            java.lang.String PNDIdentNumber,
+           java.lang.String dippdentNumber,
+           de.nrw.dipp.dippCore.webservice.IdentNumberType identNumber,
            java.lang.String academicTitle,
            java.lang.String emailAddress,
            java.lang.String firstName,
@@ -44,6 +50,8 @@ public class CreatorPerson  implements java.io.Serializable, VCard {
            java.lang.String role) {
            this.GKDIdentNumber = GKDIdentNumber;
            this.PNDIdentNumber = PNDIdentNumber;
+           this.dippdentNumber = dippdentNumber;
+           this.identNumber = identNumber;
            this.academicTitle = academicTitle;
            this.emailAddress = emailAddress;
            this.firstName = firstName;
@@ -92,6 +100,46 @@ public class CreatorPerson  implements java.io.Serializable, VCard {
      */
     public void setPNDIdentNumber(java.lang.String PNDIdentNumber) {
         this.PNDIdentNumber = PNDIdentNumber;
+    }
+
+
+    /**
+     * Gets the dippdentNumber value for this CreatorPerson.
+     * 
+     * @return dippdentNumber
+     */
+    public java.lang.String getDippdentNumber() {
+        return dippdentNumber;
+    }
+
+
+    /**
+     * Sets the dippdentNumber value for this CreatorPerson.
+     * 
+     * @param dippdentNumber
+     */
+    public void setDippdentNumber(java.lang.String dippdentNumber) {
+        this.dippdentNumber = dippdentNumber;
+    }
+
+
+    /**
+     * Gets the identNumber value for this CreatorPerson.
+     * 
+     * @return identNumber
+     */
+    public de.nrw.dipp.dippCore.webservice.IdentNumberType getIdentNumber() {
+        return identNumber;
+    }
+
+
+    /**
+     * Sets the identNumber value for this CreatorPerson.
+     * 
+     * @param identNumber
+     */
+    public void setIdentNumber(de.nrw.dipp.dippCore.webservice.IdentNumberType identNumber) {
+        this.identNumber = identNumber;
     }
 
 
@@ -272,6 +320,12 @@ public class CreatorPerson  implements java.io.Serializable, VCard {
             ((this.PNDIdentNumber==null && other.getPNDIdentNumber()==null) || 
              (this.PNDIdentNumber!=null &&
               this.PNDIdentNumber.equals(other.getPNDIdentNumber()))) &&
+            ((this.dippdentNumber==null && other.getDippdentNumber()==null) || 
+             (this.dippdentNumber!=null &&
+              this.dippdentNumber.equals(other.getDippdentNumber()))) &&
+            ((this.identNumber==null && other.getIdentNumber()==null) || 
+             (this.identNumber!=null &&
+              this.identNumber.equals(other.getIdentNumber()))) &&
             ((this.academicTitle==null && other.getAcademicTitle()==null) || 
              (this.academicTitle!=null &&
               this.academicTitle.equals(other.getAcademicTitle()))) &&
@@ -312,6 +366,12 @@ public class CreatorPerson  implements java.io.Serializable, VCard {
         }
         if (getPNDIdentNumber() != null) {
             _hashCode += getPNDIdentNumber().hashCode();
+        }
+        if (getDippdentNumber() != null) {
+            _hashCode += getDippdentNumber().hashCode();
+        }
+        if (getIdentNumber() != null) {
+            _hashCode += getIdentNumber().hashCode();
         }
         if (getAcademicTitle() != null) {
             _hashCode += getAcademicTitle().hashCode();
@@ -358,6 +418,19 @@ public class CreatorPerson  implements java.io.Serializable, VCard {
         elemField.setXmlName(new javax.xml.namespace.QName("", "PNDIdentNumber"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(true);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("dippdentNumber");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "dippdentNumber"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("identNumber");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "IdentNumber"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://webservice.dippCore.dipp.nrw.de", "IdentNumberType"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("academicTitle");
