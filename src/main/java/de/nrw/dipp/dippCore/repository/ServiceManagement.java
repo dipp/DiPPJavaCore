@@ -226,7 +226,7 @@ public class ServiceManagement {
 	 */
 	public synchronized String createNewDataObject(String aLabel, String aType, DigitalObject aParentObject){
 		//TODO: Change call from Metadata.java to call from ServiceManagement.java to make method private
-		// and clearify mission of classes
+		// and clarify mission of classes
 		String pid = null;
 		DOManagement digObjMgt = new DOManagement();
 		

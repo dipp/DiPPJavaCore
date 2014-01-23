@@ -77,6 +77,7 @@ import de.nrw.dipp.dippCore.webservice.Contributor;
 import de.nrw.dipp.dippCore.webservice.CreatorCorporated;
 import de.nrw.dipp.dippCore.webservice.CreatorPerson;
 import de.nrw.dipp.dippCore.webservice.Element;
+import de.nrw.dipp.dippCore.webservice.IdentNumberType;
 import de.nrw.dipp.dippCore.webservice.Part;
 import de.nrw.dipp.dippCore.webservice.QualifiedDublinCore;
 import de.nrw.dipp.dippCore.webservice.SubjectClassified;
@@ -779,6 +780,17 @@ public class Metadata {
 			if (aFedoraVCard.isSetGkdIdentifier()){
 				creator.setGKDIdentNumber(aFedoraVCard.getGkdIdentifier());						
 			}
+			//starting adding new Identifier fields to system logic
+			if (aFedoraVCard.isSetDippIdentifier()){
+				creator.setDippIdentNumber(aFedoraVCard.getDippIdentifier());						
+			}
+			if (aFedoraVCard.isSetIdentifier()){
+				IdentNumberType id = creator.getIdentNumber();
+				id.setIdentNumber(aFedoraVCard.getIdentifier().getIdentifier());
+				id.setType(aFedoraVCard.getIdentifier().getType());
+				creator.setIdentNumber(id);						
+			}
+
 		}
 		return creator;		
 	}

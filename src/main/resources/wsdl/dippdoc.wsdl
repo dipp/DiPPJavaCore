@@ -463,7 +463,9 @@
             		<xsd:element name="PNDIdentNumber" type="xsd:string"
             			nillable="true">
             		</xsd:element>
-            		<xsd:element name="dippdentNumber" type="xsd:string"></xsd:element>
+            		<xsd:element name="dippIdentNumber" type="xsd:string"
+            			nillable="true">
+            		</xsd:element>
             		<xsd:element name="IdentNumber"
             			type="ns0:IdentNumberType" maxOccurs="1" minOccurs="0">
             		</xsd:element>
@@ -502,7 +504,8 @@
             		<xsd:element name="PNDIdentNumber" type="xsd:string"
             			nillable="true">
             		</xsd:element>
-            		<xsd:element name="dippIdentNumber" type="xsd:string"></xsd:element>
+            		<xsd:element name="dippIdentNumber" type="xsd:string"
+            			nillable="true"></xsd:element>
             		<xsd:element name="IdentNumber"
             			type="ns0:IdentNumberType" maxOccurs="1" minOccurs="0">
             		</xsd:element>
@@ -925,14 +928,13 @@
       		<xsd:element name="rights" type="xsd:string" maxOccurs="unbounded" minOccurs="0"></xsd:element>
       	</xsd:sequence>
       </xsd:complexType>
-        	
-        
       <xsd:complexType name="IdentNumberType">
       	<xsd:sequence>
       		<xsd:element name="IdentNumber" type="xsd:string"
       			maxOccurs="1" minOccurs="1">
       		</xsd:element>
-      		<xsd:element name="type" type="xsd:string" maxOccurs="1" minOccurs="1"></xsd:element>
+      		<xsd:element name="type" type="xsd:string" 
+      			maxOccurs="1" minOccurs="1"></xsd:element>
       	</xsd:sequence>
       </xsd:complexType>
     </xsd:schema>
