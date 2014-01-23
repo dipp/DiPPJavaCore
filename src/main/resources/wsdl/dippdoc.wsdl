@@ -504,7 +504,8 @@
             		<xsd:element name="PNDIdentNumber" type="xsd:string"
             			nillable="true">
             		</xsd:element>
-            		<xsd:element name="dippIdentNumber" type="xsd:string"></xsd:element>
+            		<xsd:element name="dippIdentNumber" type="xsd:string"
+            			nillable="true"></xsd:element>
             		<xsd:element name="IdentNumber"
             			type="ns0:IdentNumberType" maxOccurs="1" minOccurs="0">
             		</xsd:element>
