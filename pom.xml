@@ -127,8 +127,7 @@
         <dependency>
             <groupId>dipp</groupId>
             <artifactId>qdcMetadata</artifactId>
-            <version>1.5</version>
-            <type>jar</type>
+            <version>1.6</version>
         </dependency>
         <dependency>
             <groupId>dipp</groupId>

@@ -189,4 +189,9 @@ xmlns="http://www.w3.org/2001/XMLSchema" >
 			<extension base="dc:SimpleLiteral"/>
 		</simpleContent>
 	</complexType>
+	<complexType name="JEL">
+		<simpleContent>
+			<extension base="dc:SimpleLiteral"/>
+		</simpleContent>
+	</complexType>
 </schema>

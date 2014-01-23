@@ -7,7 +7,7 @@
 
 package de.nrw.dipp.dippCore.webservice;
 
-public class Contributor  implements java.io.Serializable {
+public class Contributor  implements VCard, java.io.Serializable {
     private java.lang.String GKDIdentNumber;
 
     private java.lang.String PNDIdentNumber;
