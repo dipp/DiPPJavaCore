@@ -513,16 +513,4 @@ public class Contributor  implements VCard, java.io.Serializable {
             _javaType, _xmlType, typeDesc);
     }
 
-	@Override
-	public void setIdentNumberType(IdentNumberType anIdentType) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public IdentNumberType getIdentNumberType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

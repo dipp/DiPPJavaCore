@@ -25,7 +25,7 @@ public interface VCard {
 
 	//Quast: added dippIdentnumber and generic identNumber
 	public void setDippIdentNumber(String aDippIdent);
-	public void setIdentNumberType(IdentNumberType anIdentType);
+	public void setIdentNumber(IdentNumberType anIdentType);
 	
 	public void setRole(String aRole);
 	public void setInstitutionelAuthor(String aInstitutionelAuthor);
@@ -42,6 +42,6 @@ public interface VCard {
 	public String getRole();
 	public String getInstitutionelAuthor();
 	public String getDippIdentNumber();
-	public IdentNumberType getIdentNumberType();
+	public IdentNumberType getIdentNumber();
 
 }
