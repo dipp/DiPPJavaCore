@@ -7,7 +7,7 @@
 
 package de.nrw.dipp.dippCore.webservice;
 
-public class Contributor  implements java.io.Serializable {
+public class Contributor  implements VCard, java.io.Serializable {
     private java.lang.String GKDIdentNumber;
 
     private java.lang.String PNDIdentNumber;
@@ -512,5 +512,17 @@ public class Contributor  implements java.io.Serializable {
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
     }
+
+	@Override
+	public void setIdentNumberType(IdentNumberType anIdentType) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public IdentNumberType getIdentNumberType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
