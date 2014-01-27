@@ -425,9 +425,11 @@
             			nillable="true">
             		</xsd:element>
             		<xsd:element name="dippIdentNumber"
-            			type="xsd:string">
+            			nillable="true" type="xsd:string">
             		</xsd:element>
-            		<xsd:element name="IdentNumber" type="ns0:IdentNumberType"></xsd:element>
+            		<xsd:element name="IdentNumber" 
+            			type="ns0:IdentNumberType" maxOccurs="unbounded" minOccurs="0">
+            		</xsd:element>
             		<xsd:element name="academicTitle" type="xsd:string"
             			nillable="true">
             		</xsd:element>
@@ -467,7 +469,7 @@
             			nillable="true">
             		</xsd:element>
             		<xsd:element name="IdentNumber"
-            			type="ns0:IdentNumberType" maxOccurs="1" minOccurs="0">
+            			type="ns0:IdentNumberType" maxOccurs="unbounded" minOccurs="0">
             		</xsd:element>
             		<xsd:element name="academicTitle" type="xsd:string"
             			nillable="true">
@@ -507,7 +509,7 @@
             		<xsd:element name="dippIdentNumber" type="xsd:string"
             			nillable="true"></xsd:element>
             		<xsd:element name="IdentNumber"
-            			type="ns0:IdentNumberType" maxOccurs="1" minOccurs="0">
+            			type="ns0:IdentNumberType" maxOccurs="unbounded" minOccurs="0">
             		</xsd:element>
             		<xsd:element name="academicTitle" type="xsd:string"
             			nillable="true">
@@ -930,7 +932,7 @@
       </xsd:complexType>
       <xsd:complexType name="IdentNumberType">
       	<xsd:sequence>
-      		<xsd:element name="IdentNumber" type="xsd:string"
+      		<xsd:element name="identNumber" type="xsd:string"
       			maxOccurs="1" minOccurs="1">
       		</xsd:element>
       		<xsd:element name="type" type="xsd:string" 

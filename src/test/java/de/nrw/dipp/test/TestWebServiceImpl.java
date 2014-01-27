@@ -76,7 +76,7 @@ public class TestWebServiceImpl {
 		
 		File tmpConvertDir = new File("convert");
 		tmpConvertDir.mkdir();
-		qdc = getQdcTestObject("dipp:2152");
+		qdc = getQdcTestObject("dipp:2181");
 		
 		try {
 			result = impl.setNewArticle(containerPid, journalPid, qdc, nativeDocIdent, storageType, targetFormat);
@@ -120,6 +120,7 @@ public class TestWebServiceImpl {
 		// TODO Auto-generated method stub
 		TestWebServiceImpl testWS = new TestWebServiceImpl();
 		testWS.callSetNewArticle();
+			
 		log.debug("finished Test new article");
 	}
 }

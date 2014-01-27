@@ -83,7 +83,6 @@ public class TaskXML extends Observable implements Task {
 	private Properties			mPerlscriptsProps	= new Properties();
 	
 	public TaskXML( Param aParam ){
-		log.info("initialize TaskXml");
 		mParam = aParam;
 		try{
 			mPerlscriptsProps.load(getClass().getResourceAsStream("perlscripts.properties")); // "perlscripts.properties"));
@@ -91,7 +90,6 @@ public class TaskXML extends Observable implements Task {
 			ioExc.printStackTrace();
 			log.error(ioExc);
 		}
-		log.info("initialized TaskXml");
 		
 	}
 	
@@ -155,14 +153,14 @@ public class TaskXML extends Observable implements Task {
 						System.out.println("TaskXML for id " + getObjectID() + " wait");
 						wait(2500);				
 					}
-					System.out.println("TaskXML for id " + getObjectID() + " got upcast");
+					log.info("TaskXML for id " + getObjectID() + " got upcast");
 //					mFi.setArticleConvertedStatus(mParam.getArticlePID(), false);
 					
 					String articleType = "";
 					if (qdc.getArticleType().length > 0){
 						articleType = qdc.getArticleType(0);
 					}
-					System.out.println("TaskXML: " + "upCast.setSourceFile: " + fu.getNativeFile().getAbsolutePath());
+					log.info("TaskXML: " + "upCast.setSourceFile: " + fu.getNativeFile().getAbsolutePath());
 					upcast.setSourceFile(fu.getNativeFile());
 					upcast.doConvert(fu.getTargetDir(), 1, articleObj.getLabel(), articleType);
 					

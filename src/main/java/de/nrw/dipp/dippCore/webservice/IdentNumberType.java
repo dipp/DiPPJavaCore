@@ -109,7 +109,7 @@ public class IdentNumberType  implements java.io.Serializable {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://webservice.dippCore.dipp.nrw.de", "IdentNumberType"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("identNumber");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "IdentNumber"));
+        elemField.setXmlName(new javax.xml.namespace.QName("", "identNumber"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);

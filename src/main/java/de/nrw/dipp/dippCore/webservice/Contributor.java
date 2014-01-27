@@ -14,7 +14,7 @@ public class Contributor  implements VCard, java.io.Serializable {
 
     private java.lang.String dippIdentNumber;
 
-    private de.nrw.dipp.dippCore.webservice.IdentNumberType identNumber;
+    private de.nrw.dipp.dippCore.webservice.IdentNumberType[] identNumber;
 
     private java.lang.String academicTitle;
 
@@ -39,7 +39,7 @@ public class Contributor  implements VCard, java.io.Serializable {
            java.lang.String GKDIdentNumber,
            java.lang.String PNDIdentNumber,
            java.lang.String dippIdentNumber,
-           de.nrw.dipp.dippCore.webservice.IdentNumberType identNumber,
+           de.nrw.dipp.dippCore.webservice.IdentNumberType[] identNumber,
            java.lang.String academicTitle,
            java.lang.String emailAddress,
            java.lang.String firstName,
@@ -128,7 +128,7 @@ public class Contributor  implements VCard, java.io.Serializable {
      * 
      * @return identNumber
      */
-    public de.nrw.dipp.dippCore.webservice.IdentNumberType getIdentNumber() {
+    public de.nrw.dipp.dippCore.webservice.IdentNumberType[] getIdentNumber() {
         return identNumber;
     }
 
@@ -138,8 +138,16 @@ public class Contributor  implements VCard, java.io.Serializable {
      * 
      * @param identNumber
      */
-    public void setIdentNumber(de.nrw.dipp.dippCore.webservice.IdentNumberType identNumber) {
+    public void setIdentNumber(de.nrw.dipp.dippCore.webservice.IdentNumberType[] identNumber) {
         this.identNumber = identNumber;
+    }
+
+    public de.nrw.dipp.dippCore.webservice.IdentNumberType getIdentNumber(int i) {
+        return this.identNumber[i];
+    }
+
+    public void setIdentNumber(int i, de.nrw.dipp.dippCore.webservice.IdentNumberType _value) {
+        this.identNumber[i] = _value;
     }
 
 
@@ -325,7 +333,7 @@ public class Contributor  implements VCard, java.io.Serializable {
               this.dippIdentNumber.equals(other.getDippIdentNumber()))) &&
             ((this.identNumber==null && other.getIdentNumber()==null) || 
              (this.identNumber!=null &&
-              this.identNumber.equals(other.getIdentNumber()))) &&
+              java.util.Arrays.equals(this.identNumber, other.getIdentNumber()))) &&
             ((this.academicTitle==null && other.getAcademicTitle()==null) || 
              (this.academicTitle!=null &&
               this.academicTitle.equals(other.getAcademicTitle()))) &&
@@ -371,7 +379,15 @@ public class Contributor  implements VCard, java.io.Serializable {
             _hashCode += getDippIdentNumber().hashCode();
         }
         if (getIdentNumber() != null) {
-            _hashCode += getIdentNumber().hashCode();
+            for (int i=0;
+                 i<java.lang.reflect.Array.getLength(getIdentNumber());
+                 i++) {
+                java.lang.Object obj = java.lang.reflect.Array.get(getIdentNumber(), i);
+                if (obj != null &&
+                    !obj.getClass().isArray()) {
+                    _hashCode += obj.hashCode();
+                }
+            }
         }
         if (getAcademicTitle() != null) {
             _hashCode += getAcademicTitle().hashCode();
@@ -431,6 +447,7 @@ public class Contributor  implements VCard, java.io.Serializable {
         elemField.setXmlType(new javax.xml.namespace.QName("http://webservice.dippCore.dipp.nrw.de", "IdentNumberType"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
+        elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("academicTitle");

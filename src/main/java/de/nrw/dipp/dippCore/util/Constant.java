@@ -173,6 +173,8 @@ public class Constant {
 	public static String getcUpcastWorkDirPath() {
 		return cUpcastWorkDirPath;
 	}
+	
+	
 	/**
 	 *  Method for initiate Logging System which include Logger 
 	 *  Configuration from log4j.properties 

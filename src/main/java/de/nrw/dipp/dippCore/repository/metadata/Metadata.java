@@ -784,11 +784,16 @@ public class Metadata {
 			if (aFedoraVCard.isSetDippIdentifier()){
 				creator.setDippIdentNumber(aFedoraVCard.getDippIdentifier());						
 			}
-			if (aFedoraVCard.isSetIdentifier()){
-				IdentNumberType id = creator.getIdentNumber();
-				id.setIdentNumber(aFedoraVCard.getIdentifier().getIdentifier());
-				id.setType(aFedoraVCard.getIdentifier().getType());
-				creator.setIdentNumber(id);						
+			if (aFedoraVCard.getIdentifierArray() != null){
+
+				creator.getIdentNumber();
+				IdentNumberType[] id = new IdentNumberType[aFedoraVCard.getIdentifierArray().length];
+				
+				creator.setIdentNumber(id);
+				for(int i=0; i< aFedoraVCard.getIdentifierArray().length; i++){
+					creator.getIdentNumber(i).setIdentNumber(aFedoraVCard.getIdentifierArray(i).getIdentifier());
+					creator.getIdentNumber(i).setType(aFedoraVCard.getIdentifierArray(i).getType());
+				}
 			}
 
 		}
