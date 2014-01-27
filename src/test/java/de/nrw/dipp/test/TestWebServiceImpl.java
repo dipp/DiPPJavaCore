@@ -22,11 +22,18 @@
  */
 package de.nrw.dipp.test;
 
+import java.io.File;
 import java.rmi.RemoteException;
+import java.util.Enumeration;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.openarchives.oai.x20.oaiDc.ArticleType;
+import org.openarchives.oai.x20.oaiDc.MetadataDocument;
 
+import de.nrw.dipp.dippCore.repository.FedoraAccess;
+import de.nrw.dipp.dippCore.repository.metadata.Metadata;
 import de.nrw.dipp.dippCore.www.definitions.DippSoapBindingImpl;
 import de.nrw.dipp.dippCore.webservice.QualifiedDublinCore;
 import de.nrw.dipp.dippCore.webservice.SetNewArticle_fault;
@@ -55,25 +62,54 @@ public class TestWebServiceImpl {
 	}
 	
 	@Test public void callSetNewArticle(){
+		
+		log.debug("start newArticleTest");
 		DippSoapBindingImpl impl = new DippSoapBindingImpl();
-		String[] pidNS = null; //Namespace of the PID;
+		
+		String result = null;
+		String[] containerPid = {"dipp:1898"}; 
 		String journalPid = "dipp:1"; // ID of the journal the article should be part of 
 		QualifiedDublinCore qdc = null; //TODO create dummy qdc
 		String nativeDocIdent = "http://www.dipp.nrw.de/download/Beispiel.rtf"; //The URL where the Article-stream is accessible
-		String storageType = null;
-		String[] targetFormat = null;
+		String storageType = "temporary";
+		String[] targetFormat = {"html"};
+		
+		File tmpConvertDir = new File("convert");
+		tmpConvertDir.mkdir();
+		qdc = getQdcTestObject("dipp:2152");
 		
 		try {
-			impl.setNewArticle(pidNS, journalPid, qdc, nativeDocIdent, storageType, targetFormat);
+			result = impl.setNewArticle(containerPid, journalPid, qdc, nativeDocIdent, storageType, targetFormat);
 		} catch (SetNewArticle_fault e) {
 			// TODO Auto-generated catch block
+			log.error(e);
 			e.printStackTrace();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
+			log.error(e);
 			e.printStackTrace();
 		}
+		log.info("Result of newArticle method: " + result);
+		
+		tmpConvertDir.delete();
 	}
 
+	
+	/**
+	 * <p><em>Title: Create QualifiedDublinCore for test purposes</em></p>
+	 * <p>Description: actualy this method needs to request remote Fedora Repo
+	 * to create an QualifiedDublinCore Object. It uses Metadata Class for this purpose</p>
+	 * 
+	 * @param articlePid
+	 * @return 
+	 */
+	public QualifiedDublinCore getQdcTestObject(String articlePid){
+		QualifiedDublinCore qdcTest = Metadata.getQualifiedDublinCoreMetadata(articlePid);
+		log.debug("Result of Fedora request: " + qdcTest.toString());
+		return Metadata.getQualifiedDublinCoreMetadata(articlePid);
+	}
+	
+	
 	/**
 	 * <p><em>Title: </em></p>
 	 * <p>Description: </p>
@@ -83,6 +119,7 @@ public class TestWebServiceImpl {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TestWebServiceImpl testWS = new TestWebServiceImpl();
-		
+		testWS.callSetNewArticle();
+		log.debug("finished Test new article");
 	}
 }

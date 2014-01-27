@@ -80,7 +80,7 @@ public class FileUtil {
 		if (aIdentifier != null){
 			id = aIdentifier;
 		}
-		
+		/*
 		rootDir = new File(Constant.getAbsolutPath() 
 				+ "/WEB-INF/convert/" + id.replace(':', '_') + "_" + timeStamp + "_" + counter);
 		while (rootDir.exists()){
@@ -88,7 +88,13 @@ public class FileUtil {
 					+ "/WEB-INF/convert/" + id.replace(':', '_') + "_" + timeStamp + "_" + counter);
 			counter++;
 		}
-		
+		*/
+		//try to make the path relative
+		rootDir = new File("convert/" + id.replace(':', '_') + "_" + timeStamp + "_" + counter);
+		while (rootDir.exists()){
+			rootDir = new File("convert/" + id.replace(':', '_') + "_" + timeStamp + "_" + counter);
+			counter++;
+			}
 		/*
 		rootDir = new File(Constant.getcUpcastWorkDirPath() 
 				+ id.replace(':', '_') + "_" + timeStamp + "_" + counter);
@@ -115,12 +121,12 @@ public class FileUtil {
 	}
 	
 	public String getRootDir(){
-		log.info("called rootDirGetter, path is: " + rootDir.getAbsolutePath());
+		log.debug("called rootDirGetter, path is: " + rootDir.getAbsolutePath());
 		return rootDir.getAbsolutePath();
 	}
 	
 	public String getTargetDir(){
-		log.info("called targetDirGetter, path is: " + targetDir.getAbsolutePath());
+		log.debug("called targetDirGetter, path is: " + targetDir.getAbsolutePath());
 		return targetDir.getAbsolutePath();
 	}
 /*	
