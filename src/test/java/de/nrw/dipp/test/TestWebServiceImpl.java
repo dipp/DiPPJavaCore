@@ -34,7 +34,11 @@ import org.openarchives.oai.x20.oaiDc.MetadataDocument;
 
 import de.nrw.dipp.dippCore.repository.FedoraAccess;
 import de.nrw.dipp.dippCore.repository.metadata.Metadata;
+import de.nrw.dipp.dippCore.util.Constant;
 import de.nrw.dipp.dippCore.www.definitions.DippSoapBindingImpl;
+import de.nrw.dipp.dippCore.webservice.CreatorPerson;
+import de.nrw.dipp.dippCore.webservice.Element;
+import de.nrw.dipp.dippCore.webservice.IdentNumberType;
 import de.nrw.dipp.dippCore.webservice.QualifiedDublinCore;
 import de.nrw.dipp.dippCore.webservice.SetNewArticle_fault;
 
@@ -59,11 +63,12 @@ public class TestWebServiceImpl {
 	 */
 	public TestWebServiceImpl() {
 		// TODO Auto-generated constructor stub
+		Constant.setAbsolutPath("/home/aquast/git/dippCoreMvn");
 	}
 	
 	@Test public void callSetNewArticle(){
 		
-		log.debug("start newArticleTest");
+		log.debug("start with newArticleTest");
 		DippSoapBindingImpl impl = new DippSoapBindingImpl();
 		
 		String result = null;
@@ -105,10 +110,37 @@ public class TestWebServiceImpl {
 	 */
 	public QualifiedDublinCore getQdcTestObject(String articlePid){
 		QualifiedDublinCore qdcTest = Metadata.getQualifiedDublinCoreMetadata(articlePid);
+		
+		
+		CreatorPerson[] person = qdcTest.getCreatorPerson();
+		for(int i =0; i< person.length; i++){
+			person[i].setEmailAddress("reimer@hbz-nrw.de");
+			person[i].setPNDIdentNumber("1234512345");
+			person[i].setDippIdentNumber("dummy_ident");
+			
+			IdentNumberType[] identNumber = new IdentNumberType[1];
+			identNumber[0] = new IdentNumberType();
+			identNumber[0].setIdentNumber("00000-00002-3187-2536");
+			identNumber[0].setType("ORCID-ID");
+			person[i].setIdentNumber(identNumber);
+			
+			
+		}
+		qdcTest.setCreatorPerson(person);
+		
 		log.debug("Result of Fedora request: " + qdcTest.toString());
-		return Metadata.getQualifiedDublinCoreMetadata(articlePid);
+		return qdcTest;
 	}
 	
+
+	/**
+	 * <p><em>Title: </em></p>
+	 * <p>Description: Helper method to fill special metadata fields</p>
+	 *  
+	 */
+	private void addMetadata(){
+		
+	}
 	
 	/**
 	 * <p><em>Title: </em></p>
@@ -121,6 +153,6 @@ public class TestWebServiceImpl {
 		TestWebServiceImpl testWS = new TestWebServiceImpl();
 		testWS.callSetNewArticle();
 			
-		log.debug("finished Test new article");
+		log.info("finished Test new article");
 	}
 }

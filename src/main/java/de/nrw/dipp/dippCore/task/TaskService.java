@@ -22,7 +22,12 @@
  */
 package de.nrw.dipp.dippCore.task;
 
+import java.util.Properties;
+
 import org.apache.log4j.Logger;
+
+import de.nrw.dipp.dippCore.util.FileUtil;
+import de.nrw.dipp.dippCore.webservice.ExtendedMetadata;
 
 /**
  * Class TaskService
@@ -46,6 +51,12 @@ public class TaskService {
 	public static final int		PLONE = 3;
 	
 	private Task task = null;
+	private Properties taskProp = new Properties();
+	
+	//legacy variables
+	private ExtendedMetadata	extMetadata 		= null;
+	private FileUtil			fileUtil			= null;
+	private ConversionStatus	convStatus			= null;
 
 	/**
 	 * private constructor is accessibly by newInstnace method only 
@@ -65,7 +76,10 @@ public class TaskService {
 					log.debug("factory creates TaskXML");
 
 					//TODO: Implement Param correctly!!!
-					task = new TaskXML(new Param());
+					Param param = getParam();
+					if (param != null){
+						task = new TaskXML(param);
+					}
 
 					/*
 					((TaskXML)task).addObserver(this);
@@ -83,5 +97,41 @@ public class TaskService {
 	
 	public Task getTask(){
 		return task;
+	}
+	
+	public void setExtMetadata(ExtendedMetadata ExtMetadata){
+		extMetadata = ExtMetadata;
+	}
+	
+	public void setFileUtil(FileUtil FileUtil){
+		fileUtil = FileUtil;
+	}
+
+	public void setConversionStatus(ConversionStatus ConvertStatus){
+		convStatus = ConvertStatus;
+	}
+	/**
+	 * <p><em>Title: </em></p>
+	 * <p>Description: Helper method to convert Poperties into Param for 
+	 * legacy task Classes</p>
+	 * 
+	 * @return 
+	 */
+	private Param getParam(){
+		Param param = new Param();
+		
+		param.setArticlePID(taskProp.getProperty("articlePid"));
+		param.setContentObjectPID(taskProp.getProperty("contentObjectPid"));
+		param.setContentObjectDS(taskProp.getProperty("contentObjectDataStream"));
+		param.setJournalLabel(taskProp.getProperty("journalLabel"));
+		
+		param.setDoNew(taskProp.getProperty("DoNew").equals("true"));
+		param.setDoModify(taskProp.getProperty("DoModify").equals("true"));
+		param.setExtMetadata(extMetadata);
+		param.setFileUtil(fileUtil);
+		param.setConversionStatus(convStatus);
+		
+		
+		return param;
 	}
 }

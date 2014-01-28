@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
 import org.apache.xmlbeans.SchemaType;
 import org.apache.xmlbeans.XmlAnySimpleType;
 import org.apache.xmlbeans.XmlOptions;
@@ -29,13 +30,16 @@ import org.openarchives.oai.x20.oaiDc.SWD;
 import org.openarchives.oai.x20.oaiDc.UDC;
 import org.openarchives.oai.x20.oaiDc.URL;
 import org.openarchives.oai.x20.oaiDc.URN;
+import org.purl.dc.elements.x11.IdentifierType;
 import org.purl.dc.elements.x11.Keyword;
 import org.purl.dc.elements.x11.SimpleLiteral;
 import org.purl.dc.elements.x11.VCard;
 import org.purl.dc.terms.Citation;
 import org.purl.dc.terms.PartType;
 
+import de.nrw.dipp.dippCore.repository.ServiceManagement;
 import de.nrw.dipp.dippCore.webservice.Element;
+import de.nrw.dipp.dippCore.webservice.IdentNumberType;
 import de.nrw.dipp.dippCore.webservice.QualifiedDublinCore;
 
 /**
@@ -74,6 +78,11 @@ public class DublinCoreQualified {
 	private List			mDCtypeList	= new Vector();
 	private List			mDDCList	= new Vector();
 	
+	
+    // Get Logger for Class
+	private static Logger log = Logger.getLogger(DublinCoreQualified.class);
+
+
 	public DublinCoreQualified(){
 		init();
 	}
@@ -140,13 +149,13 @@ public class DublinCoreQualified {
 		
 		try{
 			
-			// a Title is required
+			// Title mandatory!
 			for (int i = 0; i < aQDCMetadata.getTitle().length; i++){
 				SimpleLiteral lit = mMetadata.addNewTitle();
 				setLiteral(aQDCMetadata.getTitle()[i], lit);
 			}
 
-			// this Metadate is not required 
+			// Alternative Title 
 			if(aQDCMetadata.getAlternative()!= null){
 				for (int i = 0; i < aQDCMetadata.getAlternative().length; i++){
 					SimpleLiteral lit = mMetadata.addNewAlternative();
@@ -154,7 +163,7 @@ public class DublinCoreQualified {
 				}
 			}
 
-			// this Metadate is not required 
+			// Abstract  
 			if(aQDCMetadata.getDCTermsAbstract()!= null){
 				for (int i = 0; i < aQDCMetadata.getDCTermsAbstract().length; i++){
 					SimpleLiteral lit = mMetadata.addNewAbstract();
@@ -162,7 +171,7 @@ public class DublinCoreQualified {
 				}				
 			}
 
-			// this Metadate is not required 
+			// Table of Content 
 			if(aQDCMetadata.getTableOfContents()!= null){
 				for (int i = 0; i < aQDCMetadata.getTableOfContents().length; i++){
 					SimpleLiteral lit = mMetadata.addNewTableOfContents();
@@ -422,6 +431,7 @@ public class DublinCoreQualified {
 			vcard.setFirstName(aWebserviceVcard.getFirstName());
 			vcard.setLastName(aWebserviceVcard.getLastName());
 			vcard.setPndIdentifier(aWebserviceVcard.getPNDIdentNumber());
+			vcard.setDippIdentifier((aWebserviceVcard.getDippIdentNumber()));			
 			vcard.setRole(aWebserviceVcard.getRole());
 		}else if (aWebserviceVcard instanceof de.nrw.dipp.dippCore.webservice.CreatorPerson){
 			type.setStringValue(cCreatorPerson);
@@ -429,14 +439,28 @@ public class DublinCoreQualified {
 			vcard.setFirstName(aWebserviceVcard.getFirstName());
 			vcard.setLastName(aWebserviceVcard.getLastName());
 			vcard.setPndIdentifier(aWebserviceVcard.getPNDIdentNumber());
+			vcard.setDippIdentifier((aWebserviceVcard.getDippIdentNumber()));			
 		}else if (aWebserviceVcard instanceof de.nrw.dipp.dippCore.webservice.CreatorCorporated){
 			type.setStringValue(cCreatorCorporation);
 			vcard.setLastName(aWebserviceVcard.getInstitutionelAuthor());
 			vcard.setGkdIdentifier(aWebserviceVcard.getGKDIdentNumber());
+			vcard.setDippIdentifier((aWebserviceVcard.getDippIdentNumber()));			
 		}
 		vcard.setEmail(aWebserviceVcard.getEmailAddress());
 		vcard.setPostal(aWebserviceVcard.getPostalAddress());
 		vcard.setOrganization(aWebserviceVcard.getOrganization());
+		
+		if(aWebserviceVcard.getIdentNumber() != null){
+			for(int i =0; i < aWebserviceVcard.getIdentNumber().length; i++){
+				IdentNumberType id = aWebserviceVcard.getIdentNumber(i);
+				IdentifierType idType = vcard.addNewIdentifier();
+				idType.setIdentifier(id.getIdentNumber());
+				idType.setType(id.getType());
+			}
+			log.info("added: " + vcard.getIdentifierArray().length + "identfiers");
+		}
+		
+		
 	}
 	
 	private void setLiteral(Element aElement, SimpleLiteral aLiteral){

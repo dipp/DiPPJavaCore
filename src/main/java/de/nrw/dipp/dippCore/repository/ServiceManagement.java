@@ -1769,7 +1769,7 @@ public class ServiceManagement {
 	 * <p><em>Title: </em></p>
 	 * <p>Description: Method managing and starts document converting process for Articles. 
 	 * Subsequently it adds the converted documents into DiPP:Content Fedora Objects and 
-	 * assign them to newly generated DiPP Artice Objects</p>
+	 * assign them to newly generated DiPP Article Objects</p>
 	 * 
 	 * @param aContainerIDArray <code>String[]</code> an Array of String providing all 
 	 * IDs that reference container objects on which the article is a child of (Volumes,...).
