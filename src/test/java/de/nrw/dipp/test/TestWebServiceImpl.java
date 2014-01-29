@@ -36,6 +36,7 @@ import de.nrw.dipp.dippCore.repository.FedoraAccess;
 import de.nrw.dipp.dippCore.repository.metadata.Metadata;
 import de.nrw.dipp.dippCore.util.Constant;
 import de.nrw.dipp.dippCore.www.definitions.DippSoapBindingImpl;
+import de.nrw.dipp.dippCore.webservice.AdministrativeMetadata;
 import de.nrw.dipp.dippCore.webservice.CreatorPerson;
 import de.nrw.dipp.dippCore.webservice.Element;
 import de.nrw.dipp.dippCore.webservice.IdentNumberType;
@@ -58,6 +59,14 @@ public class TestWebServiceImpl {
 	// Initiate Logger for TestWebServiceImpl
 	private static Logger log = Logger.getLogger(TestWebServiceImpl.class);
 
+	private static DippSoapBindingImpl impl = new DippSoapBindingImpl();
+	private String articlePid = "dipp:2181";
+	// as long as we have now complete TestQdc Object:
+	private QualifiedDublinCore qdcTest = getQdcTestObject(articlePid);
+
+	//TODO: construct a complete dummy testQdc via TestQdc
+	//private QualifiedDublinCore qdcTest = TestQdc.getTestQdc();
+	
 	/**
 	 * 
 	 */
@@ -66,25 +75,61 @@ public class TestWebServiceImpl {
 		Constant.setAbsolutPath("/home/aquast/git/dippCoreMvn");
 	}
 	
+	@Test public void callGetQualifiedDublinCore(){
+
+		log.info("start with testing setQualifiedDublinCore using pid: " + articlePid);
+		try {
+			qdcTest = impl.getQualifiedDublinCore(articlePid);
+		} catch (RemoteException e) {
+			log.error(e);
+		}
+	}
+	
+	@Test public void callSetAdministrativeMetadata(){
+		QualifiedDublinCore qdcTest = getQdcTestObject(articlePid); 
+		AdministrativeMetadata admProperties = null;
+		log.info("start with testing getQualifiedDublinCore, using articlePid: " +articlePid);
+		
+		
+		try {
+			impl.setAdministrativeMetadata(admProperties);
+		} catch (RemoteException e) {
+			log.error(e);
+		}
+		
+	}
+	
+	@Test public void callSetQualifiedDublinCore(){
+		QualifiedDublinCore qdcTest = getQdcTestObject(articlePid); 
+
+		log.info("start with testing getQualifiedDublinCore, using QDC from articlePid: " + articlePid);
+		try {
+			impl.setQualifiedDublinCore(articlePid, qdcTest);
+		} catch (RemoteException e) {
+			log.error(e);
+		}
+		
+	}
+
 	@Test public void callSetNewArticle(){
 		
-		log.debug("start with newArticleTest");
-		DippSoapBindingImpl impl = new DippSoapBindingImpl();
+		log.info("start with testing newArticle");
 		
-		String result = null;
+		String newArticlePid = null;
 		String[] containerPid = {"dipp:1898"}; 
 		String journalPid = "dipp:1"; // ID of the journal the article should be part of 
 		QualifiedDublinCore qdc = null; //TODO create dummy qdc
+		
 		String nativeDocIdent = "http://www.dipp.nrw.de/download/Beispiel.rtf"; //The URL where the Article-stream is accessible
 		String storageType = "temporary";
 		String[] targetFormat = {"html"};
 		
 		File tmpConvertDir = new File("convert");
 		tmpConvertDir.mkdir();
-		qdc = getQdcTestObject("dipp:2181");
+		setArticlePid("dipp:2181");
 		
 		try {
-			result = impl.setNewArticle(containerPid, journalPid, qdc, nativeDocIdent, storageType, targetFormat);
+			newArticlePid = impl.setNewArticle(containerPid, journalPid, qdcTest, nativeDocIdent, storageType, targetFormat);
 		} catch (SetNewArticle_fault e) {
 			// TODO Auto-generated catch block
 			log.error(e);
@@ -94,21 +139,23 @@ public class TestWebServiceImpl {
 			log.error(e);
 			e.printStackTrace();
 		}
-		log.info("Result of newArticle method: " + result);
-		
-		tmpConvertDir.delete();
+		setArticlePid(newArticlePid);
+
 	}
 
 	
 	/**
 	 * <p><em>Title: Create QualifiedDublinCore for test purposes</em></p>
-	 * <p>Description: actualy this method needs to request remote Fedora Repo
+	 * <p>Description: actually this method needs to request remote Fedora Repo
 	 * to create an QualifiedDublinCore Object. It uses Metadata Class for this purpose</p>
 	 * 
 	 * @param articlePid
 	 * @return 
 	 */
 	public QualifiedDublinCore getQdcTestObject(String articlePid){
+		
+		log.info("create testQdc from existing QDC of article: " + articlePid);
+		
 		QualifiedDublinCore qdcTest = Metadata.getQualifiedDublinCoreMetadata(articlePid);
 		
 		
@@ -132,16 +179,14 @@ public class TestWebServiceImpl {
 		return qdcTest;
 	}
 	
-
-	/**
-	 * <p><em>Title: </em></p>
-	 * <p>Description: Helper method to fill special metadata fields</p>
-	 *  
-	 */
-	private void addMetadata(){
-		
+	public void setArticlePid(String pid){
+		articlePid = pid;
 	}
 	
+	public void setQdcTest(QualifiedDublinCore qdc){
+		qdcTest = qdc;
+	}
+
 	/**
 	 * <p><em>Title: </em></p>
 	 * <p>Description: </p>
@@ -151,8 +196,12 @@ public class TestWebServiceImpl {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TestWebServiceImpl testWS = new TestWebServiceImpl();
-		testWS.callSetNewArticle();
-			
-		log.info("finished Test new article");
+		//testWS.callSetNewArticle();
+		//testWS.setArticlePid(testWS.callSetNewArticle());
+
+		testWS.callGetQualifiedDublinCore();
+		testWS.callSetQualifiedDublinCore();
+		
+		log.info("finished WS implementation tests");
 	}
 }

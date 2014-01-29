@@ -790,7 +790,9 @@ public class Metadata {
 				IdentNumberType[] id = new IdentNumberType[aFedoraVCard.getIdentifierArray().length];
 				
 				creator.setIdentNumber(id);
+				
 				for(int i=0; i< aFedoraVCard.getIdentifierArray().length; i++){
+					creator.setIdentNumber(i, new IdentNumberType());
 					creator.getIdentNumber(i).setIdentNumber(aFedoraVCard.getIdentifierArray(i).getIdentifier());
 					creator.getIdentNumber(i).setType(aFedoraVCard.getIdentifierArray(i).getType());
 				}

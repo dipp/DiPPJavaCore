@@ -24,7 +24,9 @@ package de.nrw.dipp.test;
 
 import org.apache.log4j.Logger;
 
+import de.nrw.dipp.dippCore.webservice.CreatorPerson;
 import de.nrw.dipp.dippCore.webservice.Element;
+import de.nrw.dipp.dippCore.webservice.IdentNumberType;
 import de.nrw.dipp.dippCore.webservice.QualifiedDublinCore;
 import de.nrw.dipp.dippCore.webservice.SubjectClassified;
 
@@ -51,6 +53,13 @@ public class TestQdc {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * <p><em>Title: </em></p>
+	 * <p>Description: method creates a QualifiedDublinCore Object from scratch.
+	 * Object should be used for testing purposes only</p>
+	 * 
+	 * @return 
+	 */
 	public static QualifiedDublinCore getTestQdc(){
 		
 		QualifiedDublinCore qdcTest = new QualifiedDublinCore(); 
@@ -75,6 +84,23 @@ public class TestQdc {
 		sClass[0].setClassificationSystem("?");
 		sClass[0].setSubjectClassified("Informationstechnologie");
 		qdcTest.setSubjectClassified(sClass);
+		
+		CreatorPerson[] person = new CreatorPerson[1];
+		person[0] = new CreatorPerson();
+		person[0].setFirstName("Peter");
+		person[0].setLastName("Reimer");
+		person[0].setEmailAddress("reimer@hbz-nrw.de");
+		person[0].setPNDIdentNumber("1234512345");
+		person[0].setDippIdentNumber("dummy_ident");
+		
+		IdentNumberType[] identNumber = new IdentNumberType[1];
+		identNumber[0] = new IdentNumberType();
+		identNumber[0].setIdentNumber("00000-00002-3187-2536");
+		identNumber[0].setType("ORCID-ID");
+		person[0].setIdentNumber(identNumber);
+		qdcTest.setCreatorPerson(person);
+		
+
 		
 		
 		
