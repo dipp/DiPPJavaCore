@@ -145,7 +145,7 @@ public class DippSoapBindingImpl implements ContentModel{
      */
     public java.lang.String setNewContainer(java.lang.String in0, java.lang.String in1, java.lang.String in2) throws java.rmi.RemoteException, de.nrw.dipp.dippCore.webservice.SetNewContainer_fault {
     	//TODO: Implement this Method
-    	log.error("Method not implemented yet");
+    	log.error("Method setNewContainer not implemented yet");
     	return null;
     }
 
@@ -207,7 +207,7 @@ public class DippSoapBindingImpl implements ContentModel{
      */
     public void setAdministrativeMetadata(de.nrw.dipp.dippCore.webservice.AdministrativeMetadata admProperties) throws java.rmi.RemoteException, de.nrw.dipp.dippCore.webservice.SetAdministrativeMetadata_fault {
     	//TODO: Implement this Method
-    	log.error("Method not implemented yet");
+    	log.error("Method setAdministrativeMetadata not implemented yet");
     }
 
     /* (non-Javadoc)
@@ -215,7 +215,7 @@ public class DippSoapBindingImpl implements ContentModel{
      */
     public de.nrw.dipp.dippCore.webservice.AdministrativeMetadata getAdministrativeMetadata(java.lang.String in0) throws java.rmi.RemoteException, de.nrw.dipp.dippCore.webservice.GetAdministrativeMetadata_fault {
     	//TODO: Implement this Method
-    	log.error("Method not implemented yet");
+    	log.error("Method getAdministrativeMetadata not implemented yet");
         return null;
     }
 

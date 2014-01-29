@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.openarchives.oai.x20.oaiDc.ArticleType;
 import org.openarchives.oai.x20.oaiDc.MetadataDocument;
 
+import de.nrw.dipp.definitions.extmetadata.ExtMdDocument.ExtMd;
 import de.nrw.dipp.dippCore.repository.FedoraAccess;
 import de.nrw.dipp.dippCore.repository.metadata.Metadata;
 import de.nrw.dipp.dippCore.util.Constant;
@@ -39,6 +40,7 @@ import de.nrw.dipp.dippCore.www.definitions.DippSoapBindingImpl;
 import de.nrw.dipp.dippCore.webservice.AdministrativeMetadata;
 import de.nrw.dipp.dippCore.webservice.CreatorPerson;
 import de.nrw.dipp.dippCore.webservice.Element;
+import de.nrw.dipp.dippCore.webservice.ExtendedMetadata;
 import de.nrw.dipp.dippCore.webservice.IdentNumberType;
 import de.nrw.dipp.dippCore.webservice.QualifiedDublinCore;
 import de.nrw.dipp.dippCore.webservice.SetNewArticle_fault;
@@ -110,6 +112,21 @@ public class TestWebServiceImpl {
 		}
 		
 	}
+	
+	@Test public void callGetArticleContentMetadata(){
+
+		log.info("start with testing newArticle");
+		
+		ExtendedMetadata extMD = null;
+		
+		try {
+			extMD = impl.getArticleContentMetadata(articlePid);
+		} catch (RemoteException e) {
+			log.error(e);
+			e.printStackTrace();
+		}
+		log.info(extMD.toString());
+	}
 
 	@Test public void callSetNewArticle(){
 		
@@ -118,7 +135,7 @@ public class TestWebServiceImpl {
 		String newArticlePid = null;
 		String[] containerPid = {"dipp:1898"}; 
 		String journalPid = "dipp:1"; // ID of the journal the article should be part of 
-		QualifiedDublinCore qdc = null; //TODO create dummy qdc
+		QualifiedDublinCore qdc = null; 
 		
 		String nativeDocIdent = "http://www.dipp.nrw.de/download/Beispiel.rtf"; //The URL where the Article-stream is accessible
 		String storageType = "temporary";
@@ -126,7 +143,6 @@ public class TestWebServiceImpl {
 		
 		File tmpConvertDir = new File("convert");
 		tmpConvertDir.mkdir();
-		setArticlePid("dipp:2181");
 		
 		try {
 			newArticlePid = impl.setNewArticle(containerPid, journalPid, qdcTest, nativeDocIdent, storageType, targetFormat);
@@ -154,28 +170,10 @@ public class TestWebServiceImpl {
 	 */
 	public QualifiedDublinCore getQdcTestObject(String articlePid){
 		
-		log.info("create testQdc from existing QDC of article: " + articlePid);
+		//log.info("create testQdc from existing QDC of article: " + articlePid);
+		//QualifiedDublinCore qdcTest = Metadata.getQualifiedDublinCoreMetadata(articlePid);
 		
-		QualifiedDublinCore qdcTest = Metadata.getQualifiedDublinCoreMetadata(articlePid);
-		
-		
-		CreatorPerson[] person = qdcTest.getCreatorPerson();
-		for(int i =0; i< person.length; i++){
-			person[i].setEmailAddress("reimer@hbz-nrw.de");
-			person[i].setPNDIdentNumber("1234512345");
-			person[i].setDippIdentNumber("dummy_ident");
-			
-			IdentNumberType[] identNumber = new IdentNumberType[1];
-			identNumber[0] = new IdentNumberType();
-			identNumber[0].setIdentNumber("00000-00002-3187-2536");
-			identNumber[0].setType("ORCID-ID");
-			person[i].setIdentNumber(identNumber);
-			
-			
-		}
-		qdcTest.setCreatorPerson(person);
-		
-		log.debug("Result of Fedora request: " + qdcTest.toString());
+		QualifiedDublinCore qdcTest = TestQdc.getTestQdc();
 		return qdcTest;
 	}
 	
@@ -196,12 +194,11 @@ public class TestWebServiceImpl {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TestWebServiceImpl testWS = new TestWebServiceImpl();
-		//testWS.callSetNewArticle();
-		//testWS.setArticlePid(testWS.callSetNewArticle());
-
+		testWS.callSetNewArticle();
 		testWS.callGetQualifiedDublinCore();
 		testWS.callSetQualifiedDublinCore();
-		
+		testWS.setArticlePid("temp:1866");
+		testWS.callGetArticleContentMetadata();
 		log.info("finished WS implementation tests");
 	}
 }

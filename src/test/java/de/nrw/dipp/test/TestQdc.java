@@ -22,11 +22,31 @@
  */
 package de.nrw.dipp.test;
 
-import org.apache.log4j.Logger;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Vector;
 
+import org.apache.log4j.Logger;
+import org.openarchives.oai.x20.oaiDc.ArticleType;
+import org.openarchives.oai.x20.oaiDc.DOI;
+import org.openarchives.oai.x20.oaiDc.DocType;
+import org.openarchives.oai.x20.oaiDc.ISBN;
+import org.openarchives.oai.x20.oaiDc.ISSN;
+import org.openarchives.oai.x20.oaiDc.PubType;
+import org.openarchives.oai.x20.oaiDc.URL;
+import org.openarchives.oai.x20.oaiDc.URN;
+import org.purl.dc.elements.x11.Keyword;
+import org.purl.dc.elements.x11.SimpleLiteral;
+import org.purl.dc.elements.x11.VCard;
+
+import de.nrw.dipp.dippCore.repository.metadata.dc.DublinCoreQualified;
+import de.nrw.dipp.dippCore.webservice.Citation;
+import de.nrw.dipp.dippCore.webservice.Contributor;
+import de.nrw.dipp.dippCore.webservice.CreatorCorporated;
 import de.nrw.dipp.dippCore.webservice.CreatorPerson;
 import de.nrw.dipp.dippCore.webservice.Element;
 import de.nrw.dipp.dippCore.webservice.IdentNumberType;
+import de.nrw.dipp.dippCore.webservice.Part;
 import de.nrw.dipp.dippCore.webservice.QualifiedDublinCore;
 import de.nrw.dipp.dippCore.webservice.SubjectClassified;
 
@@ -63,20 +83,28 @@ public class TestQdc {
 	public static QualifiedDublinCore getTestQdc(){
 		
 		QualifiedDublinCore qdcTest = new QualifiedDublinCore(); 
+		
 		Element[] title = new Element[2];
 		title[0] = new Element();
-		title[0].setValue("A dummy article for Java Junit test");
+		title[0].setValue("A dummy article for JUnit tests");
 		title[0].setLang("eng");
 		title[1] = new Element();
-		title[1].setValue("A dummy article for Java Junit test");
+		title[1].setValue("really just for test");
 		title[1].setLang("eng");
 		qdcTest.setTitle(title);
 
-		String[] subjUnQualified = new String[]{"Test", "JUnit Test"};
-		qdcTest.setSubject(subjUnQualified);
+		Element[] alttitle = new Element[1];
+		alttitle[0] = new Element();
+		alttitle[0].setValue("Ein Testartikel für Tests mit JUnit ");
+		alttitle[0].setLang("ger");
+		qdcTest.setAlternative(alttitle);
 		
-		String[] ddc = new String[]{"010"};
-		qdcTest.setDDC(ddc);
+		qdcTest.setDescription(
+				new String[]{"This article is just a dummy for JUnit testing purposes"});
+
+		qdcTest.setSubject(new String[]{"Test", "JUnit Test"});
+		
+		qdcTest.setDDC(new String[]{"010"});
 		
 		SubjectClassified[] sClass = new SubjectClassified[1];
 		sClass[0] = new SubjectClassified(); 
@@ -85,13 +113,46 @@ public class TestQdc {
 		sClass[0].setSubjectClassified("Informationstechnologie");
 		qdcTest.setSubjectClassified(sClass);
 		
+		Citation[] bibCite = new Citation[1];
+		bibCite[0] = new Citation();
+		bibCite[0].setJournalTitle("Test Jounal");
+		bibCite[0].setJournalIssueDate("2014-01-29");
+		bibCite[0].setJournalIssueNumber("1");
+		bibCite[0].setJournalVolume("2014");
+		qdcTest.setBibliographicCitation(bibCite);
+				
+		
+		qdcTest.setCreated(Calendar.getInstance());
+		qdcTest.setModified(Calendar.getInstance());
+		qdcTest.setIssued(Calendar.getInstance());
+		qdcTest.setValid(Calendar.getInstance());
+		
+		qdcTest.setDateSubmitted(Calendar.getInstance());
+		qdcTest.setDateAccepted(Calendar.getInstance());
+		qdcTest.setDateCopyrighted(Calendar.getInstance());
+		
+		qdcTest.setDocType(new String[]{"article"});
+		qdcTest.setPubType(new String[]{"article"});
+		qdcTest.setArticleType(new String[]{"peer-reviewed"});
+		qdcTest.setFormat(new String[]{"html"});
+		
+		qdcTest.setIdentifier(new String[]{"12345"});
+		qdcTest.setIdentifierDOI("10.xxx-xxx-xxx");
+		qdcTest.setIdentifierURN("nbn.xxx.xxx.xxx");
+		qdcTest.setIdentifierISBN("xxx-xxxx-xxx");
+		qdcTest.setIdentifierISSN("xxxx-xxxx");
+		qdcTest.setIdentifierURL("http://no-domain.xxx");
+
+		qdcTest.setLanguage(new String[]{"ger"});
+		
+		
 		CreatorPerson[] person = new CreatorPerson[1];
 		person[0] = new CreatorPerson();
-		person[0].setFirstName("Peter");
-		person[0].setLastName("Reimer");
-		person[0].setEmailAddress("reimer@hbz-nrw.de");
-		person[0].setPNDIdentNumber("1234512345");
-		person[0].setDippIdentNumber("dummy_ident");
+		person[0].setFirstName("Andres");
+		person[0].setLastName("Quast");
+		person[0].setEmailAddress("quast@hbz-nrw.de");
+		person[0].setPNDIdentNumber("");
+		person[0].setDippIdentNumber("000-0002");
 		
 		IdentNumberType[] identNumber = new IdentNumberType[1];
 		identNumber[0] = new IdentNumberType();
@@ -100,6 +161,20 @@ public class TestQdc {
 		person[0].setIdentNumber(identNumber);
 		qdcTest.setCreatorPerson(person);
 		
+		Contributor[] contrib = new Contributor[1];
+		contrib[0] = new Contributor();
+		contrib[0].setFirstName("Peter");
+		contrib[0].setLastName("Reimer");
+		contrib[0].setEmailAddress("Reimer@hbz-nrw.de");
+		contrib[0].setPNDIdentNumber("");
+		contrib[0].setDippIdentNumber("000-0001");
+		
+		identNumber = new IdentNumberType[1];
+		identNumber[0] = new IdentNumberType();
+		identNumber[0].setIdentNumber("00000-00002-3187-2536");
+		identNumber[0].setType("ORCID-ID");
+		contrib[0].setIdentNumber(identNumber);
+		qdcTest.setContributor(contrib);
 
 		
 		
