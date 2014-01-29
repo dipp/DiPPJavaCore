@@ -1,0 +1,25 @@
+h1. About
+
+DiPPCore is the Java based Connector for the DiPP Platform Modules. DiPPCore provides SOAP-Web services for accessing and managing various content (e.g. journals, articles, supplementary materials) of the DiPP Plattform.    
+
+h1. Releases
+
+Current Release DiPPCore 1.3.01
+* added DiPPIdentifier and generic Identifier element to person metadata schema
+* added JUnit tests for Webservice Implementation
+* reorganized project to fit to Maven convention ("convention goes over configuration")
+* added Maven configuration for war-deployment 
+
+h1. Status
+
+stable
+
+h1. License
+
+The contents of the project is subject to the D-FSL License Version 1.0 (the "License"). 
+You may not use this software except in compliance with the License. You may obtain a copy of the License
+at http://www.dipp.nrw.de/dfsl/
+
+Software distributed under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for the specific language governing rights and limitations under the License.
+
+Portions created for the Fedora Repository System are Copyright 2002-2005 by The Rector and Visitors of the University of Virginia and Cornell University. All rights reserved.
