@@ -23,3 +23,9 @@ at http://www.dipp.nrw.de/dfsl/
 Software distributed under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for the specific language governing rights and limitations under the License.
 
 Portions created for the Fedora Repository System are Copyright 2002-2005 by The Rector and Visitors of the University of Virginia and Cornell University. All rights reserved.
+
+h1. Install
+
+DiPPCore should be deployed as WebArchive (war) container within the Tomcat Web-Application Server. To generate the war-container run mvn clean compile war:war
+
+ 
