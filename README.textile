@@ -4,11 +4,12 @@ DiPPCore is the Java based Connector for the DiPP Platform Modules. DiPPCore pro
 
 h1. Releases
 
-Current Release DiPPCore 1.3.01
+Current Release DiPPCore 1.3.02
 * added DiPPIdentifier and generic Identifier element to person metadata schema
 * added JUnit tests for Webservice Implementation
 * reorganized project to fit to Maven convention ("convention goes over configuration")
-* added Maven configuration for war-deployment 
+* added Maven configuration for war-deployment
+* merged DiPPFedora2 and DiPPFedora3 into DiPPCore to streamline compilation and deployment 
 
 h1. Status
 
