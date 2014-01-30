@@ -47,6 +47,30 @@ h3. XMLBeans
 DiPP provides a shell script dippXBeanGenerator.sh to create XMLBean Packages. Please configure either your development system or the shell script accordingly.
 New beans may be added as jar to the DiPPCore by using an local Maven Repository and configure pom.xml.
 
+h3. Connect to SOAP ZSI (Python SOAP Framework)
+
+The DiPP Plone Frontend uses ZSI to communicate with the DiPPCore SOAP-API. To generate ZSI client classes for the API please copy dippDoc.wsdl to the location of your Python instance, install the ZSI2.0 Egg and run 
+
+<code>
+/files/lib/python[-version]/bin/wsdl2py -b -e
+-u [path/to/]dippDoc.wsdl
+-o /files/lib/python[-version].4.5/lib/python[version]/site-packages/fedora3/
+</code>
+
+Afterward you have to replace one Line for the method setQualifiedDublinCore within the auto generated class ContentModelService_services.py.
+
+Replace
+<code>
+#check for soap, assume soap:fault
+ if self.binding.IsSOAP(): self.binding.Receive(None, **kw)
+</code> 
+
+with
+<code>
+#check for soap, assume soap:fault
+ if self.binding.IsSOAP(): self.binding.ReceiveRaw
+</code> 
+
 
 
 
