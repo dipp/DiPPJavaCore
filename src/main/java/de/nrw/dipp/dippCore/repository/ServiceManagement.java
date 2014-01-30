@@ -1282,6 +1282,17 @@ public class ServiceManagement {
 			task.setConversionStatus(convStatus);
 			task.setExtMetadata(extMeta);
 			task.setFileUtil(fileUtil);
+
+			// added Propertries to make task enhanceable
+			
+			Properties taskProp = new Properties();
+			taskProp.setProperty("ArticlePID", aArticleID);
+			taskProp.setProperty("journalLabel", articleObj.getLabel());
+			taskProp.setProperty("DoModify", "true");
+			taskProp.setProperty("ContentObjectPid", pid);
+			taskProp.setProperty("ContentObjectDS", "DS1");
+			
+			
 			convStatus.addBit(ConversionStatus.cFlagConversion);
 			TaskManager.getInstance().addTask(TaskManager.cRegisteredTaskXML, task, true);
 			convStatus.addBit(ConversionStatus.cFlagXML);
