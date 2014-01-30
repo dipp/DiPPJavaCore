@@ -197,7 +197,7 @@ public class TestWebServiceImpl {
 		testWS.callSetNewArticle();
 		testWS.callGetQualifiedDublinCore();
 		testWS.callSetQualifiedDublinCore();
-		testWS.setArticlePid("temp:1866");
+		//testWS.setArticlePid("temp:1866");
 		testWS.callGetArticleContentMetadata();
 		log.info("finished WS implementation tests");
 	}

@@ -49,8 +49,9 @@ public class TaskService {
 	public static final int 	HTML  = 1;
 	public static final int 	PDF   = 2;
 	public static final int		PLONE = 3;
+	public static final int		PDFA  = 4;
 	
-	private Task task = null;
+	private Task task;
 	private Properties taskProp = new Properties();
 	
 	//legacy variables
@@ -65,28 +66,60 @@ public class TaskService {
 		
 	}
 	
-	
-	public class Factory {
+	/**
+	 * <p><em>Title: </em></p>
+	 * <p>Description: Helper method to convert Poperties into Param for 
+	 * legacy task Classes</p>
+	 * 
+	 * @return 
+	 */
+	public Param getParam(){
+		Param param = new Param();
 		
-		public TaskService newInstance(int taskType){
-			TaskService tService = null;
+		param.setArticlePID(taskProp.getProperty("articlePid"));
+		param.setContentObjectPID(taskProp.getProperty("contentObjectPid"));
+		param.setContentObjectDS(taskProp.getProperty("contentObjectDataStream"));
+		param.setJournalLabel(taskProp.getProperty("journalLabel"));
+		
+		param.setDoNew(taskProp.getProperty("DoNew").equals("true"));
+		param.setDoModify(taskProp.getProperty("DoModify").equals("true"));
+		param.setExtMetadata(extMetadata);
+		param.setFileUtil(fileUtil);
+		param.setConversionStatus(convStatus);
+		
+		
+		return param;
+	}
+	
+	public static class Factory {
+		
+		public static TaskService newInstance(int taskType){
+			TaskService tService = new TaskService();
 			
+			//Task task = new TaskXML(null);
 			switch(taskType){
 				case TaskService.XML:
 					log.debug("factory creates TaskXML");
 
 					//TODO: Implement Param correctly!!!
-					Param param = getParam();
+					Param param = new Param();
+					param = tService.getParam();
 					if (param != null){
-						task = new TaskXML(param);
+						tService.task = new TaskXML(param);
 					}
 
-					/*
-					((TaskXML)task).addObserver(this);
-					mHashtableXML.put(aParam.getArticlePID(), task);
-					log.info("before starting task");
-					*/
-					tService = new TaskService();
+					break;
+				
+				case TaskService.HTML:
+					log.debug("factory creates TaskHTML");
+
+					//TODO: Implement Param correctly!!!
+					param = new Param();
+					param = tService.getParam();
+					if (param != null){
+						tService.task = new TaskHTML(param);
+					}
+
 					break;
 				}	
 
@@ -110,28 +143,5 @@ public class TaskService {
 	public void setConversionStatus(ConversionStatus ConvertStatus){
 		convStatus = ConvertStatus;
 	}
-	/**
-	 * <p><em>Title: </em></p>
-	 * <p>Description: Helper method to convert Poperties into Param for 
-	 * legacy task Classes</p>
-	 * 
-	 * @return 
-	 */
-	private Param getParam(){
-		Param param = new Param();
-		
-		param.setArticlePID(taskProp.getProperty("articlePid"));
-		param.setContentObjectPID(taskProp.getProperty("contentObjectPid"));
-		param.setContentObjectDS(taskProp.getProperty("contentObjectDataStream"));
-		param.setJournalLabel(taskProp.getProperty("journalLabel"));
-		
-		param.setDoNew(taskProp.getProperty("DoNew").equals("true"));
-		param.setDoModify(taskProp.getProperty("DoModify").equals("true"));
-		param.setExtMetadata(extMetadata);
-		param.setFileUtil(fileUtil);
-		param.setConversionStatus(convStatus);
-		
-		
-		return param;
-	}
+
 }

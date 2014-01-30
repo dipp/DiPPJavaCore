@@ -71,6 +71,9 @@ public class TaskManager implements Observer{
 
 	public synchronized void addTask(int registeredTask, Param aParam, boolean aStart){
 		Task task;
+		
+		task = TaskService.Factory.newInstance(registeredTask).getTask();
+		((Observable) task).addObserver(this);
 		switch(registeredTask){
 			case cRegisteredTaskXML: 
 				log.info("calling TaskXML");
