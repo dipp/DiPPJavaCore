@@ -27,6 +27,27 @@ Portions created for the Fedora Repository System are Copyright 2002-2005 by The
 
 h1. Install
 
-DiPPCore should be deployed as WebArchive (war) container within the Tomcat Web-Application Server. To generate the war-container run mvn clean compile war:war
+DiPPCore should be deployed as WebArchive (war) container within the Tomcat Web-Application Server. To generate the war-container please run mvn clean compile war:war
+
+DiPPCore is part of the DiPP Platform. Further modules required to run DiPP are Fedora Commons Repository System and Plone CMI with DiPP Extensions. For more information please contact dipp
+   
+
+h1. Development
+
+h2. Code Generation 
+
+DiPPCore relies on auto generated code from the Axis-framework and from XMLBeans. 
+
+h3. Axis SOAP WebServices
+
+Any changes to SOAP WebServices may be implemented according the "Contract First" concept. Please make use of dippDoc.wdsl to implement contract changes. DiPPCore provides a shell script dippAxisGenerator.sh to generate classes. Please configure either your development system or shell script accordingly.
+
+h3. XMLBeans
+
+DiPP provides a shell script dippXBeanGenerator.sh to create XMLBean Packages. Please configure either your development system or the shell script accordingly.
+New beans may be added as jar to the DiPPCore by using an local Maven Repository and configure pom.xml.
+
+
+
 
  
