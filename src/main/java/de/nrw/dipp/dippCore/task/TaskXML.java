@@ -66,7 +66,7 @@ import de.nrw.dipp.dippCore.webservice.QualifiedDublinCore;
  * @author Jochen Schirrwagen, schirrwagen@hbz-nrw.de
  * @version $Id: TaskXML.java,v 1.4 2007/01/05 11:43:14 dippadm Exp $
  */
-public class TaskXML extends Observable implements Task {
+public class TaskXML extends TaskService implements Task {
 
     // Get Logger for TaskXML
 	private static Logger log = Logger.getLogger(TaskXML.class);

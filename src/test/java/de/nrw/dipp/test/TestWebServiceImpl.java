@@ -195,10 +195,10 @@ public class TestWebServiceImpl {
 		// TODO Auto-generated method stub
 		TestWebServiceImpl testWS = new TestWebServiceImpl();
 		testWS.callSetNewArticle();
-		testWS.callGetQualifiedDublinCore();
-		testWS.callSetQualifiedDublinCore();
+		//testWS.callGetQualifiedDublinCore();
+		//testWS.callSetQualifiedDublinCore();
 		//testWS.setArticlePid("temp:1866");
-		testWS.callGetArticleContentMetadata();
+		//testWS.callGetArticleContentMetadata();
 		log.info("finished WS implementation tests");
 	}
 }

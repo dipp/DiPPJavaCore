@@ -92,7 +92,7 @@ public class TaskHTML extends TaskXML {
 		try{
 			System.out.println("TaskHTML for id " + getObjectID() );
 			// ****************************************
-			// * before aquire of upcast -> test, wether sourcefile exists
+			// * before aquire of upcast -> test, whether sourcefile exists
 			// ****************************************
 			while( (upcast = Upcast.getInstance()) == null ){
 				System.out.println("TaskHTML for id " + getObjectID() + " wait");

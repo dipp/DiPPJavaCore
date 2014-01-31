@@ -69,50 +69,28 @@ public class TaskManager implements Observer{
 		return ControllerHolder.controller;
 	}
 
+	/**
+	 * Method calls TaskService to create new Task depending on the kind of 
+	 * task that is required. taskService replaces legacy addTask method. 
+	 * All logic required to determine kind of Task is moved to TaskService 
+	 * 
+	 * @param registeredTask
+	 * @param aParam
+	 * @param aStart
+	 */
 	public synchronized void addTask(int registeredTask, Param aParam, boolean aStart){
-		Task task;
+		TaskService task;
 		
-		task = TaskService.Factory.newInstance(registeredTask).getTask();
-		((Observable) task).addObserver(this);
-		switch(registeredTask){
-			case cRegisteredTaskXML: 
-				log.info("calling TaskXML");
-				task = new TaskXML(aParam);
-				log.info("add Observer");
-				((TaskXML)task).addObserver(this);
-				mHashtableXML.put(aParam.getArticlePID(), task);
-				log.info("before starting task");
+		task = TaskService.Factory.newInstance(registeredTask);
+		task.setParam(aParam);
+		task.addObserver(this);
 
-				if (aStart){
-					log.info("starting task now");
-					new Thread(task).start();
-					log.info("task started");
-				}
-				break;
-			case cRegisteredTaskHTML:
-				log.info("calling TaskHTML");
-				task = new TaskHTML(aParam);
-				((TaskHTML)task).addObserver(this);
-				mHashtableHTML.put(aParam.getArticlePID(), task);
-				break;
-			case cRegisteredTaskPDF:
-//				task = new TaskPDF(aParam);
-//				((TaskPDF)task).addObserver(this);
-				log.info("calling TaskDocBook2PDF");
-				task = new TaskDocBook2PDF(aParam);
-				((TaskDocBook2PDF)task).addObserver(this);
-				mHashtablePDF.put(aParam.getArticlePID(), task);
-				break;
-			case cRegisteredTaskPlone:
-				log.info("calling TaskPloneRegister");
-				task = new TaskPloneRegister(aParam);
-				((TaskPloneRegister)task).addObserver(this);
-				mHashtablePlone.put(aParam.getArticlePID(), task);
-				if (aStart){
-					new Thread(task).start();					
-				}
-				break;
-		}		
+		if (aStart){
+			log.info("starting task now");
+			new Thread(task).start();
+			log.info("task started");
+		}
+
 	}
 
 	/* (non-Javadoc)
@@ -226,6 +204,7 @@ public class TaskManager implements Observer{
 			fi.setArticleConvertedStatus(aOID, aConversionStatus);
 			log.info(aOID + " converted Status: " + aConversionStatus);
 		}catch(IOException ioExc){
+			log.error(ioExc);
 			ioExc.printStackTrace();				
 		}		
 	}

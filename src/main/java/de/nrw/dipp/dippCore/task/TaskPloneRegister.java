@@ -63,7 +63,7 @@ import de.nrw.dipp.dippCore.webservice.QualifiedDublinCore;
  * @author Jochen Schirrwagen, schirrwagen@hbz-nrw.de
  * @version $Id: TaskPloneRegister.java,v 1.1 2007/01/05 11:39:24 dippadm Exp $
  */
-public class TaskPloneRegister extends Observable implements Task {
+public class TaskPloneRegister extends TaskService implements Task {
 
 	private Param mParam = null;
 	private boolean mSucceed = false;
@@ -75,7 +75,8 @@ public class TaskPloneRegister extends Observable implements Task {
 
 	private DOManagement domMgn = new DOManagement();
 
-	public TaskPloneRegister(Param aParam) {
+	protected TaskPloneRegister(Param aParam) {
+		
 		mParam = aParam;
 		/*
 		 * try{ //TODO Qa: Reimplement this with log4j //FileHandler handler =

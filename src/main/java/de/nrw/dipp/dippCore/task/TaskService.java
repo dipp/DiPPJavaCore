@@ -22,6 +22,7 @@
  */
 package de.nrw.dipp.dippCore.task;
 
+import java.util.Observable;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -40,7 +41,7 @@ import de.nrw.dipp.dippCore.webservice.ExtendedMetadata;
  * creation date: 27.01.2014
  *
  */
-public class TaskService {
+public abstract class TaskService extends Observable implements Task {
 
 	// Initiate Logger for TaskService
 	private static Logger log = Logger.getLogger(TaskService.class);
@@ -51,7 +52,6 @@ public class TaskService {
 	public static final int		PLONE = 3;
 	public static final int		PDFA  = 4;
 	
-	private Task task;
 	private Properties taskProp = new Properties();
 	
 	//legacy variables
@@ -62,13 +62,13 @@ public class TaskService {
 	/**
 	 * private constructor is accessibly by newInstnace method only 
 	 */
-	private TaskService() {
+	protected TaskService() {
 		
 	}
 	
 	/**
 	 * <p><em>Title: </em></p>
-	 * <p>Description: Helper method to convert Poperties into Param for 
+	 * <p>Description: Helper method to convert Properties into Param for 
 	 * legacy task Classes</p>
 	 * 
 	 * @return 
@@ -94,18 +94,21 @@ public class TaskService {
 	public static class Factory {
 		
 		public static TaskService newInstance(int taskType){
-			TaskService tService = new TaskService();
+			TaskService tService = null;
 			
 			//Task task = new TaskXML(null);
 			switch(taskType){
 				case TaskService.XML:
 					log.debug("factory creates TaskXML");
 
-					//TODO: Implement Param correctly!!!
-					Param param = new Param();
-					param = tService.getParam();
+					PropToParam pp = new PropToParam();
+					pp.setProperties(new Properties());
+					Param param = pp.getParam();
+
 					if (param != null){
-						tService.task = new TaskXML(param);
+						tService = new TaskXML(param);
+					}else{
+						log.error("cannot initialize new TaskXML");
 					}
 
 					break;
@@ -113,35 +116,54 @@ public class TaskService {
 				case TaskService.HTML:
 					log.debug("factory creates TaskHTML");
 
-					//TODO: Implement Param correctly!!!
-					param = new Param();
-					param = tService.getParam();
+					pp = new PropToParam();
+					pp.setProperties(new Properties());
+					param = pp.getParam();
+
 					if (param != null){
-						tService.task = new TaskHTML(param);
+						tService = new TaskHTML(param);
+					}else{
+						log.error("cannot initialize new TaskHTML");
 					}
 
 					break;
-				}	
+
+				case TaskService.PDF:
+					log.debug("factory creates TaskPDF");
+
+					pp = new PropToParam();
+					pp.setProperties(new Properties());
+					param = pp.getParam();
+
+					if (param != null){
+						tService = new TaskDocBook2PDF(param);
+					}else{
+						log.error("cannot initialize new TaskPDF");
+					}
+
+					break;
+				case TaskService.PLONE:
+					log.debug("factory creates TaskPlone");
+
+					pp = new PropToParam();
+					pp.setProperties(new Properties());
+					param = pp.getParam();
+
+					if (param != null){
+						tService = new TaskPloneRegister(param);
+					}else{
+						log.error("cannot initialize new TaskPloneRegister");
+					}
+
+					break;
+
+			
+			
+			}	
 
 			// TODO add correct task choice
 			return tService;
 		}
 	}
-	
-	public Task getTask(){
-		return task;
-	}
-	
-	public void setExtMetadata(ExtendedMetadata ExtMetadata){
-		extMetadata = ExtMetadata;
-	}
-	
-	public void setFileUtil(FileUtil FileUtil){
-		fileUtil = FileUtil;
-	}
-
-	public void setConversionStatus(ConversionStatus ConvertStatus){
-		convStatus = ConvertStatus;
-	}
-
+		
 }
