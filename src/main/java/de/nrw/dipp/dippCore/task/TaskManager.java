@@ -1,6 +1,7 @@
 package de.nrw.dipp.dippCore.task;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
@@ -48,12 +49,14 @@ public class TaskManager implements Observer{
 	public static final int 	cRegisteredTaskPDF   = 2;
 	public static final int		cRegisteredTaskPlone = 3;
 	
-	public Hashtable 	mHashtableXML		= new Hashtable();
-	public Hashtable 	mHashtableHTML		= new Hashtable();
-	public Hashtable 	mHashtablePDF		= new Hashtable();
-	public Hashtable	mHashtableNative	= new Hashtable();
-	public Hashtable	mHashtablePlone		= new Hashtable();
-	
+	public Hashtable<String, Task> 	mHashtableXML		= new Hashtable<String, Task>();
+	public Hashtable<String, Task> 	mHashtableHTML		= new Hashtable<String, Task>();
+	public Hashtable<String, Task> 	mHashtablePDF		= new Hashtable<String, Task>();
+	public Hashtable<String, Task>	mHashtableNative	= new Hashtable<String, Task>();
+	public Hashtable<String, Task>	mHashtablePlone		= new Hashtable<String, Task>();
+
+	private Hashtable<String, ArrayList<Task>> taskTable = new Hashtable<String, ArrayList<Task>>();
+
 	private static final class ControllerHolder{ 
 		static final TaskManager controller = new TaskManager();
 	}
@@ -79,11 +82,23 @@ public class TaskManager implements Observer{
 	 * @param aStart
 	 */
 	public synchronized void addTask(int registeredTask, Param aParam, boolean aStart){
+
+		ArrayList<Task> taskList = new ArrayList<Task>();
+
+		// Get taskList if already exists for the articlePid
+		if(taskTable.containsKey(aParam.getArticlePID())){
+			taskList = taskTable.get(aParam.getArticlePID());
+		}
+		
 		TaskService task;
 		
 		task = TaskService.Factory.newInstance(registeredTask);
 		task.setParam(aParam);
 		task.addObserver(this);
+		taskList.add(task);
+		taskTable.put(aParam.getArticlePID(), taskList);
+		
+		
 
 		if (aStart){
 			log.info("starting task now");
@@ -97,19 +112,23 @@ public class TaskManager implements Observer{
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
 	public synchronized void update(Observable arg0, Object arg1){
-		log.debug("current xml tasks in Hashtable: " + mHashtableXML.size());
-		log.debug("current html tasks in Hashtable: " + mHashtableHTML.size());
-		log.debug("current pdf tasks in Hashtable: " + mHashtablePDF.size());
-		log.debug("current plone tasks in Hashtable: " + mHashtablePlone.size());
+		
+		ArrayList<Task> taskList = new ArrayList<Task>();
+		
+		// the challenge here is that we do not know which child of Task has called 
+		// the update method. Depending on this we have to do different things
+		
 		String oid = null;
 		if (arg1 != null){
 			oid = (String)arg1;
 		}
 		try{
 			// if the Observable is an TaskHTML Object, remove oid. oid = articlePid
-			// not sure why we do this
+			// then we know that the TaskHTML is finished (either successfully or not)
 			if (arg0 instanceof TaskHTML){
 				mHashtableHTML.remove(oid);
+				taskList = taskTable.get(oid);
+				//taskList.remove();
 				// lets see if TaskHTML runs successfully: if so change conversionStatus
 				ConversionStatus convStatus = ((TaskHTML)arg0).getParam().getConversionStatus();
 				if ( ((TaskHTML)arg0).isSucceeded()){
