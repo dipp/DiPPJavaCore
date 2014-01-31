@@ -128,35 +128,49 @@ public class TaskManager implements Observer{
 			oid = (String)arg1;
 		}
 		try{
+			// if the Observable is an TaskHTML Object, remove oid. oid = articlePid
+			// not sure why we do this
 			if (arg0 instanceof TaskHTML){
 				mHashtableHTML.remove(oid);
+				// lets see if TaskHTML runs successfully: if so change conversionStatus
 				ConversionStatus convStatus = ((TaskHTML)arg0).getParam().getConversionStatus();
 				if ( ((TaskHTML)arg0).isSucceeded()){
 					convStatus.addBit((-ConversionStatus.cFlagHTML));
 				}
+				//Test if article has TaskPDF, if not, proceed with starting TaskPlone
 				if (!mHashtablePDF.containsKey(oid)){
+					// change ConversionStatus if no task TaskPDF exists for this ArticlePid
 					updateConversionStatus(oid, convStatus.getBitMask());
+					// we start TaskPlone
 					if (mHashtablePlone.containsKey(oid)){
 						new Thread( (Task)mHashtablePlone.get(oid) ).start();						
 					}
 				}
-			}else if (arg0 instanceof TaskXML){
+			}
+			// if the Observable is an TaskXML Object...
+			else if (arg0 instanceof TaskXML){
 				TaskXML taskXML = (TaskXML)arg0;
+				// ...change ConversionStatus
 				ConversionStatus convStatus = ((TaskXML)arg0).getParam().getConversionStatus();
 				if (taskXML.isSucceeded()){
+					// ...and again change ConversionStatus
 					convStatus.addBit((-ConversionStatus.cFlagXML));
+					// if article neither have TaskHTML nor TaskPDF succeed with TaskPlone
 					if (!mHashtableHTML.containsKey(oid) && !mHashtablePDF.containsKey(oid)){
 						updateConversionStatus(oid, convStatus.getBitMask());
 						if (mHashtablePlone.containsKey(oid)){
+							//start TaskPlone
 							new Thread( (Task)mHashtablePlone.get(oid) ).start();
 						}
 					}
+					// if TaskXML successfully finished and article has TaskHTML start TaskHTML   
 					if (mHashtableHTML.containsKey(oid) ){
 						TaskHTML taskHTML = (TaskHTML)mHashtableHTML.get(oid);
 						log.info("TaskMonitor:a taskxml outputfile: " + ((TaskXML)arg0).getOutputFile());
 						taskHTML.setInputFile( ((TaskXML)arg0).getOutputFile());
 						new Thread((Task)mHashtableHTML.get(oid) ).start();
 					}
+					// if TaskXML successfully finished and article has TaskPDF start TaskPDF 
 					if (mHashtablePDF.containsKey(oid) ){
 						TaskDocBook2PDF taskPDF = (TaskDocBook2PDF)mHashtablePDF.get(oid);
 						log.info("TaskMonitor:b taskxml outputfile: " + ((TaskXML)arg0).getOutputFile());
@@ -164,28 +178,40 @@ public class TaskManager implements Observer{
 						new Thread((Task)mHashtablePDF.get(oid) ).start();
 					}
 				}else{
+					// If TaskXML fails skip all other associated Tasks
 					log.error("TaskXML not succeeded!");
 					mHashtableHTML.remove(oid);
 					mHashtablePDF.remove(oid);
+					// do not miss to make some magic with ConversionStatus ;-)
 					updateConversionStatus(oid, convStatus.getBitMask());
+					// also TaskXML fails proceed with TaskPlone
 					if (mHashtablePlone.containsKey(oid)){
 						new Thread( (Task)mHashtablePlone.get(oid) ).start();
 					}
 				}
+				// remove TaskXML from HashTable
 				mHashtableXML.remove(oid);
-			}else if (arg0 instanceof TaskDocBook2PDF){
+			
+			}
+			// check if update-calling Task is TaskPDF, if so change ConversionStatus 
+			// and remove oid from HashTable. oid = articlePid
+			else if (arg0 instanceof TaskDocBook2PDF){
 				mHashtablePDF.remove(oid);
 				ConversionStatus convStatus = ((TaskDocBook2PDF)arg0).getParam().getConversionStatus();
 				if ( ((TaskDocBook2PDF)arg0).isSucceeded()){
 					convStatus.addBit((-ConversionStatus.cFlagPDF));
 				}
+				// If we have no TaskHTML proceed with TaskPlone
 				if (!mHashtableHTML.containsKey(oid)){
 					updateConversionStatus(oid, convStatus.getBitMask());
+					//start TaskPlone
 					if (mHashtablePlone.containsKey(oid)){
 						new Thread( (Task)mHashtablePlone.get(oid) ).start();
 					}
 				}
-			}else if (arg0 instanceof TaskPloneRegister){
+			}
+			// unregister PloneTask from HashTable
+			else if (arg0 instanceof TaskPloneRegister){
 				mHashtablePlone.remove(oid);
 				
 			}
