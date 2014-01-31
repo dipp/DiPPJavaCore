@@ -52,12 +52,8 @@ public abstract class TaskService extends Observable implements Task {
 	public static final int		PLONE = 3;
 	public static final int		PDFA  = 4;
 	
-	private Properties taskProp = new Properties();
-	
-	//legacy variables
-	private ExtendedMetadata	extMetadata 		= null;
-	private FileUtil			fileUtil			= null;
-	private ConversionStatus	convStatus			= null;
+	private int taskType = -1;
+	private TaskParam tParam = new TaskParam();
 
 	/**
 	 * private constructor is accessibly by newInstnace method only 
@@ -66,34 +62,14 @@ public abstract class TaskService extends Observable implements Task {
 		
 	}
 	
-	/**
-	 * <p><em>Title: </em></p>
-	 * <p>Description: Helper method to convert Properties into Param for 
-	 * legacy task Classes</p>
-	 * 
-	 * @return 
-	 */
-	public Param getParam(){
-		Param param = new Param();
-		
-		param.setArticlePID(taskProp.getProperty("articlePid"));
-		param.setContentObjectPID(taskProp.getProperty("contentObjectPid"));
-		param.setContentObjectDS(taskProp.getProperty("contentObjectDataStream"));
-		param.setJournalLabel(taskProp.getProperty("journalLabel"));
-		
-		param.setDoNew(taskProp.getProperty("DoNew").equals("true"));
-		param.setDoModify(taskProp.getProperty("DoModify").equals("true"));
-		param.setExtMetadata(extMetadata);
-		param.setFileUtil(fileUtil);
-		param.setConversionStatus(convStatus);
-		
-		
-		return param;
+	
+	public int getTaskType(){
+		return taskType;
 	}
 	
 	public static class Factory {
 		
-		public static TaskService newInstance(int taskType){
+		public static TaskService newInstance(int taskType, TaskParam tParam){
 			TaskService tService = null;
 			
 			//Task task = new TaskXML(null);
@@ -101,12 +77,11 @@ public abstract class TaskService extends Observable implements Task {
 				case TaskService.XML:
 					log.debug("factory creates TaskXML");
 
-					PropToParam pp = new PropToParam();
-					pp.setProperties(new Properties());
-					Param param = pp.getParam();
-
+					TaskParam taskParam = tParam;
+					Param param = taskParam.getParam();
 					if (param != null){
 						tService = new TaskXML(param);
+						tService.taskType = TaskService.XML;
 					}else{
 						log.error("cannot initialize new TaskXML");
 					}
@@ -116,12 +91,11 @@ public abstract class TaskService extends Observable implements Task {
 				case TaskService.HTML:
 					log.debug("factory creates TaskHTML");
 
-					pp = new PropToParam();
-					pp.setProperties(new Properties());
-					param = pp.getParam();
-
+					taskParam = tParam;
+					param = taskParam.getParam();
 					if (param != null){
 						tService = new TaskHTML(param);
+						tService.taskType = TaskService.HTML;
 					}else{
 						log.error("cannot initialize new TaskHTML");
 					}
@@ -131,12 +105,11 @@ public abstract class TaskService extends Observable implements Task {
 				case TaskService.PDF:
 					log.debug("factory creates TaskPDF");
 
-					pp = new PropToParam();
-					pp.setProperties(new Properties());
-					param = pp.getParam();
-
+					taskParam = tParam;
+					param = taskParam.getParam();
 					if (param != null){
 						tService = new TaskDocBook2PDF(param);
+						tService.taskType = TaskService.PDF;
 					}else{
 						log.error("cannot initialize new TaskPDF");
 					}
@@ -145,12 +118,11 @@ public abstract class TaskService extends Observable implements Task {
 				case TaskService.PLONE:
 					log.debug("factory creates TaskPlone");
 
-					pp = new PropToParam();
-					pp.setProperties(new Properties());
-					param = pp.getParam();
-
+					taskParam = tParam;
+					param = taskParam.getParam();
 					if (param != null){
 						tService = new TaskPloneRegister(param);
+						tService.taskType = TaskService.PLONE;
 					}else{
 						log.error("cannot initialize new TaskPloneRegister");
 					}

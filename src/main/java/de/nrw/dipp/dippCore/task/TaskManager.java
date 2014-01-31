@@ -71,32 +71,78 @@ public class TaskManager implements Observer{
 	public static synchronized TaskManager getInstance(){
 		return ControllerHolder.controller;
 	}
+	
+	@Deprecated
+	public synchronized void addTask(int registeredTask, Param aParam, boolean aStart){
+		Task task;
+		
+		switch(registeredTask){
+			case cRegisteredTaskXML: 
+				log.info("calling TaskXML");
+				task = new TaskXML(aParam);
+				log.info("add Observer");
+				((TaskXML)task).addObserver(this);
+				mHashtableXML.put(aParam.getArticlePID(), task);
+				log.info("before starting task");
+
+				if (aStart){
+					log.info("starting task now");
+					new Thread(task).start();
+					log.info("task started");
+				}
+				break;
+			case cRegisteredTaskHTML:
+				log.info("calling TaskHTML");
+				task = new TaskHTML(aParam);
+				((TaskHTML)task).addObserver(this);
+				mHashtableHTML.put(aParam.getArticlePID(), task);
+				break;
+			case cRegisteredTaskPDF:
+//				task = new TaskPDF(aParam);
+//				((TaskPDF)task).addObserver(this);
+				log.info("calling TaskDocBook2PDF");
+				task = new TaskDocBook2PDF(aParam);
+				((TaskDocBook2PDF)task).addObserver(this);
+				mHashtablePDF.put(aParam.getArticlePID(), task);
+				break;
+			case cRegisteredTaskPlone:
+				log.info("calling TaskPloneRegister");
+				task = new TaskPloneRegister(aParam);
+				((TaskPloneRegister)task).addObserver(this);
+				mHashtablePlone.put(aParam.getArticlePID(), task);
+				if (aStart){
+					new Thread(task).start();					
+				}
+				break;
+		}		
+	}
+
 
 	/**
 	 * Method calls TaskService to create new Task depending on the kind of 
 	 * task that is required. taskService replaces legacy addTask method. 
 	 * All logic required to determine kind of Task is moved to TaskService 
 	 * 
-	 * @param registeredTask
-	 * @param aParam
+	 * @param registeredTask represents the Type of Task that should be initiated
+	 * @param taskParam an extensible Class for task parameters, using Properties  
 	 * @param aStart
 	 */
-	public synchronized void addTask(int registeredTask, Param aParam, boolean aStart){
+	public synchronized void addTask(int registeredTask, TaskParam taskParam, boolean aStart){
 
 		ArrayList<Task> taskList = new ArrayList<Task>();
 
 		// Get taskList if already exists for the articlePid
-		if(taskTable.containsKey(aParam.getArticlePID())){
-			taskList = taskTable.get(aParam.getArticlePID());
+		if(taskTable.containsKey(taskParam.getProperties().get("articlePid"))){
+			taskList = taskTable.get(taskParam.getProperties().get("articlePid"));
 		}
 		
 		TaskService task;
 		
-		task = TaskService.Factory.newInstance(registeredTask);
-		task.setParam(aParam);
+		task = TaskService.Factory.newInstance(registeredTask, taskParam);
+		task.setParam(taskParam.getParam());
 		task.addObserver(this);
 		taskList.add(task);
-		taskTable.put(aParam.getArticlePID(), taskList);
+		taskTable.put(taskParam.getProperties().get("articlePid").toString(), taskList);
 		
 		
 
@@ -127,7 +173,6 @@ public class TaskManager implements Observer{
 			// then we know that the TaskHTML is finished (either successfully or not)
 			if (arg0 instanceof TaskHTML){
 				mHashtableHTML.remove(oid);
-				taskList = taskTable.get(oid);
 				//taskList.remove();
 				// lets see if TaskHTML runs successfully: if so change conversionStatus
 				ConversionStatus convStatus = ((TaskHTML)arg0).getParam().getConversionStatus();
