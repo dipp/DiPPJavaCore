@@ -154,9 +154,17 @@ public class TaskManager implements Observer{
 
 	}
 
+	public synchronized void update(TaskService arg0, Object arg1){
+		
+		//retrieve information which task has called update
+		//articlePid = null;
+		arg0.getTaskType();
+	}
+
 	/* (non-Javadoc)
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
+	
 	public synchronized void update(Observable arg0, Object arg1){
 		
 		ArrayList<Task> taskList = new ArrayList<Task>();

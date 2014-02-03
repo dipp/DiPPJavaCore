@@ -22,6 +22,7 @@
  */
 package de.nrw.dipp.dippCore.task;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Properties;
 
@@ -52,11 +53,12 @@ public abstract class TaskService extends Observable implements Task {
 	public static final int		PLONE = 3;
 	public static final int		PDFA  = 4;
 	
+	
 	private int taskType = -1;
 	private TaskParam tParam = new TaskParam();
 
 	/**
-	 * private constructor is accessibly by newInstnace method only 
+	 * private constructor is accessibly by newInstance method only 
 	 */
 	protected TaskService() {
 		
@@ -71,67 +73,31 @@ public abstract class TaskService extends Observable implements Task {
 		
 		public static TaskService newInstance(int taskType, TaskParam tParam){
 			TaskService tService = null;
+
+			//workaround for mapping integer to String, used as long as method calls 
+			//weren't changed
 			
-			//Task task = new TaskXML(null);
-			switch(taskType){
-				case TaskService.XML:
-					log.debug("factory creates TaskXML");
-
-					TaskParam taskParam = tParam;
-					Param param = taskParam.getParam();
-					if (param != null){
-						tService = new TaskXML(param);
-						tService.taskType = TaskService.XML;
-					}else{
-						log.error("cannot initialize new TaskXML");
-					}
-
-					break;
-				
-				case TaskService.HTML:
-					log.debug("factory creates TaskHTML");
-
-					taskParam = tParam;
-					param = taskParam.getParam();
-					if (param != null){
-						tService = new TaskHTML(param);
-						tService.taskType = TaskService.HTML;
-					}else{
-						log.error("cannot initialize new TaskHTML");
-					}
-
-					break;
-
-				case TaskService.PDF:
-					log.debug("factory creates TaskPDF");
-
-					taskParam = tParam;
-					param = taskParam.getParam();
-					if (param != null){
-						tService = new TaskDocBook2PDF(param);
-						tService.taskType = TaskService.PDF;
-					}else{
-						log.error("cannot initialize new TaskPDF");
-					}
-
-					break;
-				case TaskService.PLONE:
-					log.debug("factory creates TaskPlone");
-
-					taskParam = tParam;
-					param = taskParam.getParam();
-					if (param != null){
-						tService = new TaskPloneRegister(param);
-						tService.taskType = TaskService.PLONE;
-					}else{
-						log.error("cannot initialize new TaskPloneRegister");
-					}
-
-					break;
-
+			ArrayList<String> classList = new ArrayList<String>();
+			classList.add("TaskXML");
+			classList.add("TaskHTML");
+			classList.add("TaskDocBook2PDF");
+			classList.add("TaskPloneRegister");
 			
-			
-			}	
+			TaskParam taskParam = tParam;
+			Param param = taskParam.getParam();
+			if (param != null){
+				try{
+					Class serviceClass =  Class.forName(classList.get(taskType));
+					tService = (TaskService) serviceClass.newInstance();
+					tService.taskType = taskType;
+					log.info("initialized new "  + classList.get(taskType));
+				}catch(Exception e){
+					log.error(e);
+				}
+			}else{
+				log.error("cannot initialize new " + classList.get(taskType));
+			}
+
 
 			// TODO add correct task choice
 			return tService;

@@ -141,19 +141,19 @@ public class TaskXML extends TaskService implements Task {
 		try{
 			DigitalObject articleObj = DOManagement.retrieveDigitalObject(mParam.getArticlePID());
 			
-			System.out.println("TaskXML for id " + getObjectID() );
+			log.info("start TaskXML for id " + getObjectID() );
 			QualifiedDublinCore qdc = Metadata.getQualifiedDublinCoreMetadata(mParam.getArticlePID());
 			
 			// Qa: Test if first conversion took place already, if not start it:
 			// task are: convert rtf-files to DocBookXml 
 			if (!fu.getNativeFileMimeType().equals("text/xml")){
 				try{
-					// rtf
+					// rtf upCast needs some time to start wait for this...
 					while( (upcast = Upcast.getInstance()) == null ){
-						System.out.println("TaskXML for id " + getObjectID() + " wait");
+						log.info("waiting for UpCast becoming ready to processing");
 						wait(2500);				
 					}
-					log.info("TaskXML for id " + getObjectID() + " got upcast");
+					log.info("UpCast is ready to process "  + getObjectID());
 //					mFi.setArticleConvertedStatus(mParam.getArticlePID(), false);
 					
 					String articleType = "";
@@ -164,7 +164,7 @@ public class TaskXML extends TaskService implements Task {
 					upcast.setSourceFile(fu.getNativeFile());
 					upcast.doConvert(fu.getTargetDir(), 1, articleObj.getLabel(), articleType);
 					
-					System.out.println("UpcastThread: 1.Teil OK");
+					log.info("Upcast has processesd XML file successfully");
 					mOutputFile = new File ( mParam.getFileUtil().getTargetDir() + "/" + mParam.getFileUtil().getNativeFile().getName().substring(
 							0, mParam.getFileUtil().getNativeFile().getName().lastIndexOf(".")) + ".xml" );
 					
