@@ -136,15 +136,17 @@ public class TaskXML extends TaskService implements Task {
 	 */
 	public synchronized void run() {
 		Upcast upcast = null;
+		
 		FileUtil fu = mParam.getFileUtil();
 		
+		// Getting QualifiedDublinCore for the File we want to process
 		try{
 			DigitalObject articleObj = DOManagement.retrieveDigitalObject(mParam.getArticlePID());
 			
 			log.info("start TaskXML for id " + getObjectID() );
 			QualifiedDublinCore qdc = Metadata.getQualifiedDublinCoreMetadata(mParam.getArticlePID());
 			
-			// Qa: Test if first conversion took place already, if not start it:
+			// Qa: Test if sourc e file is not already xml:
 			// task are: convert rtf-files to DocBookXml 
 			if (!fu.getNativeFileMimeType().equals("text/xml")){
 				try{

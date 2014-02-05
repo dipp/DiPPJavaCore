@@ -75,8 +75,13 @@ public class TaskParam {
 		param.setContentObjectDS(taskProp.getProperty("contentObjectDataStream"));
 		param.setJournalLabel(taskProp.getProperty("journalLabel"));
 		
-		param.setDoNew(taskProp.getProperty("DoNew").equals("true"));
-		param.setDoModify(taskProp.getProperty("DoModify").equals("true"));
+		if(taskProp.containsKey("DoNew")){
+			param.setDoNew(taskProp.getProperty("DoNew").equals("true"));
+		}
+
+		if(taskProp.containsKey("DoModify")){
+			param.setDoModify(taskProp.getProperty("DoModify").equals("true"));
+		}
 		
 		param.setExtMetadata(mExtMetadata);
 		param.setConversionStatus(mConvStatus);

@@ -55,7 +55,7 @@ public abstract class TaskService extends Observable implements Task {
 	
 	
 	private int taskType = -1;
-	private TaskParam tParam = new TaskParam();
+	protected TaskParam tParam = new TaskParam();
 
 	/**
 	 * private constructor is accessibly by newInstance method only 
@@ -67,6 +67,10 @@ public abstract class TaskService extends Observable implements Task {
 	
 	public int getTaskType(){
 		return taskType;
+	}
+	
+	protected void setTaskParam(TaskParam TParam){
+		tParam = TParam;
 	}
 	
 	public static class Factory {
@@ -102,6 +106,22 @@ public abstract class TaskService extends Observable implements Task {
 			// TODO add correct task choice
 			return tService;
 		}
+
+		public static TaskService newInstance(String taskType, TaskParam tParam){
+			TaskService tService = null;
+			try{
+				Class serviceClass =  Class.forName("de.nrw.dipp.dippCore.task." + taskType);
+				tService = (TaskService) serviceClass.newInstance();
+				tService.setTaskParam(tParam);
+				log.info("initialized new "  + taskType);
+			}catch(Exception e){
+				log.error(e);
+			}
+
+			// TODO add correct task choice
+		return tService;
+		}
+
 	}
-		
+
 }

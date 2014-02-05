@@ -74,7 +74,6 @@ public class TestWebServiceImpl {
 	 */
 	public TestWebServiceImpl() {
 		// TODO Auto-generated constructor stub
-		Constant.setAbsolutPath("/home/aquast/git/dippCoreMvn");
 	}
 	
 	@Test public void callGetQualifiedDublinCore(){
@@ -193,6 +192,8 @@ public class TestWebServiceImpl {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Constant.setAbsolutPath("/home/aquast/git/dippCoreMvn");
+
 		TestWebServiceImpl testWS = new TestWebServiceImpl();
 		testWS.callSetNewArticle();
 		//testWS.callGetQualifiedDublinCore();
