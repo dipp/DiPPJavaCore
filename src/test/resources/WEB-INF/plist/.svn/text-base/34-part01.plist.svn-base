@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+    <key>RTFImportFilter</key>
+    <dict>
+      <key>1</key>
+      <dict>
+        <key>CopyToOutput</key>
+        <false />
+        <key>DefaultFontSize</key>
+        <string>*</string>
+        <key>DefaultPixmapResolution</key>
+        <string>*</string>
+        <key>DocbaseImageNaming</key>
+        <true />
+        <key>EMFDestFormat</key>
+        <string>UseWMFSubstitute</string>
+        <key>GroupEmptyHeadings</key>
+        <false />
+        <key>HoistCommonInlines</key>
+        <true />
+        <key>ImageRenderingResolution</key>
+        <integer>96</integer>
+        <key>IncludeImages</key>
+        <true />
+        <key>InlineProcessorClass</key>
+        <string>*</string>
+        <key>InlineReferencedImages</key>
+        <true />
+        <key>JPEGDestFormat</key>
+        <string>unchanged</string>
+        <key>JPEGDest</key>
+        <dict>
+          <key>JPEG</key>
+          <dict>
+            <key>Quality</key>
+            <integer>100</integer>
+          </dict>
+          <key>PNG</key>
+          <dict>
+            <key>CmprType</key>
+            <string>default</string>
+          </dict>
+        </dict>
+        <key>KillTimeout</key>
+        <integer>300</integer>
+        <key>LiteralCharStyle</key>
+        <string>LITERALCHAR</string>
+        <key>LiteralParStyle</key>
+        <string>LITERAL</string>
+        <key>LiteralProcessing</key>
+        <false />
+        <key>ObjectHandling</key>
+        <string>image</string>
+        <key>OrigNumbering</key>
+        <true />
+        <key>PICTDestFormat</key>
+        <string>JPEG</string>
+        <key>PICTDest</key>
+        <dict>
+          <key>JPEG</key>
+          <dict>
+            <key>Quality</key>
+            <integer>100</integer>
+          </dict>
+          <key>PNG</key>
+          <dict>
+            <key>CmprType</key>
+            <string>default</string>
+          </dict>
+        </dict>
+        <key>PNGDestFormat</key>
+        <string>unchanged</string>
+        <key>PNGDest</key>
+        <dict>
+          <key>JPEG</key>
+          <dict>
+            <key>Quality</key>
+            <integer>100</integer>
+          </dict>
+          <key>PNG</key>
+          <dict>
+            <key>CmprType</key>
+            <string>default</string>
+          </dict>
+        </dict>
+        <key>RemoveEmptyInlines</key>
+        <true />
+        <key>RespectParOutlineLevel</key>
+        <true />
+        <key>SectionProcessorClass</key>
+        <string>*</string>
+        <key>WMFDestFormat</key>
+        <string>PNG</string>
+        <key>WMFDest</key>
+        <dict>
+          <key>JPEG</key>
+          <dict>
+            <key>Quality</key>
+            <integer>100</integer>
+          </dict>
+          <key>PNG</key>
+          <dict>
+            <key>CmprType</key>
+            <string>default</string>
+          </dict>
+        </dict>
+        <key>WordLinkCommand</key>
+        <string></string>
+        <key>WordLinkMode</key>
+        <string>doc</string>
+      </dict>
+    </dict>
+    <key>XMLRaw</key>
+    <dict>
+      <key>85</key>
+      <dict>
+        <key>CombineWithLogicalStyle</key>
+        <true />
+        <key>DOCTYPEDecl</key>
+        <string> </string>
+        <key>DeleteEmpties</key>
+        <false />
+        <key>Extension</key>
+        <string>-raw.xml</string>
+        <key>FilterName</key>
+        <string>XML (Raw)</string>
+        <key>IncludeVisual</key>
+        <true />
+        <key>OutputEncoding</key>
+        <string>UTF-8</string>
+        <key>OutputResolution</key>
+        <integer>96</integer>
+        <key>RevisionTracking</key>
+        <true />
+        <key>Stylesheet</key>
+        <string></string>
+        <key>TableModel</key>
+        <string>CALS</string>
+        <key>UseNamespace</key>
+        <false />
+        <key>Validate</key>
+        <false />
+        <key>WriteTOC</key>
+        <false />
+        <key>XSLTParameters</key>
+        <string></string>
+        <key>XSLTProcessor</key>
+        <string>xalan</string>
+      </dict>
+    </dict>
+    <key>XSLTProcessor</key>
+    <dict>
+      <key>72</key>
+      <dict>
+        <key>FilterName</key>
+        <string>XSLT Processor</string>
+        <key>InputFile</key>
+        <string>${il:destbasename}-db42.xml</string>
+        <key>OutputFile</key>
+        <string>${il:destbasename}.xml</string>
+        <key>Stylesheet</key>
+        <string>/files/share/upCast/xsl/docbook/xhtml/01-NewTestJournal4-customXML.xsl</string>
+        <key>XSLTParameters</key>
+        <string></string>
+        <key>XSLTProcessor</key>
+        <string>saxon</string>
+      </dict>
+      <key>86</key>
+      <dict>
+        <key>FilterName</key>
+        <string>XSLT Processor</string>
+        <key>InputFile</key>
+        <string>${il:destbasename}-raw.xml</string>
+        <key>OutputFile</key>
+        <string>${il:destbasename}-db42.xml</string>
+        <key>Stylesheet</key>
+        <string>/files/share/upCast/xsl/01-db42-NewTestJournal4-custom01.xsl</string>
+        <key>XSLTParameters</key>
+        <string></string>
+        <key>XSLTProcessor</key>
+        <string>xalan</string>
+      </dict>
+    </dict>
+    <key>application</key>
+    <dict>
+      <key>locations</key>
+      <dict>
+        <key>configurations</key>
+        <string>D:\temp\rte-part01.plist</string>
+        <key>configurationsBCF</key>
+        <string>U:\DiPP\XML\upcast\demo\demo.bcf</string>
+        <key>licenses</key>
+        <string>U:\XML\upcast\Server-Lizenz\upcast.license</string>
+        <key>xslfiles</key>
+        <string>D:\XSL\01-db42-rte-custom01.xsl</string>
+      </dict>
+      <key>name</key>
+      <string>upCast</string>
+      <key>stats</key>
+      <dict>
+        <key>CharacterCounter</key>
+        <integer>6782553</integer>
+        <key>ConversionCounter</key>
+        <integer>286</integer>
+        <key>StartDate</key>
+        <string>Wed, 11 Aug 2004 11:05:04 CEST</string>
+      </dict>
+      <key>version</key>
+      <integer>1314</integer>
+      <key>xml</key>
+      <dict>
+        <key>CatalogFile</key>
+        <string>file:///files/share/upCast/catalog/catalog</string>
+      </dict>
+    </dict>
+    <key>converter</key>
+    <dict>
+      <key>Dflt</key>
+      <dict>
+        <key>SwingPLAF</key>
+        <string>com.sun.java.swing.plaf.windows.WindowsLookAndFeel</string>
+        <key>imageDir</key>
+        <string></string>
+        <key>inFilterClass</key>
+        <string>de.infinityloop.upcast.importfilters.RTFImportFilter</string>
+        <key>inFilterInstID</key>
+        <string>1</string>
+        <key>inputFile</key>
+        <string>D:\temp\rte\Artikel\Kienzl_Praezisionsguss-mod2.rtf</string>
+        <key>instanceID</key>
+        <integer>86</integer>
+        <key>outFilterClass0</key>
+        <string>de.infinityloop.upcast.exportfilters.ExportFilter12</string>
+        <key>outFilterClass1</key>
+        <string>de.infinityloop.upcast.exportfilters.ExportFilter10</string>
+        <key>outFilterClass2</key>
+        <string>de.infinityloop.upcast.exportfilters.ExportFilter10</string>
+        <key>outFilterClass3</key>
+        <string>de.infinityloop.upcast.exportfilters.ExportFilter10</string>
+        <key>outFilterClass4</key>
+        <string>de.infinityloop.upcast.exportfilters.ExportFilter10</string>
+        <key>outFilterClass5</key>
+        <string>de.infinityloop.upcast.exportfilters.ExportFilter10</string>
+        <key>outFilterClass6</key>
+        <string>de.infinityloop.upcast.exportfilters.ExportFilter10</string>
+        <key>outFilterClass7</key>
+        <string>de.infinityloop.upcast.exportfilters.ExportFilter10</string>
+        <key>outFilterCount</key>
+        <integer>3</integer>
+        <key>outFilterInstID0</key>
+        <string>85</string>
+        <key>outFilterInstID1</key>
+        <string>86</string>
+        <key>outFilterInstID2</key>
+        <string>72</string>
+        <key>outFilterInstID3</key>
+        <string>75</string>
+        <key>outFilterInstID4</key>
+        <string>76</string>
+        <key>outFilterInstID5</key>
+        <string>77</string>
+        <key>outFilterInstID6</key>
+        <string>78</string>
+        <key>outFilterInstID7</key>
+        <string>78</string>
+        <key>outputDir</key>
+        <string>D:\temp\rte\Artikel\Kienzl2</string>
+      </dict>
+      <key>UserInstanceID</key>
+      <string>Dflt</string>
+    </dict>
+    <key>global</key>
+    <dict>
+      <key>TimedExecutionSilentOp</key>
+      <string>true</string>
+      <key>TimedExecutionSwitch</key>
+      <false />
+    </dict>
+</dict>
+</plist>

@@ -29,6 +29,7 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import de.nrw.dipp.dippCore.repository.Download;
+import de.nrw.dipp.dippCore.task.DecoratorTask;
 import de.nrw.dipp.dippCore.task.TaskParam;
 import de.nrw.dipp.dippCore.task.TaskService;
 import de.nrw.dipp.dippCore.task.TaskXml;
@@ -51,6 +52,7 @@ public class GenericTaskTest {
 	// Initiate Logger for GenericTaskTest
 	private static Logger log = Logger.getLogger(GenericTaskTest.class);
 
+	private String articlePid = "temp:1878";
 	/**
 	 * 
 	 */
@@ -63,12 +65,17 @@ public class GenericTaskTest {
 		tParam.setProperties(getProp());
 		tParam.setFileUtil(getFileUtil());
 		TaskService taskXml = TaskService.Factory.newInstance("TaskXml", tParam);
-		Thread thread = new Thread(taskXml);
+		DecoratorTask dTask = DecoratorTask.Factory.newInstance("TaskHtml", taskXml);
+	
+		
+		Thread thread = new Thread(dTask);
 		thread.setName("TaskXml Thread");
 		thread.start();
 		
 		
 		}
+
+
 	/**
 	 * <p><em>Title: </em></p>
 	 * <p>Description: </p>
@@ -88,7 +95,7 @@ public class GenericTaskTest {
 	public Properties getProp(){
 		Properties taskProp = new Properties();
 		
-		taskProp.setProperty("articlePid", "temp:1860");
+		taskProp.setProperty("articlePid", articlePid);
 		
 		
 		return taskProp;
@@ -97,8 +104,8 @@ public class GenericTaskTest {
 	public FileUtil getFileUtil(){
 		FileUtil fUtil = new FileUtil();
 		String nativeDocIdent = "http://www.dipp.nrw.de/download/Beispiel.rtf";
-		fUtil.create("temp:1860");
-		
+		fUtil.create(articlePid);
+		fUtil.setNativeFileMimeType("text/rtf");
 		try {
 			Download dw = new Download(nativeDocIdent);
 			dw.downloadToFile(fUtil.getNativeFilename());
@@ -106,6 +113,7 @@ public class GenericTaskTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 
 		fUtil.setNativeDocIdent(nativeDocIdent);
 		log.info("fileUtil found MimeType " + fUtil.getNativeFileMimeType());

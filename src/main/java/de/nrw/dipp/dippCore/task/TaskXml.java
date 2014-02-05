@@ -46,7 +46,8 @@ public class TaskXml extends TaskService implements Task {
 
 	// Initiate Logger for TaskXml
 	private static Logger log = Logger.getLogger(TaskXml.class);
-
+	
+	private File outputFile = null; 
 	boolean isSucceeded = false;
 
 	/**
@@ -61,6 +62,51 @@ public class TaskXml extends TaskService implements Task {
 	 */
 	@Override
 	public void run() {
+		convert();
+	}
+
+	/* (non-Javadoc)
+	 * @see de.nrw.dipp.dippCore.task.Task#getParam()
+	 */
+	@Override
+	public Param getParam() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see de.nrw.dipp.dippCore.task.Task#setParam(de.nrw.dipp.dippCore.task.Param)
+	 */
+	@Override
+	public void setParam(Param aParam) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public File getOutputFile(){
+		return outputFile;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see de.nrw.dipp.dippCore.task.Task#isFinished()
+	 */
+	@Override
+	public boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see de.nrw.dipp.dippCore.task.Task#isSucceeded()
+	 */
+	@Override
+	public boolean isSucceeded() {
+		return isSucceeded;
+	}
+	
+	
+	public void convert(){
 		Upcast upcast = null;
 		isSucceeded = false;
 		FileUtil fUtil = tParam.getFileUtil();
@@ -94,7 +140,7 @@ public class TaskXml extends TaskService implements Task {
 					upcast.doConvert(fUtil.getTargetDir(), 1, articleObj.getLabel(), articleType);
 					
 					log.info("Upcast has processesd XML file successfully");
-					File mOutputFile = new File ( fUtil.getTargetDir() + "/" + fUtil.getNativeFile().getName().substring(
+					outputFile = new File ( fUtil.getTargetDir() + "/" + fUtil.getNativeFile().getName().substring(
 							0, fUtil.getNativeFile().getName().lastIndexOf(".")) + ".xml" );
 					
 					if (fUtil.isCompressedZip() && fUtil.isBatchProcess()){
@@ -112,45 +158,11 @@ public class TaskXml extends TaskService implements Task {
 				}
 			}catch(Exception e){
 				log.error(e);
+				e.printStackTrace();
 			}finally{
 				isSucceeded = true;
 			}
 
-	}
-
-	/* (non-Javadoc)
-	 * @see de.nrw.dipp.dippCore.task.Task#getParam()
-	 */
-	@Override
-	public Param getParam() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.nrw.dipp.dippCore.task.Task#setParam(de.nrw.dipp.dippCore.task.Param)
-	 */
-	@Override
-	public void setParam(Param aParam) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	/* (non-Javadoc)
-	 * @see de.nrw.dipp.dippCore.task.Task#isFinished()
-	 */
-	@Override
-	public boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.nrw.dipp.dippCore.task.Task#isSucceeded()
-	 */
-	@Override
-	public boolean isSucceeded() {
-		return isSucceeded;
+		
 	}
 }

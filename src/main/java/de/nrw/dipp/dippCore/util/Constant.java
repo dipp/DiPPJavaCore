@@ -186,7 +186,7 @@ public class Constant {
 		if (logConfiguration.isFile()) {
 			try {
 				PropertyConfigurator.configure(logConfiguration.getAbsolutePath());
-				System.out.println("read log4j-configuration file at: " + logConfiguration.getAbsolutePath());
+				//System.out.println("read log4j-configuration file at: " + logConfiguration.getAbsolutePath());
 			}
 			catch (Exception e) {
 				System.out.println(e);
