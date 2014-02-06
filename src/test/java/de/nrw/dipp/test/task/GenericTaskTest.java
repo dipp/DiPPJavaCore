@@ -69,14 +69,16 @@ public class GenericTaskTest {
 		setExtendedMetadata();
 		tParam.setExtMetadata(extendedMetadata);
 		TaskService taskXml = TaskService.Factory.newInstance("TaskXml", tParam);
-		DecoratorTask dTask = DecoratorTask.Factory.newInstance("TaskHtml", taskXml);
+		DecoratorTask dTask = DecoratorTask.Factory.newInstance("TaskGetMd", taskXml);
+		DecoratorTask dTask0 = DecoratorTask.Factory.newInstance("TaskHtml", dTask);
+		DecoratorTask dTask1 = DecoratorTask.Factory.newInstance("TaskPloneReg", dTask0);
 	
 		
-		Thread thread = new Thread(dTask);
+		Thread thread = new Thread(dTask1);
 		thread.setName("TaskXml Thread0");
 		thread.start();
 		
-		
+		/*
 		TaskService taskXml1 = TaskService.Factory.newInstance("TaskXml", tParam);
 		DecoratorTask dTask1 = DecoratorTask.Factory.newInstance("TaskGetMd", taskXml1);
 
@@ -84,7 +86,7 @@ public class GenericTaskTest {
 		Thread thread1 = new Thread(dTask1);
 		thread1.setName("TaskXml Thread1");
 		thread1.start();
-		
+		*/
 		
 		}
 

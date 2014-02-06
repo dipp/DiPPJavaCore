@@ -88,6 +88,9 @@ public class TaskHtml extends DecoratorTask {
 		baseTask.convert();
 		tParam = baseTask.getTaskParam();
 		
+		log.info("baseTask has finished, starting decoratorTask\n\n");
+
+		
 		Upcast upcast = null;
 		FileUtil fUtil = tParam.getFileUtil();
 		String articlePid = tParam.getProperties().getProperty("articlePid");
@@ -121,7 +124,7 @@ public class TaskHtml extends DecoratorTask {
 			upcast.setSourceFile(sourceFile);
 			upcast.doConvert(sourceFile.getParent(), 2, articleObj.getLabel(), articleType);
 
-			log.info("UpcastThread: 2.Teil OK fuer: " + sourceFile.getAbsolutePath());
+			log.info("UpcastThread for html generation: OK for " + sourceFile.getAbsolutePath());
 			sourceFileBaseName = sourceFile.getName().substring(0, sourceFile.getName().lastIndexOf("."));
 			
 			log.info("Verzeichnispfad: "+ perlscriptsProps.getProperty("toc"));
@@ -192,7 +195,7 @@ public class TaskHtml extends DecoratorTask {
 				// throw LogMessage
 			}
 		
-			System.out.println("UpcastThread: finished");
+			log.info("UpcastThread: finished");
 			succeed = true;
 		}catch(InterruptedException e){
 			log.error("TaskHTML: " + "error interrupt" + e);
