@@ -121,6 +121,8 @@ public class TaskPloneReg extends DecoratorTask {
 				.getQualifiedDublinCoreMetadata(articlePid);
 		
 		log.info("try to get Journal Qdc");
+
+		mFi = new ServiceManagement();
 		String journalPid = mFi.getPidOfJournal(label);
 		log.info(journalPid);
 		QualifiedDublinCore qdcJournal = Metadata.getQualifiedDublinCoreMetadata(journalPid);
@@ -136,7 +138,6 @@ public class TaskPloneReg extends DecoratorTask {
 		log.debug("ClientObject: " + client.getClientConfig().toString());
 
 		// read metadata informations required for RPC-Client:
-		mFi = new ServiceManagement();
 		String journalPID = mFi.getPidOfJournal(label);
 		
 		String qdcTitle = "";
