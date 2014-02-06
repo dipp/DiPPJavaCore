@@ -69,8 +69,17 @@ public class GenericTaskTest {
 	
 		
 		Thread thread = new Thread(dTask);
-		thread.setName("TaskXml Thread");
+		thread.setName("TaskXml Thread0");
 		thread.start();
+		
+		
+		TaskService taskXml1 = TaskService.Factory.newInstance("TaskXml", tParam);
+		DecoratorTask dTask1 = DecoratorTask.Factory.newInstance("TaskGetMd", taskXml1);
+
+		
+		Thread thread1 = new Thread(dTask1);
+		thread1.setName("TaskXml Thread1");
+		thread1.start();
 		
 		
 		}

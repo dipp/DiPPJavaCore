@@ -47,7 +47,7 @@ import de.nrw.dipp.dippCore.webservice.ExtendedMetadata;
  * @author Jochen Schirrwagen, schirrwagen@hbz-nrw.de
  * @version $Id: TaskDocBook2PDF.java,v 1.1 2006/04/26 08:48:05 dippadm Exp $
  */
-public class TaskDocBook2PDF extends TaskService implements Task {
+public class TaskDocBook2PDF extends Observable implements Task {
 
 	private Param	mParam		= null;
 	private File	mSrcFile 	= null;

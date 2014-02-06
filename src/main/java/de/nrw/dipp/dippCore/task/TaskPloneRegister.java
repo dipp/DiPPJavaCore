@@ -63,7 +63,7 @@ import de.nrw.dipp.dippCore.webservice.QualifiedDublinCore;
  * @author Jochen Schirrwagen, schirrwagen@hbz-nrw.de
  * @version $Id: TaskPloneRegister.java,v 1.1 2007/01/05 11:39:24 dippadm Exp $
  */
-public class TaskPloneRegister extends TaskService implements Task {
+public class TaskPloneRegister extends Observable implements Task {
 
 	private Param mParam = null;
 	private boolean mSucceed = false;

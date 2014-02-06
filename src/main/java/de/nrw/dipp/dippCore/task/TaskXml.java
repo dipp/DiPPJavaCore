@@ -120,20 +120,22 @@ public class TaskXml extends TaskService implements Task {
 			log.info("starting TaskXml for id " + articlePid);
 
 			if (!fUtil.getNativeFileMimeType().equals("text/xml")){
+
+				while( (upcast = Upcast.getInstance()) == null ){
+					//log.info("waiting for UpCast becoming ready to processing");
+					//wait(2500);				
+				}
+
 				try{
 					// rtf upCast needs some time to start wait for this...
-					while( (upcast = Upcast.getInstance()) == null ){
-						log.info("waiting for UpCast becoming ready to processing");
-						wait(2500);				
-					}
+					
+					log.info("getting Upcast Instance: " + upcast.toString());
 					log.info("UpCast is ready to process "  + articlePid);
 					
 					String articleType = "";
 					if (qdc.getArticleType().length > 0){
 						articleType = qdc.getArticleType(0);
 						}
-
-					log.info("UpCast is ready to process "  + articlePid);
 
 					log.debug("TaskXML: " + "upCast.setSourceFile: " + fUtil.getNativeFile().getAbsolutePath());
 					upcast.setSourceFile(fUtil.getNativeFile());
@@ -143,17 +145,14 @@ public class TaskXml extends TaskService implements Task {
 					outputFile = new File ( fUtil.getTargetDir() + "/" + fUtil.getNativeFile().getName().substring(
 							0, fUtil.getNativeFile().getName().lastIndexOf(".")) + ".xml" );
 					
-					if (fUtil.isCompressedZip() && fUtil.isBatchProcess()){
-						// batch process
-						log.info("Doing batchprocess with zip file" );
-						log.error("Batch is not implemented here, please use deprecated method");
-						//batch(fUtil, upcast, articleObj.getLabel());
-						}
+					tParam.getProperties().setProperty("outputFile", outputFile.getAbsolutePath());
+					
 					}catch(ConvertException e){
 						log.error(e);
 						e.printStackTrace();
 					}finally{
-					upcast.release();
+						log.info("now release Upcast Instance");
+						upcast.release();
 					}
 				}
 			}catch(Exception e){

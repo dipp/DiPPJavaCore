@@ -49,4 +49,10 @@ public class TaskTest extends TaskService implements Task {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	protected void convert() {
+		// TODO Auto-generated method stub
+		
+	}
 }

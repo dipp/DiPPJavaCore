@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.Observable;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 import de.infinityloop.upcast.UpcastEngine;
 import de.infinityloop.util.ILException;
 //import de.infinityloop.util.ILException;
@@ -32,6 +34,9 @@ import de.nrw.dipp.dippCore.util.Constant;
 
 public final class Upcast extends Observable{
 
+	// Initiate Logger for TaskXml
+	private static Logger log = Logger.getLogger(Upcast.class);
+	
 	private static final String	cUpCastInstanceID	= "DiPP-Upcast-Instance";
 	private static String cUpCastOutputDir			= "";
 	
@@ -50,9 +55,7 @@ public final class Upcast extends Observable{
 	private Upcast(){
 		try{
 			cUpCastOutputDir = Constant.getcUpcastWorkDirPath();
-//			cUpCastConfigFile = Constant.getAbsolutPath() + "/WEB-INF/preferences.xml";
 			UpcastEngine.setLicense(UpcastEngine.class.getResourceAsStream(Constant.cLicensePathUpcast));
-//			mPerlscriptsProps.load(getClass().getResourceAsStream("perlscripts.properties")); // "perlscripts.properties"));
 			mEngine = new UpcastEngine(cUpCastInstanceID);
 			mEngine.setDebuggingMode(false);
 			mEngine.setGlobalParameter("outputDir", cUpCastOutputDir);
@@ -62,11 +65,15 @@ public final class Upcast extends Observable{
 		}
 	}
 	
+	
 	public static synchronized Upcast getInstance(){ 
+	//TODO: implement Singleton
 		if (cLocked){
+			//log.info("because clocked = true, return null");
 			return null;
 		}else{
 			cLocked = true;
+			//log.info("because clocked = false, return UpcastEngine");
 			return UpcastHolder.upcast;
 		}
 	}

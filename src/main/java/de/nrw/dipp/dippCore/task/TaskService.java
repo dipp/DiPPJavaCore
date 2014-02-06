@@ -73,6 +73,12 @@ public abstract class TaskService extends Observable implements Task {
 		tParam = TParam;
 	}
 	
+	protected TaskParam getTaskParam(){
+		return tParam;
+	}
+
+	protected abstract void convert();
+	
 	public static class Factory {
 		
 		public static TaskService newInstance(int taskType, TaskParam tParam){

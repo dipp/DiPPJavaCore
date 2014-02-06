@@ -78,30 +78,32 @@ public class TaskHtml extends DecoratorTask {
 	 */
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		convert();
 
 	}
 	
 	public void convert(){
+		
+		baseTask.convert();
+		tParam = baseTask.getTaskParam();
+		
 		Upcast upcast = null;
 		FileUtil fUtil = tParam.getFileUtil();
 		String articlePid = tParam.getProperties().getProperty("articlePid");
-		sourceFile = new File(tParam.getProperties().getProperty("sourceFile"));
+		// we need to get the result File from the last Task
+		sourceFile = new File(tParam.getProperties().getProperty("outputFile"));
 		
 		ServiceManagement mFi = new ServiceManagement();
 		
-		// Getting QualifiedDublinCore for the File we want to process
+		while( (upcast = Upcast.getInstance()) == null ){
+		}
+
 		try{			
 			DigitalObject articleObj = DOManagement.retrieveDigitalObject(articlePid);
 			QualifiedDublinCore qdc = Metadata.getQualifiedDublinCoreMetadata(articlePid);
 
 			log.info("starting TaskHtml for id " + articlePid);
 
-			// rtf upCast needs some time to start wait for this...
-			while( (upcast = Upcast.getInstance()) == null ){
-				log.info("waiting for UpCast becoming ready to processing");
-				wait(2500);				
-			}
 			log.info("UpCast is ready to process "  + articlePid);
 			
 			String articleType = "";

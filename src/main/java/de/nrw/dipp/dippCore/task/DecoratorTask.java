@@ -25,7 +25,7 @@ public abstract class DecoratorTask extends TaskService{
 			DecoratorTask dTask = null;
 			
 			try {
-				Class decoratorClass = Class.forName("de.nrw.dipp.dippCore.task" + decoratorTask);
+				Class decoratorClass = Class.forName("de.nrw.dipp.dippCore.task." + decoratorTask);
 				dTask = (DecoratorTask) decoratorClass.newInstance();
 				dTask.setBaseTask(task);
 			} catch (Exception e) {
@@ -36,9 +36,6 @@ public abstract class DecoratorTask extends TaskService{
 			return dTask;
 		}
 		
-		public String getString(){
-			return "holla";
-		}
 		
 	}
 }
