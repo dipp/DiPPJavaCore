@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import de.nrw.dipp.dippCore.repository.DOManagement;
 import de.nrw.dipp.dippCore.repository.DigitalObject;
+import de.nrw.dipp.dippCore.repository.DigitalObjectDatastream;
 import de.nrw.dipp.dippCore.repository.ServiceManagement;
 import de.nrw.dipp.dippCore.repository.metadata.Metadata;
 import de.nrw.dipp.dippCore.util.Constant;
@@ -98,6 +99,12 @@ public class TaskHtml extends DecoratorTask {
 		while( (upcast = Upcast.getInstance()) == null ){
 		}
 
+		try{
+			perlscriptsProps.load(getClass().getResourceAsStream("perlscripts.properties")); // "perlscripts.properties"));
+		}catch(IOException ioExc){
+			ioExc.printStackTrace();
+		}
+
 		try{			
 			DigitalObject articleObj = DOManagement.retrieveDigitalObject(articlePid);
 			QualifiedDublinCore qdc = Metadata.getQualifiedDublinCoreMetadata(articlePid);
@@ -117,6 +124,7 @@ public class TaskHtml extends DecoratorTask {
 			log.info("UpcastThread: 2.Teil OK fuer: " + sourceFile.getAbsolutePath());
 			sourceFileBaseName = sourceFile.getName().substring(0, sourceFile.getName().lastIndexOf("."));
 			
+			log.info("Verzeichnispfad: "+ perlscriptsProps.getProperty("toc"));
 			Process pToc = Runtime.getRuntime().exec(perlscriptsProps.getProperty("toc") 
 					+ " " + sourceFile.getParent() + "/" + sourceFileBaseName 
 					+ "-toc.html " + sourceFile.getParent() + "/ " 
@@ -133,11 +141,13 @@ public class TaskHtml extends DecoratorTask {
 
 			//TODO: skip using ExtendedMetadata
 			ExtendedMetadata mExtMeta = tParam.getExtMetadata();
-			Hashtable dsTableHTML = new Hashtable();
-			Hashtable dsTableXML = new Hashtable();
+			Hashtable<String, DigitalObjectDatastream> dsTableHTML = new Hashtable<String, DigitalObjectDatastream>();
+			Hashtable<String, DigitalObjectDatastream> dsTableXML = new Hashtable<String, DigitalObjectDatastream>();
 
 			// if an html representation already exists for article object 
 			if (tParam.getProperties().containsKey("DoNew") && !tParam.getProperties().getProperty("DoNew").equals(true)){
+				// get all Datastreams IDs and Stream representations 
+				// of the Fedora content-Object including html streams  
 				dsTableHTML = mFi.getDatastreamTable(mExtMeta.getObjectHTML());
 				dsTableXML = mFi.getDatastreamTable(mExtMeta.getObjectXML());
 			}

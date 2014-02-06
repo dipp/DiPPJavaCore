@@ -29,6 +29,7 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import de.nrw.dipp.dippCore.repository.Download;
+import de.nrw.dipp.dippCore.repository.ServiceManagement;
 import de.nrw.dipp.dippCore.task.DecoratorTask;
 import de.nrw.dipp.dippCore.task.TaskParam;
 import de.nrw.dipp.dippCore.task.TaskService;
@@ -53,6 +54,7 @@ public class GenericTaskTest {
 	private static Logger log = Logger.getLogger(GenericTaskTest.class);
 
 	private String articlePid = "temp:1878";
+	private ExtendedMetadata extendedMetadata = null; 
 	/**
 	 * 
 	 */
@@ -64,6 +66,8 @@ public class GenericTaskTest {
 		TaskParam tParam = new TaskParam();
 		tParam.setProperties(getProp());
 		tParam.setFileUtil(getFileUtil());
+		setExtendedMetadata();
+		tParam.setExtMetadata(extendedMetadata);
 		TaskService taskXml = TaskService.Factory.newInstance("TaskXml", tParam);
 		DecoratorTask dTask = DecoratorTask.Factory.newInstance("TaskHtml", taskXml);
 	
@@ -105,8 +109,7 @@ public class GenericTaskTest {
 		Properties taskProp = new Properties();
 		
 		taskProp.setProperty("articlePid", articlePid);
-		
-		
+				
 		return taskProp;
 	}
 
@@ -127,5 +130,9 @@ public class GenericTaskTest {
 		fUtil.setNativeDocIdent(nativeDocIdent);
 		log.info("fileUtil found MimeType " + fUtil.getNativeFileMimeType());
 		return fUtil;
+	}
+	
+	public void setExtendedMetadata(){
+		extendedMetadata = ServiceManagement.getDiPPExtendedMetadata(articlePid);
 	}
 }

@@ -1,0 +1,4 @@
+23-11-2005 by JS: 
+    element legalnotice mit element copyright ausgetauscht in allen 01-db42-???journal???.xsl
+    in 01-basic-customHTML.xsl legalnotice wird unterdrückt
+    in 01-basic-customHTML.xsl template für copyright überschrieben
