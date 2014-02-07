@@ -1822,7 +1822,9 @@ public class ServiceManagement {
 		
 		// First step: get mimeType from native File
 		mimeType = de.nrw.dipp.dippCore.util.request.MimeType.getInstance().getMimeType(aFileUtil.getNativeFile());
-
+		
+		log.info("MimeType found: " + mimeType);
+		
 		// if file is a compressed file, unzip file and determine the main file
 		if (mimeType.equals("application/zip")){
 			try{
@@ -1848,6 +1850,7 @@ public class ServiceManagement {
 					throw new RemoteException("Das verwendete Dokumentenformat " + aFileUtil.getNativeFileMimeType() 
 							+ " wird für die Konvertierung nicht unterstützt");
 				}
+				log.info("set doConvert = true");
 				doConvert = true;						
 			}
 		}
@@ -2068,7 +2071,7 @@ public class ServiceManagement {
 		
 
 		if (doConvert){
-			
+			log.info(aFileUtil.getNativeFileMimeType());
 			if(aFileUtil.getNativeFileMimeType().equals("application/pdf")){
 				//start here to use new TaskService with TasKDecorator
 				

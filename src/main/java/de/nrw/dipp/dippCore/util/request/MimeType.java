@@ -64,7 +64,7 @@ public final class MimeType {
 			}
 			*/
 			
-			MagicMatch match = magic.getMagicMatch(aFile);
+			MagicMatch match = magic.getMagicMatch(aFile, false);
 			System.out.println("MimeType aaa");
 			mimeType = match.getMimeType();
 			System.out.println("MimeType b");

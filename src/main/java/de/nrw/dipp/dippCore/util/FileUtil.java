@@ -160,7 +160,15 @@ public class FileUtil {
 			}					
 			nativeFile.renameTo(newFile);
 			nativeFile = newFile;
-		}
+		}else if (nativeFileMimeType.endsWith("pdf")){
+			if (nativeFile.getAbsolutePath().endsWith(".pdf")){
+				newFile = new File(nativeFile.getAbsolutePath());
+			}else{
+				newFile = new File(nativeFile.getAbsolutePath() + ".pdf");				
+			}					
+		nativeFile.renameTo(newFile);
+		nativeFile = newFile;
+	}
 	}
 	
 	public String getNativeFileMimeType(){
