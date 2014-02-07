@@ -34,6 +34,7 @@ import de.nrw.dipp.dippCore.task.DecoratorTask;
 import de.nrw.dipp.dippCore.task.TaskParam;
 import de.nrw.dipp.dippCore.task.TaskService;
 import de.nrw.dipp.dippCore.task.TaskXml;
+import de.nrw.dipp.dippCore.util.Config;
 import de.nrw.dipp.dippCore.util.Constant;
 import de.nrw.dipp.dippCore.util.FileUtil;
 import de.nrw.dipp.dippCore.webservice.ExtendedMetadata;
@@ -63,11 +64,13 @@ public class GenericTaskTest {
 	}
 
 	@Test public void processTaskXml(){
+		
 		TaskParam tParam = new TaskParam();
 		tParam.setProperties(getProp());
-		tParam.setFileUtil(getFileUtil());
+		tParam.setFileUtil(getFileUtilRtf());
 		setExtendedMetadata();
 		tParam.setExtMetadata(extendedMetadata);
+		
 		TaskService taskXml = TaskService.Factory.newInstance("TaskXml", tParam);
 		DecoratorTask dTask = DecoratorTask.Factory.newInstance("TaskGetMd", taskXml);
 		DecoratorTask dTask0 = DecoratorTask.Factory.newInstance("TaskHtml", dTask);
@@ -77,7 +80,6 @@ public class GenericTaskTest {
 		Thread thread = new Thread(dTask1);
 		thread.setName("TaskXml Thread0");
 		thread.start();
-		
 		/*
 		TaskService taskXml1 = TaskService.Factory.newInstance("TaskXml", tParam);
 		DecoratorTask dTask1 = DecoratorTask.Factory.newInstance("TaskGetMd", taskXml1);
@@ -90,6 +92,25 @@ public class GenericTaskTest {
 		
 		}
 
+	@Test public void processTaskPdf(){
+		
+		
+		TaskParam tParam = new TaskParam();
+		tParam.setProperties(getProp());
+		tParam.setFileUtil(getFileUtilPdf());
+		
+		//setExtendedMetadata();
+		//tParam.setExtMetadata(extendedMetadata);
+				
+		TaskService taskPdf = TaskService.Factory.newInstance("TaskPdf", tParam);
+		DecoratorTask dTaskPdf = DecoratorTask.Factory.newInstance("TaskPdfA", taskPdf);
+
+		Thread thread1 = new Thread(dTaskPdf);
+		thread1.setName("TaskPdf Thread1");
+		thread1.start();
+
+		
+		}
 
 	/**
 	 * <p><em>Title: </em></p>
@@ -103,6 +124,7 @@ public class GenericTaskTest {
 
 		GenericTaskTest gTTest = new GenericTaskTest();
 		gTTest.processTaskXml();
+		gTTest.processTaskPdf();
 
 	}
 	
@@ -115,7 +137,7 @@ public class GenericTaskTest {
 		return taskProp;
 	}
 
-	public FileUtil getFileUtil(){
+	public FileUtil getFileUtilRtf(){
 		FileUtil fUtil = new FileUtil();
 		String nativeDocIdent = "http://www.dipp.nrw.de/download/Beispiel.rtf";
 		fUtil.create(articlePid);
@@ -134,6 +156,17 @@ public class GenericTaskTest {
 		return fUtil;
 	}
 	
+	public FileUtil getFileUtilPdf(){
+		FileUtil fUtil = new FileUtil();
+		String nativeDocIdent = "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf";
+		fUtil.create(articlePid);
+		fUtil.setNativeFileMimeType("application/pdf");
+		
+
+		fUtil.setNativeDocIdent(nativeDocIdent);
+		return fUtil;
+	}
+
 	public void setExtendedMetadata(){
 		extendedMetadata = ServiceManagement.getDiPPExtendedMetadata(articlePid);
 	}

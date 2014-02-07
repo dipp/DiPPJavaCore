@@ -293,6 +293,17 @@
         	<artifactId>DiPPConfiguration</artifactId>
         	<version>1.0</version>
         </dependency>
+        	<dependency>
+		<groupId>com.sun.jersey</groupId>
+		<artifactId>jersey-bundle</artifactId>
+		<version>1.17.1</version>
+	</dependency>
+	<dependency>
+		<groupId>asm</groupId>
+		<artifactId>asm</artifactId>
+		<version>3.3</version>
+	</dependency>
+        
     </dependencies> 
 
 </project>
