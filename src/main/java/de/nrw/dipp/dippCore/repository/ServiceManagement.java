@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.File;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -35,7 +36,6 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
-
 import org.apache.xmlbeans.XmlException;
 import org.openarchives.oai.x20.oaiDc.DcDocument;
 import org.openarchives.oai.x20.oaiDc.OaiDcType;
@@ -60,8 +60,11 @@ import de.nrw.dipp.dippCore.repository.metadata.rdf.vocabulary.Fedora;
 import de.nrw.dipp.dippCore.repository.metadata.rdf.vocabulary.FedoraCMA;
 import de.nrw.dipp.dippCore.repository.metadata.rdf.vocabulary.OAI;
 import de.nrw.dipp.dippCore.task.ConversionStatus;
+import de.nrw.dipp.dippCore.task.DecoratorTask;
 import de.nrw.dipp.dippCore.task.Param;
 import de.nrw.dipp.dippCore.task.TaskManager;
+import de.nrw.dipp.dippCore.task.TaskParam;
+import de.nrw.dipp.dippCore.task.TaskService;
 import de.nrw.dipp.dippCore.util.Config;
 import de.nrw.dipp.dippCore.util.Constant;
 import de.nrw.dipp.dippCore.util.FileUtil;
@@ -71,7 +74,6 @@ import de.nrw.dipp.dippCore.webservice.Citation;
 import de.nrw.dipp.dippCore.webservice.ExtendedMetadata;
 import de.nrw.dipp.dippCore.webservice.QualifiedDublinCore;
 import de.nrw.dipp.dippCore.www.definitions.InvalidParamMessage;
-
 import de.nrw.dipp.dippCore.webservice.FieldSearchResult;
 import de.nrw.dipp.dippCore.webservice.ConditionType;
 import de.nrw.dipp.dippCore.webservice.ObjectFields;
@@ -1838,9 +1840,11 @@ public class ServiceManagement {
 		// doConvert to true
 		if (aTargetFormat != null ){
 			if (aTargetFormat.length > 0){
-				if (! (	aFileUtil.getNativeFileMimeType().equals("application/rtf") 	|| 
-						aFileUtil.getNativeFileMimeType().equals("text/rtf") 		||
-						aFileUtil.getNativeFileMimeType().equals("text/xml") ) ){
+				if (! (	aFileUtil.getNativeFileMimeType().equals("application/rtf") 
+						|| aFileUtil.getNativeFileMimeType().equals("text/rtf")
+						|| aFileUtil.getNativeFileMimeType().equals("text/rtf")
+						|| aFileUtil.getNativeFileMimeType().equals("application/pdf")
+							 ) ){
 					throw new RemoteException("Das verwendete Dokumentenformat " + aFileUtil.getNativeFileMimeType() 
 							+ " wird für die Konvertierung nicht unterstützt");
 				}
@@ -2005,7 +2009,7 @@ public class ServiceManagement {
 		}
 		try{
 			pid = persistNewDigitalObject(articlePID.substring(0,articlePID.indexOf(":")), digObj, dcQualified, isTest);
-					
+								
 		}catch(RemoteException RemExc){
 			log.error(RemExc);
 		}
@@ -2016,7 +2020,6 @@ public class ServiceManagement {
 		}catch(Exception Exc){
 			log.error(Exc);
 		}
-		
 		
 		ExtendedMetadata extMeta = getDiPPExtendedMetadata(pid);
 		log.info("FedoraInterface: " + aFileUtil.getNativeFile().getAbsolutePath());
@@ -2051,25 +2054,53 @@ public class ServiceManagement {
 		log.debug(Constant.cConfiguration.getIdentifier(serialNumber + ""));
 		log.debug("die JournalUrl: " + journalURL);
 					
+		
+		// added TaskParam to make TaskService enhanceable in an easy way
+		
+		TaskParam tParam = new TaskParam();
+		tParam.setProperty("articlePid", pid);
+		tParam.setProperty("journalLabel", digObj.getLabel());
+		tParam.setProperty("DoModify", "true");
+		tParam.setProperty("ContentObjectPid", pid);
+		tParam.setProperty("ContentObjectDS", "DS1");
+		tParam.setExtMetadata(extMeta);
+		tParam.setFileUtil(aFileUtil);
+		
+
 		if (doConvert){
-					
-			convStatus.addBit(ConversionStatus.cFlagConversion);
-			TaskManager.getInstance().addTask(TaskManager.cRegisteredTaskXML, task, true);
-			convStatus.addBit(ConversionStatus.cFlagXML);
-			if (journalURL.length() > 0){
-				// this is a workaround and can removed, if all instances have a journalURL assigned
+			
+			if(aFileUtil.getNativeFileMimeType().equals("application/pdf")){
+				//start here to use new TaskService with TasKDecorator
+				
+				ArrayList<String> taskClassName = new ArrayList();
+				taskClassName.add("TaskPdf"); // the baseTask
+				taskClassName.add("TaskPdfA"); // first Decorator
+				taskClassName.add("TaskPloneReg"); // next Decorator
+				
+				TaskManager.getInstance().addTask(taskClassName, tParam);
+			
+			}else{
+
+				convStatus.addBit(ConversionStatus.cFlagConversion);
+				TaskManager.getInstance().addTask(TaskManager.cRegisteredTaskXML, task, true);
+				convStatus.addBit(ConversionStatus.cFlagXML);
+				if (journalURL.length() > 0){
+					// this is a workaround and can removed, if all instances have a journalURL assigned
+					TaskManager.getInstance().addTask(TaskManager.cRegisteredTaskPlone, task, false);
+				}
 				TaskManager.getInstance().addTask(TaskManager.cRegisteredTaskPlone, task, false);
+				for (int i = 0; i < aTargetFormat.length; i++){
+					if (aTargetFormat[i].equals("html")){
+						TaskManager.getInstance().addTask(TaskManager.cRegisteredTaskHTML, task, false);
+						convStatus.addBit(ConversionStatus.cFlagHTML);
+					}else if (aTargetFormat[i].equals("pdf")){
+						TaskManager.getInstance().addTask(TaskManager.cRegisteredTaskPDF, task, false);
+						convStatus.addBit(ConversionStatus.cFlagPDF);
+					}	
+				}
+				
 			}
-			TaskManager.getInstance().addTask(TaskManager.cRegisteredTaskPlone, task, false);
-			for (int i = 0; i < aTargetFormat.length; i++){
-				if (aTargetFormat[i].equals("html")){
-					TaskManager.getInstance().addTask(TaskManager.cRegisteredTaskHTML, task, false);
-					convStatus.addBit(ConversionStatus.cFlagHTML);
-				}else if (aTargetFormat[i].equals("pdf")){
-					TaskManager.getInstance().addTask(TaskManager.cRegisteredTaskPDF, task, false);
-					convStatus.addBit(ConversionStatus.cFlagPDF);
-				}	
-			}
+					
 		}else{
 			// TODO just write the file to the according container object as datastream
 						

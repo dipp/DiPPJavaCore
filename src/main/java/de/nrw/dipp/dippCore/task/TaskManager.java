@@ -127,30 +127,22 @@ public class TaskManager implements Observer{
 	 * @param taskParam an extensible Class for task parameters, using Properties  
 	 * @param aStart
 	 */
-	public synchronized void addTask(int registeredTask, TaskParam taskParam, boolean aStart){
+	public synchronized void addTask(ArrayList<String> taskClassName, TaskParam tParam){
 
-		ArrayList<Task> taskList = new ArrayList<Task>();
+		TaskService task = TaskService.Factory.newInstance(taskClassName.get(0), tParam);
+		task.setParam(tParam.getParam());
 
-		// Get taskList if already exists for the articlePid
-		if(taskTable.containsKey(taskParam.getProperties().get("articlePid"))){
-			taskList = taskTable.get(taskParam.getProperties().get("articlePid"));
+		ArrayList<TaskService> dTask = new ArrayList<TaskService>();
+		dTask.add(task);
+		
+		for(int i=1; i<taskClassName.size(); i++ ){ //we have to start with 1 here !
+			dTask.add(DecoratorTask.Factory.newInstance(taskClassName.get(i), dTask.get(i -1)));
+			log.info("added Task: " + taskClassName.get(i) + " which decorates " + dTask.get(i -1));
 		}
 		
-		TaskService task;
-		
-		task = TaskService.Factory.newInstance(registeredTask, taskParam);
-		task.setParam(taskParam.getParam());
-		task.addObserver(this);
-		taskList.add(task);
-		taskTable.put(taskParam.getProperties().get("articlePid").toString(), taskList);
-		
-		
-
-		if (aStart){
-			log.info("starting task now");
-			new Thread(task).start();
-			log.info("task started");
-		}
+		// now start the last DecoratorTask
+		new Thread(dTask.get(dTask.size()-1)).start();
+		log.info("task started");
 
 	}
 

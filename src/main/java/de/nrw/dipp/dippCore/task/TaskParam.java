@@ -27,9 +27,8 @@ public class TaskParam {
 	private ConversionStatus	mConvStatus			= null;
 	
 	public TaskParam(){
-		
+		taskProp = new Properties();
 	}
-
 
 	public void setProperties(Properties prop){
 		taskProp = prop;
@@ -37,6 +36,20 @@ public class TaskParam {
 	
 	public Properties getProperties(){
 		return taskProp;
+	}
+
+	
+	/**
+	 * method makes directly accessibly setProperty method from Properties Object inside 
+	 * @param key
+	 * @param value
+	 */
+	public void setProperty(String key, String value){
+		taskProp.setProperty(key, value);
+	}
+	
+	public String getProperty(String key){
+		return taskProp.getProperty(key);
 	}
 
 	public void setConversionStatus(ConversionStatus aConvStatus){

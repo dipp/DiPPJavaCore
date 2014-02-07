@@ -133,12 +133,13 @@ public class TestWebServiceImpl {
 		
 		String newArticlePid = null;
 		String[] containerPid = {"dipp:1898"}; 
-		String journalPid = "dipp:1"; // ID of the journal the article should be part of 
+		String journalPid = "dipp:1898"; // ID of the journal the article should be part of 
 		QualifiedDublinCore qdc = null; 
 		
 		String nativeDocIdent = "http://www.dipp.nrw.de/download/Beispiel.rtf"; //The URL where the Article-stream is accessible
-		String storageType = "temporary";
-		String[] targetFormat = {"html"};
+		nativeDocIdent = "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf"; //The URL where the Article-stream is accessible
+		String storageType = "permanent";
+		String[] targetFormat = {"pdf"};
 		
 		File tmpConvertDir = new File("convert");
 		tmpConvertDir.mkdir();

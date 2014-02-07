@@ -27,7 +27,6 @@ import java.io.File;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
-import org.junit.Test;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
