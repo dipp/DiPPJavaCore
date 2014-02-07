@@ -1834,6 +1834,10 @@ public class ServiceManagement {
 			}
 			aFileUtil.declareMainFile();
 			aFileUtil.setNativeFileMimeType(de.nrw.dipp.dippCore.util.request.MimeType.getInstance().getMimeType(aFileUtil.getNativeFile()));
+		}else if(mimeType.equals("application/pdf")){
+			// just a work around if target format is null: we like to convert pdf to pdf a
+			aFileUtil.setNativeFileMimeType(mimeType);			
+			doConvert = true;
 		}else{
 			aFileUtil.setNativeFileMimeType(mimeType);
 		}
