@@ -1821,7 +1821,8 @@ public class ServiceManagement {
 		log.debug("start creation of Article and its associated Objects in Fedora");
 		
 		// First step: get mimeType from native File
-		mimeType = de.nrw.dipp.dippCore.util.request.MimeType.getInstance().getMimeType(aFileUtil.getNativeFile());
+		mimeType = de.nrw.dipp.dippCore.util.request
+				.MimeType.getInstance().getMimeType(aFileUtil.getNativeFile());
 		
 		log.info("MimeType found: " + mimeType);
 		
@@ -2076,10 +2077,14 @@ public class ServiceManagement {
 
 		if (doConvert){
 			log.info(aFileUtil.getNativeFileMimeType());
+			
+			//newly implemented TaskService call should replace old way to call 
+			//TaskManager.addTask in future. It is implemented to make tasks 
+			//much easier enhanceable
 			if(aFileUtil.getNativeFileMimeType().equals("application/pdf")){
 				//start here to use new TaskService with TasKDecorator
 				
-				ArrayList<String> taskClassName = new ArrayList();
+				ArrayList<String> taskClassName = new ArrayList<String>();
 				taskClassName.add("TaskPdf"); // the baseTask
 				taskClassName.add("TaskPdfA"); // first Decorator
 				taskClassName.add("TaskPloneReg"); // next Decorator

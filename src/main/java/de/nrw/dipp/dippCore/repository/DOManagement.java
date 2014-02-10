@@ -240,6 +240,27 @@ public class DOManagement {
 		return FedoraManagement.getInstance().getFedoraServices().addDatastream(aPID, aDSId, aLocation, aMimeType, aLabel, aControlgroup, "DEFAULT", null);
 	}
 	
+	 /**
+	 * <p><em>Title:</em> Add datastream identified by Filename</p>
+	 * <p>Method adds any Datastream to an existing Fedora Object, which is 
+	 * identified by an Url.</p>
+	 * <p>It can be used to add an external Datastream from local machine to a
+	 * Fedora Object.</p>
+	 * 
+	 * @param aPID the pid of the object.
+	 * @param url external link to import as datastream.
+	 * @param aMimeType the mimetype of the file.
+	 * @param aLabel a label of the new datastream.
+	 * @return <code>String</code> the datastream id.
+	 * TODO should throw an exception
+	 */
+	public String addDatastreamFromUrl(String aPID, String aDSId, String url, 
+			String aMimeType, String aLabel, 
+			String aControlgroup)throws Exception{
+
+		log.info("Upload-Url: " + url);
+		return FedoraManagement.getInstance().getFedoraServices().addDatastream(aPID, aDSId, url, aMimeType, aLabel, aControlgroup, "DEFAULT", null);
+	}
 
 	/**
 	 * <p>Adds any Datastream to an existing Fedora Object.</p>

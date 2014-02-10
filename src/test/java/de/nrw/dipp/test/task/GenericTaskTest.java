@@ -99,13 +99,14 @@ public class GenericTaskTest {
 		tParam.setProperties(getProp());
 		tParam.setFileUtil(getFileUtilPdf());
 		
-		//setExtendedMetadata();
-		//tParam.setExtMetadata(extendedMetadata);
+		setExtendedMetadata();
+		tParam.setExtMetadata(extendedMetadata);
 				
 		TaskService taskPdf = TaskService.Factory.newInstance("TaskPdf", tParam);
 		DecoratorTask dTaskPdf = DecoratorTask.Factory.newInstance("TaskPdfA", taskPdf);
+		DecoratorTask dTaskPlReg = DecoratorTask.Factory.newInstance("TaskPloneReg", dTaskPdf);
 
-		Thread thread1 = new Thread(dTaskPdf);
+		Thread thread1 = new Thread(dTaskPlReg);
 		thread1.setName("TaskPdf Thread1");
 		thread1.start();
 
@@ -123,7 +124,7 @@ public class GenericTaskTest {
 		Constant.setAbsolutPath("/home/aquast/git/dippCoreMvn");
 
 		GenericTaskTest gTTest = new GenericTaskTest();
-		gTTest.processTaskXml();
+		//gTTest.processTaskXml();
 		gTTest.processTaskPdf();
 
 	}
@@ -133,6 +134,7 @@ public class GenericTaskTest {
 		Properties taskProp = new Properties();
 		
 		taskProp.setProperty("articlePid", articlePid);
+		taskProp.setProperty("label", "81");
 				
 		return taskProp;
 	}

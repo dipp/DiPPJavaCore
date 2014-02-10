@@ -153,9 +153,6 @@ public class Constant {
 	
 	// Configuration should be changeable during runtime, unfortunately this means it will be created each time it is called?
 	public static Config cConfiguration	= new Config(new File(Constant.cConfigFileDir + Constant.cConfigFileName));
-	//public static final Config	cConfiguration	= new Config(new File(Constant.cConfigFileDir + Constant.cConfigFileName));
-	//public static final Config	cConfiguration	= new Config(Constant.class.getClassLoader().getResourceAsStream("dippConfiguration.xml"));
-	//public static final Config	cConfiguration	= new Config(new File("dippConfiguration.xml"));
 	
 	// Initialize logger object 
 	private static Logger log = null;

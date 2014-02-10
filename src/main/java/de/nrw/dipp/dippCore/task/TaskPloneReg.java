@@ -97,22 +97,8 @@ public class TaskPloneReg extends DecoratorTask {
 
 		
 		String articlePid = tParam.getProperties().getProperty("articlePid");
-		String label = null;
-		
-		if(tParam.getProperties().containsKey("label")){
-			label = tParam.getProperties().getProperty("label");
-		}else{
-			DigitalObject articleObj = null;
-			try {
-				log.warn("not found journalLabel in Properties");
-				articleObj = DOManagement.retrieveDigitalObject(articlePid);
-				label = articleObj.getLabel();
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}	
+
+		String label = getJournalLabel();
 
 		log.info("label: " + label);
 
@@ -135,7 +121,7 @@ public class TaskPloneReg extends DecoratorTask {
 		} catch (MalformedURLException urlExc) {
 			log.error(urlExc);
 		}
-		log.debug("ClientObject: " + client.getClientConfig().toString());
+		log.info("ClientObject: " + client.getClientConfig().toString());
 
 		// read metadata informations required for RPC-Client:
 		String journalPID = mFi.getPidOfJournal(label);

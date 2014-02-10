@@ -25,14 +25,20 @@ package de.nrw.dipp.dippCore.task;
 import java.io.File;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.ext.MessageBodyReader;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
+import de.nrw.dipp.dippCore.repository.DOManagement;
+import de.nrw.dipp.dippCore.util.Constant;
 import de.nrw.dipp.dippCore.util.FileUtil;
 
 /**
@@ -113,14 +119,31 @@ public class TaskPdfA extends DecoratorTask {
 		tParam = baseTask.getTaskParam();
 		FileUtil fUtil = tParam.getFileUtil();
 		
-		fUtil.getNativeFile();
 		log.info("baseTask has finished, starting decoratorTask\n\n");
 
-		//sourceFile = new File(tParam.getProperties().getProperty("outputFile"));
+		JSONObject jResponse = callRemoteService(fUtil.getNativeDocIdent());
+
+		String pdfaUrl = null;
+		int success = -1;
 		
+		try {
+			success = jResponse.getInt("exitState");
+			pdfaUrl = jResponse.getString("resultFileUrl");
+			
+		} catch (JSONException e) {
+			log.error(e);
+		}
 		
-		callRemoteService(fUtil.getNativeDocIdent());
-		
+		if(success == 0){
+			DOManagement domg = new DOManagement();
+			try{
+				domg.addDatastreamFromUrl(tParam.getExtMetadata().getObjectPDF(), null, pdfaUrl, "application/pdf", getJournalLabel(), Constant.cFedoraDatastreamControlGroupManaged);
+				log.info("added PDF/A Document to Content Object \"pdf\"");
+			}catch(Exception e){
+				log.error(e);
+			}
+
+		}
 		
 
 	}
@@ -130,22 +153,26 @@ public class TaskPdfA extends DecoratorTask {
 	 * <p>Description: method calls the remote PDF/A Service via RestFul API</p>
 	 *  
 	 */
-	private void callRemoteService(String pdfUri){
+	private JSONObject callRemoteService(String pdfUri){
+
 		String uri = "http://nyx.hbz-nrw.de/pdfa/";
 		Client client = createClient();
+		
 		WebResource wResource = client.resource(uri + "api/convertFromUrl/autoConf");
 		wResource = wResource
 			.queryParam("inputFile", pdfUri);
 
-		log.info(wResource);
-		log.info(wResource.accept(MediaType.APPLICATION_JSON).post(String.class).toString());
 		
-		
+		ClientResponse response = wResource.accept(MediaType.APPLICATION_JSON).post(ClientResponse.class);
+		JSONObject jResponse = response.getEntity(JSONObject.class);
+		return jResponse;
 		
 	}
 	
 
-	
+	private void createDatastream(){
+		
+	}
 
 	private Client createClient(){
 		ClientConfig config = new DefaultClientConfig();

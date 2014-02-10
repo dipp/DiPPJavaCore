@@ -22,12 +22,15 @@
  */
 package de.nrw.dipp.dippCore.task;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import de.nrw.dipp.dippCore.repository.DOManagement;
+import de.nrw.dipp.dippCore.repository.DigitalObject;
 import de.nrw.dipp.dippCore.util.FileUtil;
 import de.nrw.dipp.dippCore.webservice.ExtendedMetadata;
 
@@ -76,6 +79,27 @@ public abstract class TaskService extends Observable implements Task {
 	protected TaskParam getTaskParam(){
 		return tParam;
 	}
+	
+	protected String getJournalLabel(){
+		String label = null;
+		if(tParam.getProperties().containsKey("label")){
+			label = tParam.getProperty("label");
+			}else{
+				DigitalObject articleObj = null;
+				try {
+					log.warn("not found journalLabel in Properties");
+					articleObj = DOManagement
+						.retrieveDigitalObject(tParam.getProperty("articlePid"));
+					label = articleObj.getLabel();
+				}catch(RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
+			
+			}	
+
+		return label;
+	}
 
 	protected abstract void convert();
 	
@@ -112,7 +136,7 @@ public abstract class TaskService extends Observable implements Task {
 			// TODO add correct task choice
 			return tService;
 		}
-
+		
 		public static TaskService newInstance(String taskType, TaskParam tParam){
 			TaskService tService = null;
 			try{

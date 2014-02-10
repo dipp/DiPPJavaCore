@@ -137,7 +137,7 @@ public class TestWebServiceImpl {
 		QualifiedDublinCore qdc = null; 
 		
 		String nativeDocIdent = "http://www.dipp.nrw.de/download/Beispiel.rtf"; //The URL where the Article-stream is accessible
-		nativeDocIdent = "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf"; //The URL where the Article-stream is accessible
+		//nativeDocIdent = "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf"; //The URL where the Article-stream is accessible
 		String storageType = "permanent";
 		String[] targetFormat = {"pdf"};
 		

@@ -122,7 +122,7 @@ public class Config {
 
 		// Create a new File if not exists. At least one Instance is required for this
 		// is obsolete in Constant Class is adapted to find out the Dipp Version
-		log.info(confFile.getAbsoluteFile());
+		log.debug(confFile.getAbsoluteFile());
 		if(!confFile.isFile()){
 			Properties instanceProp = new Properties();
 			instanceProp.put("activeInst", "Melpomene");

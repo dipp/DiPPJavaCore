@@ -24,6 +24,9 @@ package de.nrw.dipp.dippCore.task;
 
 import org.apache.log4j.Logger;
 
+import de.nrw.dipp.dippCore.repository.DOManagement;
+import de.nrw.dipp.dippCore.util.Constant;
+
 /**
  * Class TaskPdf
  * 
@@ -96,7 +99,17 @@ public class TaskPdf extends TaskService {
 	 */
 	@Override
 	protected void convert() {
-		// TODO Auto-generated method stub
 		log.info("Die interne URL des PDF-Files: " + tParam.getFileUtil().getNativeDocIdent());
+		
+		// all we have to do here is to copy PDF Datastream into Fedora DataObject
+		DOManagement domg = new DOManagement();
+		try{
+			domg.addDatastream(tParam.getExtMetadata().getObjectPDF(), null, tParam.getFileUtil().getNativeFilename(), "application/pdf", getJournalLabel(), Constant.cFedoraDatastreamControlGroupManaged);
+			log.info("added native PDF Document to Content Object \"pdf\"");
+		}catch(Exception e){
+			log.error(e);
+			e.printStackTrace();
+		}
+
 	}
 }
