@@ -1204,7 +1204,7 @@ public class ServiceManagement {
 		String journalLabel = digObj.getLabel();
 		
 		// Update cConfiguration at runtime for adding new Journal-Informations into runtime system
-		Constant.cConfiguration = new Config(new File(Constant.cConfigFileDir + Constant.cConfigFileName));
+		Constant.cConfiguration = Config.getInstance(new File(Constant.cConfigFileDir + Constant.cConfigFileName));
 		String setName = Constant.cConfiguration.getOaiSetName(journalLabel);
 		String setSpec = Constant.cConfiguration.getOaiSetSpec(journalLabel);
 		log.info("SetName: " + setName);

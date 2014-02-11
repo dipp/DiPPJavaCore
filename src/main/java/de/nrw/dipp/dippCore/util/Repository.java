@@ -189,7 +189,7 @@ public class Repository {
 			//confFile = new File(Constant.cFallbackConfigFileDir + Constant.cConfigFileName);
 		}
 		// create a new DiPPConfiguration File
-		Config nConf = new Config(confFile);
+		Config nConf = Config.getInstance(confFile);
 		nConf.createInstanceEntry(props);
 		
 		// write Journal Infos into Config file  
@@ -200,20 +200,6 @@ public class Repository {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-//		Repository c = new Repository();
-/*		try{
-			Repository c = new Repository(new FileInputStream("c:\\user\\jochen\\src\\dippFedora2\\src\\java\\repository.xml"));
-			Properties props = c.getRepositoryProperties();
-			System.out.println("host: " + props.getProperty("host"));
-			System.out.println("port: " + props.getProperty("port"));
-			System.out.println("version: " + props.getProperty("version"));
-//			c.addRepositoryInstance("PythiaTest", "193.30.112.98", "9080", "1", "fedoraAdmin", "fssAug04");			
-//			c.persist("c:\\user\\jochen\\src\\dippFedora2\\src\\java\\repository.xml");
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-*/		
 		System.out.println("Fedora Version in use: " + Constant.cFedoraVersion);
 	}
 	

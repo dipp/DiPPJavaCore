@@ -66,7 +66,7 @@ public class XMLProcessor {
 	private static XMLProcessor		mXMLProcessor	= null;
 	private static Properties		mISO639			= new Properties();
 	private static Licence			mLicence		= null;
-	private List					mImageList		= new Vector();
+	private List<ImageProperties>	mImageList		= new Vector<ImageProperties>();
 	
     // Get Logger for TaskXML
 	private static Logger log = Logger.getLogger(XMLProcessor.class);
@@ -76,9 +76,6 @@ public class XMLProcessor {
 		try{
 			mISO639.load(getClass().getResourceAsStream("iso639.properties"));
 			mLicence = new Licence(getClass().getClassLoader().getResourceAsStream("licence.xml"));
-			// wofür wird das folgende gebraucht?
-			//new Config(getClass().getClassLoader().getResourceAsStream("dippConfiguration.xml"));
-			new Config();
 		}catch(IOException ioExc){
 			System.out.println(ioExc);
 			ioExc.printStackTrace();
@@ -131,7 +128,7 @@ public class XMLProcessor {
 	
 	private void init(){
 		DocType docType = mDocument.getDocType();
-		docType.setInternalSubset(""); // supresses the "<!NOTATION" comments
+		docType.setInternalSubset(""); // suppresses the "<!NOTATION" comments
 		mArticle = mDocument.getRootElement();
 		mArticleInfo = mArticle.getChild("articleinfo");
 	}
@@ -329,7 +326,7 @@ public class XMLProcessor {
 			double pxHeight = 0;
 			//TODO patch mm-Values to px values, if mm where found in DocBook XML. 
 			// Qa: The next is a workaround only, because I can't locate the correct
-			// place for px value generatong until now :-(  
+			// place for px value generation until now :-(  
 			if(depth.getValue().indexOf("mm") != -1){
 				// Transform mm-values into dpi
 				log.info("filename: " + fileref.getValue() + " depth: " + depth.getValue().substring(0, depth.getValue().indexOf("mm")) + " width: " + width.getValue().substring(0, width.getValue().indexOf("mm")));
@@ -351,7 +348,7 @@ public class XMLProcessor {
 	}
 	
 	// get all image names, width, height
-	public synchronized List getImageList(){
+	public synchronized List<ImageProperties> getImageList(){
 		mImageList.clear();
 		listChildren(mArticle);
 		return mImageList;

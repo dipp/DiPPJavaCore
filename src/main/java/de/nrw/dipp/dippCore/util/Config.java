@@ -63,6 +63,7 @@ public class Config {
 	// Initiate Logger for NewConfig
 	private static Logger log = Logger.getLogger(Config.class);
 
+	private static Config					config 			= null;
 	private static DippInstanceDocument 	mDoc			= null;
 	private static DippInstance 			dippInstance	= null;
 	private static InstanceType 			instance		= null;
@@ -77,7 +78,7 @@ public class Config {
 	 * Abstract Constructor
 	 * required for testing purposes and XMLProcessor???
 	 */
-	public Config(){
+	private Config(){
 		
 	}
 
@@ -89,7 +90,7 @@ public class Config {
 	public Config(InputStream aXMLInputStream){
 		
 		//calling new constructor first to create an Default Config File
-		this(new File(Constant.cConfigFileDir + Constant.cConfigFileName));
+		getInstance(new File(Constant.cConfigFileDir + Constant.cConfigFileName));
 		
 		log.info("calling deprecated constructor because no Configuration File was found");		
 		try{
@@ -105,20 +106,11 @@ public class Config {
 		writeJournalData2DippConfiguration();
 	}
 
-	/*	public NewConfig(InputStream iStream){
-		try{
-			mDoc = DippInstanceDocument.Factory.parse(iStream);			
-		}catch(Exception e){
-			log.error(e);
-		}
-		instArray = mDoc.getDippInstance().getInstanceArray();
-	}
-*/
 	/**
 	 * Constructor for DiPP 1.2
 	 * @param confFile
 	 */
-	public Config(File confFile){
+	private Config(File confFile){
 
 		// Create a new File if not exists. At least one Instance is required for this
 		// is obsolete in Constant Class is adapted to find out the Dipp Version
@@ -141,6 +133,14 @@ public class Config {
 			log.error(e);
 		}
 		instArray = mDoc.getDippInstance().getInstanceArray();
+		
+	}
+	
+	public static Config getInstance(File confFile){
+		if(config == null){
+			config = new Config(confFile);
+		}
+		return config;
 	}
 
 
@@ -291,10 +291,10 @@ public class Config {
 	 * 
 	 * @param instanceProp 
 	 */
-	public void createNewConfigFile(Properties instanceProp){
+	public static void createNewConfigFile(Properties instanceProp){
 		mDoc = DippInstanceDocument.Factory.newInstance();
 		dippInstance = mDoc.addNewDippInstance();
-		this.createInstanceEntry(instanceProp);
+		createInstanceEntry(instanceProp);
 	}
 	
 	/**
@@ -304,7 +304,7 @@ public class Config {
 	 * 
 	 * @param instanceProp 
 	 */
-	public void createInstanceEntry(Properties instanceProp){
+	public static void createInstanceEntry(Properties instanceProp){
 		instArray = mDoc.getDippInstance().getInstanceArray();
 		boolean exists = false;
 		for(InstanceType inst: instArray){
@@ -427,7 +427,7 @@ public class Config {
 	 *  into the File</p>
 	 *  
 	 */
-	private void saveConfig(){
+	private static void saveConfig(){
 		Map<String, String> nsMap = new Hashtable<String, String>();
 		nsMap.put("http://dipp.nrw.de/DiPPConfiguration", "dipp");
 		

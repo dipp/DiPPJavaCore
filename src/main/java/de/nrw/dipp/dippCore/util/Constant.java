@@ -152,7 +152,7 @@ public class Constant {
 	public static final int cResizeLimit					= 500;
 	
 	// Configuration should be changeable during runtime, unfortunately this means it will be created each time it is called?
-	public static Config cConfiguration	= new Config(new File(Constant.cConfigFileDir + Constant.cConfigFileName));
+	public static Config cConfiguration	= Config.getInstance(new File(Constant.cConfigFileDir + Constant.cConfigFileName));
 	
 	// Initialize logger object 
 	private static Logger log = null;
@@ -208,18 +208,18 @@ public class Constant {
 		
 		Properties repProp = new Properties();
 		FedoraInstance fedoraInst = null;
-		System.out.println(Constant.cConfigFileDir);
+		//System.out.println(Constant.cConfigFileDir);
 		if(new File(Constant.cConfigFileDir + Constant.cConfigFileName).isFile()){
-			System.out.println("Reading DiPP Configuration from: " + Constant.cConfigFileDir + Constant.cConfigFileName);
+			//System.out.println("Reading DiPP Configuration from: " + Constant.cConfigFileDir + Constant.cConfigFileName);
 			//repProp = (new Config(new File(Constant.cConfigFileDir + Constant.cConfigFileName)).getInstanceProperties());
-			fedoraInst = (new Config(new File(Constant.cConfigFileDir + Constant.cConfigFileName)).getInstance());
+			fedoraInst = (Config.getInstance(new File(Constant.cConfigFileDir + Constant.cConfigFileName)).getInstance());
 		}else{
-			System.out.println("Reading DiPP Configuration from: repository.xml");
+			//System.out.println("Reading DiPP Configuration from: repository.xml");
 			repProp = (new Repository(Constant.class.getClassLoader().getResourceAsStream("repository.xml"))).getRepositoryProperties();
-			fedoraInst = (new Config(new File(Constant.cConfigFileDir + Constant.cConfigFileName)).getInstance());
+			fedoraInst = (Config.getInstance(new File(Constant.cConfigFileDir + Constant.cConfigFileName)).getInstance());
 			System.out.println(fedoraInst.getFedoraName());
 		}
-		System.out.println(fedoraInst.getFedoraVersion());
+		//System.out.println(fedoraInst.getFedoraVersion());
 		//return repProp;
 		return fedoraInst;
 	}

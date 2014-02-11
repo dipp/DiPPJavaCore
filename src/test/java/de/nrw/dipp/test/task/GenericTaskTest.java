@@ -72,12 +72,14 @@ public class GenericTaskTest {
 		tParam.setExtMetadata(extendedMetadata);
 		
 		TaskService taskXml = TaskService.Factory.newInstance("TaskXml", tParam);
-		DecoratorTask dTask = DecoratorTask.Factory.newInstance("TaskGetMd", taskXml);
-		DecoratorTask dTask0 = DecoratorTask.Factory.newInstance("TaskHtml", dTask);
-		DecoratorTask dTask1 = DecoratorTask.Factory.newInstance("TaskPloneReg", dTask0);
+		DecoratorTask dTaskMD = DecoratorTask.Factory.newInstance("TaskGetMd", taskXml);
+		DecoratorTask dTaskIM = DecoratorTask.Factory.newInstance("TaskImage", dTaskMD);
+		DecoratorTask dTaskME = DecoratorTask.Factory.newInstance("TaskMedia", dTaskIM);
+		DecoratorTask dTaskHT = DecoratorTask.Factory.newInstance("TaskHtml", dTaskME);
+		DecoratorTask dTaskPL = DecoratorTask.Factory.newInstance("TaskPloneReg", dTaskHT);
 	
 		
-		Thread thread = new Thread(dTask1);
+		Thread thread = new Thread(dTaskME);
 		thread.setName("TaskXml Thread0");
 		thread.start();
 		/*
@@ -124,8 +126,8 @@ public class GenericTaskTest {
 		Constant.setAbsolutPath("/home/aquast/git/dippCoreMvn");
 
 		GenericTaskTest gTTest = new GenericTaskTest();
-		//gTTest.processTaskXml();
-		gTTest.processTaskPdf();
+		gTTest.processTaskXml();
+		//gTTest.processTaskPdf();
 
 	}
 	
