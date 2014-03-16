@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ooo:converters xmlns:ooo="http://qterra.de/oooconverter/converters">
+  <ooo:converter>
+    <ooo:converterName>OooToPdf</ooo:converterName>
+    <ooo:converterCall>OooToPdf</ooo:converterCall>
+    <ooo:fileSuffix>pdf</ooo:fileSuffix>
+  </ooo:converter>
+  <ooo:converter>
+    <ooo:converterName>OooToTex</ooo:converterName>
+    <ooo:converterCall>OooToTex</ooo:converterCall>
+    <ooo:fileSuffix>tex</ooo:fileSuffix>
+  </ooo:converter>
+  <ooo:converter>
+    <ooo:converterName>RtfToOoo</ooo:converterName>
+    <ooo:converterCall>RtfToOoo</ooo:converterCall>
+    <ooo:fileSuffix>odt</ooo:fileSuffix>
+  </ooo:converter>
+</ooo:converters>
